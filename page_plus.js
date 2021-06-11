@@ -3,6 +3,7 @@
 // @description  包括【取消全部网站蒙灰】、【允许网页内文本选择】
 // @version      0.0.1
 // @author       DuangXT
+// @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *
 // @include      *
 // @require

@@ -8,13 +8,13 @@
 
 // 样式
 /** 隐藏元素 */
-var style_hidden = "display:none;visibility:hidden!important;";
+const style_hidden = "display:none;visibility:hidden!important;";
 /** 彩色页面 */
-var style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
+const style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
 /** 自由滚动 */
-var style_overflow = "overflow:auto!important;";
+const style_overflow = "overflow:auto!important;";
 /** 文本选择 */
-var style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
+const style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
 
 
 /** 查找url中是否包含指定字符 */

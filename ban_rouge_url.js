@@ -5,6 +5,7 @@
 // @src_author   micoua
 // @author       DuangXT
 // @src_namespace    https://greasyfork.org/zh-CN/users/162781
+// @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        www.baidu.com/*
 // @match        123.hao245.com/*
 // @match        360.hao245.com/*

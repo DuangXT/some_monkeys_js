@@ -3,6 +3,7 @@
 // @description  包括【自动跳过bilibili充电鸣谢】、【自动隐藏bilibili大会员解锁高画质弹窗】、【自动隐藏CSDN登录弹窗】、【自动隐藏知乎登录弹窗】
 // @version      0.0.1
 // @author       DuangXT
+// @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *.bilibili.com/video/*
 // @match        *.zhihu.com/*
 // @match        *.csdn.net/*
