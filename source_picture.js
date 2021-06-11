@@ -3,7 +3,7 @@
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @version      0.0.2
 // @author       DuangXT
-// @match        www.4kbizhi.com/wallpaper/*
+// @match        www.4kbizhi.com
 // @match        www.pixiv.net/artworks/*
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
