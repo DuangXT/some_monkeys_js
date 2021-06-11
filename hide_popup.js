@@ -8,6 +8,8 @@
 // @match        *.zhihu.com/*
 // @match        *.csdn.net/*
 // @include      *
+// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
+// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // @grant        none
 // ==/UserScript==

@@ -5,6 +5,8 @@
 // @author       DuangXT
 // @match        www.4kbizhi.com/wallpaper/*
 // @match        www.pixiv.net/artworks/*
+// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
+// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // @grant        unsafeWindow
 // ==/UserScript==

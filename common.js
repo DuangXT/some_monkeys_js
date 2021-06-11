@@ -4,6 +4,8 @@
 // @version      0.0.1
 // @author       DuangXT
 // @grant        none
+// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
+// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // ==/UserScript==
 
 // 样式

@@ -6,6 +6,8 @@
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *
 // @include      *
+// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/page_plus.js
+// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/page_plus.js
 // @require
 // @grant        none
 // ==/UserScript==
