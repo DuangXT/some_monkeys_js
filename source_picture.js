@@ -36,12 +36,13 @@ function bizhi(link){
             $("#loginpop").setAttribute("style",style_hidden);
             $(".opacity_bg").setAttribute("style",style_hidden);
 
-            if(urlMatching(window.location.href, "4kbizhi.com/wallpaper")){
-                var link = document.getElementsByClassName("view-wallpaper")[0].getElementsByTagName("img")[0].src;
-                link = bizhi(link);
-                document.getElementsByClassName("view-wallpaper")[0].getElementsByTagName("img")[0].src = link;
-                document.getElementsByClassName("view-wallpaper")[0].getElementsByTagName("img")[0].style = "max-width:100%;margin:0px auto 20px;";
+            if(urlMatching(window.location.href, "/wallpaper")){
+                var img = document.querySelector(".view-wallpaper");
+                img.setAttribute("style", "margin-top:60px;");
+                img.setAttribute("src", bizhi(img.querySelector("img").src));
+                img.setAttribute("style", "max-width:100%;margin:0px auto 20px;");
             }else{
+                document.querySelector(".piclist").setAttribute("style", "margin-top:60px;");
                 var els = $$("div[class=col]>ul>li>a");
                 for (const a of els) {
                     const p = a.querySelector('p');
