@@ -3,7 +3,7 @@
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @version      0.0.2
 // @author       DuangXT
-// @match        www.4kbizhi.com
+// @match        www.4kbizhi.com/*
 // @match        www.pixiv.net/artworks/*
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
@@ -32,7 +32,9 @@ function bizhi(link){
 
             // 隐藏傻逼登录框
             $("#loginpop").removeAttribute("style");
+            $(".opacity_bg").removeAttribute("style");
             $("#loginpop").setAttribute("style",style_hidden);
+            $(".opacity_bg").setAttribute("style",style_hidden);
 
             if(urlMatching(window.location.href, "4kbizhi.com/wallpaper")){
                 var link = document.getElementsByClassName("view-wallpaper")[0].getElementsByTagName("img")[0].src;
