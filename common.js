@@ -6,6 +6,7 @@
 // @grant        none
 // @match        *
 // @include      *
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // ==/UserScript==

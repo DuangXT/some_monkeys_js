@@ -5,6 +5,7 @@
 // @author       DuangXT
 // @match        www.4kbizhi.com/*
 // @match        www.pixiv.net/artworks/*
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js

@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         隐藏网站干扰项
 // @description  包括【自动跳过bilibili充电鸣谢】、【自动隐藏bilibili大会员解锁高画质弹窗】、【自动隐藏CSDN登录弹窗】、【自动隐藏知乎登录弹窗】
-// @version      0.0.2
+// @version      0.0.3
 // @author       DuangXT
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *.bilibili.com/video/*
 // @match        *.zhihu.com/*
 // @match        *.csdn.net/*
 // @include      *
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
@@ -24,6 +25,32 @@
             : domainURL; // 只处理两个根，其它多的不考虑
 
         console.log("[隐藏网站干扰项]开始，当前页面链接：" + currentURL);
+
+        if(urlMatching(currentURL, "dl.3dmgame.com/patch/")){ // 3DM资源下载
+            document.querySelector("#layui-layer-shade1").remove();
+            let els = document.querySelectorAll('.dllist>a');
+            for (let a of els) {
+                a.href = a.dataset.href;
+                a.removeAttribute("onclick");
+            }
+        }
+        if(urlMatching(currentURL, "mod.3dmgame.com/mod/")){ // 3DM模组下载
+            document.querySelector('.not-ad.mod-download-btn.openBox')
+                .setAttribute("onclick", "window.open('" +
+                    document.querySelector('.mod-download-btn.col-xs-12>a').href + "');");
+            document.querySelector('.mod-download-window').remove();
+        }
+
+        if(urlMatching(currentURL, "blzxteam.com")){ // 深海迷航社区
+            // 删除公告窗
+            let w = document.querySelector("#layui-layer1.layui-layer.layui-layer-dialog");
+            let s = document.querySelector("#layui-layer-shade1.layui-layer-shade");
+            if(w) w.remove();
+            if(s) s.remove();
+            // 暂停音乐，删除音乐窗
+            document.querySelector(".pause.fa.fa-pause-circle").click();
+            document.querySelector("#myhkplayer.playing").remove();
+        }
 
         if(urlMatching(currentURL, ".bilibili.com/video/")){
             run(function(){
@@ -52,6 +79,11 @@
 
         if(urlMatching(currentURL, ".csdn.net/")){
             run(function(){
+                if(document.querySelector('#csdn-redpack'))
+                    document.querySelector('#csdn-redpack').remove();
+            }, "删除【CSDN活动全屏】时异常：", "已删除【CSDN活动全屏】");
+
+            run(function(){
                 if(document.querySelector('.login-mark')){
                     document.querySelector('.login-mark').removeAttribute("style");
                     document.querySelector('.login-mark').setAttribute("style",style_hidden);
@@ -62,5 +94,16 @@
                 }
             }, "隐藏【CSDN登录弹框】时异常：", "已隐藏【CSDN登录弹框】");
         }
+
+        if(urlMatching(currentURL, ".jianshu.com/p/")){
+            // 简书页面一个奇怪的抽奖广告
+            if(document.querySelector('._1aCo37-mask')){
+                document.querySelector('._1aCo37-mask').setAttribute("style",style_hidden);
+                document.querySelector('._1aCo37-wrap').setAttribute("style",style_hidden);
+            }
+            if(document.querySelector("_27yofX"))
+                document.querySelector('._27yofX').setAttribute("style",style_hidden);
+        }
+
     };
 })();

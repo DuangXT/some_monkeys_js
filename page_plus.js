@@ -6,6 +6,7 @@
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *
 // @include      *
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/page_plus.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/page_plus.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
