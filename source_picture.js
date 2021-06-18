@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         尽可能将预览图替换为高清图
 // @namespace    https://github.com/DuangXT/some_monkeys_js
-// @version      0.0.2
+// @version      0.0.3
 // @author       DuangXT
 // @match        www.4kbizhi.com/*
 // @match        www.pixiv.net/artworks/*
@@ -11,21 +11,16 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 
-/** 查找url中是否包含指定字符 */
-function urlMatching(url, match){
-    return url.indexOf(match) > 0;
-}
-
 function bizhi(link){
     // "http://www.4kbizhi.com/d/file/2020/09/04/small103707vtWKg1599187027.jpg"
-    var small = link.split("small");
+    let small = link.split("small");
     return small[0] + small[1].substring(0, 11) + ".jpg";
 }
 
 (function() {
     window.onload = function(){
-        var $ = s => document.querySelector(s);
-        var $$ = s => [...document.querySelectorAll(s)];
+        let $ = s => document.querySelector(s);
+        let $$ = s => [...document.querySelectorAll(s)];
 
         // 4kbizhi.com
         if(urlMatching(window.location.href, "4kbizhi.com")){
@@ -37,13 +32,13 @@ function bizhi(link){
             $(".opacity_bg").setAttribute("style",style_hidden);
 
             if(urlMatching(window.location.href, "/wallpaper")){
-                var img = document.querySelector(".view-wallpaper");
+                let img = document.querySelector(".view-wallpaper");
                 img.setAttribute("style", "margin-top:60px;");
                 img.setAttribute("src", bizhi(img.querySelector("img").src));
                 img.setAttribute("style", "max-width:100%;margin:0px auto 20px;");
             }else{
                 document.querySelector(".piclist").setAttribute("style", "margin-top:60px;");
-                var els = $$("div[class=col]>ul>li>a");
+                let els = $$("div[class=col]>ul>li>a");
                 for (const a of els) {
                     const p = a.querySelector('p');
                     const img = a.querySelector('img');
@@ -75,8 +70,8 @@ function bizhi(link){
                 new MutationObserver(() => setTimeout(cb, 50)).observe(document.body, { childList: true });
             };
             function replaceImage() {
-                var els = $$('div[role=presentation]>a');
-                for (var a of els) {
+                let els = $$('div[role=presentation]>a');
+                for (let a of els) {
                     const image = a.querySelector('img');
                     image.src = a.href;
                     image.srcset = '';

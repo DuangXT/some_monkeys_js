@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         隐藏网站干扰项
 // @description  包括【自动跳过bilibili充电鸣谢】、【自动隐藏bilibili大会员解锁高画质弹窗】、【自动隐藏CSDN登录弹窗】、【自动隐藏知乎登录弹窗】
-// @version      0.0.1
+// @version      0.0.2
 // @author       DuangXT
 // @namespace    https://github.com/DuangXT/some_monkeys_js
 // @match        *.bilibili.com/video/*
@@ -17,9 +17,9 @@
 (function() {
     window.onload = function(){
         // 链接
-        var currentURL = window.location.href; // 获取当前网页地址
-        var domainURL = currentURL.split("//")[1].split("/")[0];
-        var hostURL = domainURL.split('.').length == 3 ?
+        let currentURL = window.location.href; // 获取当前网页地址
+        let domainURL = currentURL.split("//")[1].split("/")[0];
+        let hostURL = domainURL.split('.').length == 3 ?
             domainURL.split('.')[1] + '.' + domainURL.split('.')[2]
             : domainURL; // 只处理两个根，其它多的不考虑
 
