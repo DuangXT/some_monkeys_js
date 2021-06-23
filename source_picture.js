@@ -22,6 +22,9 @@ function bizhi(link){
     window.onload = function(){
         let $ = s => document.querySelector(s);
         let $$ = s => [...document.querySelectorAll(s)];
+        function urlMatching(url, match){
+            return url.indexOf(match) > 0;
+        }
 
         // 4kbizhi.com
         if(urlMatching(window.location.href, "4kbizhi.com")){

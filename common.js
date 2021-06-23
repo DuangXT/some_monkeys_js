@@ -11,6 +11,10 @@
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
 // ==/UserScript==
 
+// 全局元素
+const $qs = s => document.querySelector(s);
+const $qsa = s => [...document.querySelectorAll(s)];
+
 // 样式
 /** 隐藏元素 */
 var style_hidden = "display:none;visibility:hidden!important;";
@@ -39,7 +43,7 @@ function run(func, err_tip0, tip, err_tip1){
         func();
         if(tip) console.log("[tip] " + tip);
     }catch (e){
-        console.log(err_tip0);
+        if(err_tip0) console.log(err_tip0);
         console.log(e);
         if(err_tip1) console.log(err_tip1);
     }
@@ -83,4 +87,19 @@ function getRandStr(str, len) {
         ret += str[parseInt(Math.random() * str.length)];
     }
     return ret;
+}
+
+/** 尝试移除单个指定的元素 */
+function removeElement(s){
+    let ele = document.querySelector(s);
+    if(ele) ele.remove();
+}
+
+/** 尝试隐藏单个指定的元素 */
+function hideElement(s){
+    let ele = document.querySelector(s);
+    if(ele) {
+        if(ele.style) console.log("元素 " + s + "隐藏前样式：" + ele.style);
+        ele.setAttribute("style", style_hidden);
+    }
 }

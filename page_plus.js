@@ -16,6 +16,13 @@
 
 (function() {
     window.onload = function(){
+        function setTagAttr(tagName, attrName, attrContent, tagLocation = 0){
+            document.getElementsByTagName(tagName)[tagLocation].setAttribute(attrName,attrContent);
+        }
+        let style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
+        let style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
+        let style_overflow = "overflow:auto!important;";
+
         try{ // 添加样式
             let new_style = document.createElement("style");
             new_style.innerHTML =
