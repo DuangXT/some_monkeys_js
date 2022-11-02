@@ -1,19 +1,22 @@
 // ==UserScript==
 // @name         隐藏网站干扰项
-// @description  包括【自动跳过bilibili充电鸣谢】、【自动隐藏bilibili大会员解锁高画质弹窗】、【自动隐藏CSDN登录弹窗】、【自动隐藏知乎登录弹窗】
-// @version      0.0.4
+// @description  详细内容看源码内注释
+// @version      0.0.8
 // @author       DuangXT
-// @namespace    https://github.com/DuangXT/some_monkeys_js
+// @namespace    https://github.com/DuangXT/some_monkeys_js/hide_popup.js
 // @match        *://*.bilibili.com/*
 // @match        *://*.zhihu.com/*
+// @match        *://www.zhihu.com/*
+// @match        *://zhuanlan.zhihu.com/*
 // @match        *://*.csdn.net/*
 // @match        *://jamcz.com/*
+// @match        *://*.jamcz.com/*
 // @match        *://dl.3dmgame.com/patch/*
 // @match        *://mod.3dmgame.com/mod/*
 // @match        *://blzxteam.com/*
 // @match        *://*.jianshu.com/p/*
-// @match        fanyi.baidu.com
-// @include      *
+// @match        *://fanyi.baidu.com
+// @match        *://fanyi.baidu.com/*
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/hide_popup.js
@@ -22,34 +25,27 @@
 // ==/UserScript==
 
 (function() {
-    window.onload = function(){
-        let style_hidden = "display:none;visibility:hidden!important;";
-        function urlMatching(url, match){
-            return url.indexOf(match) > 0;
-        }
-        function run(func, err_tip0, tip, err_tip1){
-            try {
-                func();
-                if(tip) console.log("[tip] " + tip);
-            }catch (e){
-                if(err_tip0) console.log(err_tip0);
-                console.log(e);
-                if(err_tip1) console.log(err_tip1);
-            }
-        }
-        function removeElement(s){
-            let ele = document.querySelector(s);
-            if(ele) ele.remove();
-        }
-        function hideElement(s){
-            let ele = document.querySelector(s);
-            if(ele) {
-                if(ele.style) console.log("元素 " + s + "隐藏前样式：" + ele.style);
-                ele.setAttribute("style", style_hidden);
-            }
-        }
 
-        let href = window.location.href; // 获取当前网页地址
+/*
+ - 百度翻译删除客户端下载弹窗
+ - A站移除顶部、底部的app二维码
+ - B站移除app二维码、登录提示、大会员精彩提示
+ - B站视频播放完后默认跳过充电鸣谢
+ - B站视频移除大会员解锁高清画质弹窗
+ - B站视频播放中隐藏高级弹幕（+关注、投票 等）
+ - B站视频相关推荐显示全部标题文字，移除播放量弹幕量文字
+ - 知乎隐藏登录弹窗
+ - 简书移除抽奖广告
+ - CSDN博客移除登录弹窗、全屏活动
+ - 3DM资源下载按钮提权
+ - 3DM模组下载按钮提权
+ - 晨钟酱主页下载按钮提权
+ - 碧蓝之星删除公告栏弹窗
+ - 碧蓝之星默认暂停音乐、移除音乐窗
+ */
+
+    const href = window.location.href; // 获取当前网页地址
+    window.onload = function(){
         console.log("[隐藏网站干扰项]开始，当前页面链接：" + href);
 
         if(urlMatching(href, "fanyi.baidu.com")){
@@ -57,7 +53,7 @@
         }
 
         if(urlMatching(href, "jamcz.com/")){
-            let ass = document.querySelectorAll("a[target=_blank]");
+            let ass = $qsa("a[target=_blank]");
             for (let a of ass) {
                 if(a.innerText.indexOf("网盘") >=0 && a.onclick)
                     a.onclick = a.onclick.replace('jq(','window.open(');
@@ -66,16 +62,16 @@
 
         if(urlMatching(href, "dl.3dmgame.com/patch/")){ // 3DM资源下载
             removeElement("#layui-layer-shade1");
-            let els = document.querySelectorAll('.dllist>a');
+            let els = $qsa('.dllist>a');
             for (let a of els) {
                 a.href = a.dataset.href;
                 a.removeAttribute("onclick");
             }
         }
         if(urlMatching(href, "mod.3dmgame.com/mod/")){ // 3DM模组下载
-            document.querySelector('.not-ad.mod-download-btn.openBox')
+            $qs('.not-ad.mod-download-btn.openBox')
                 .setAttribute("onclick", "window.open('" +
-                    document.querySelector('.mod-download-btn.col-xs-12>a').href + "');");
+                    $doc('.mod-download-btn.col-xs-12>a').href + "');");
             removeElement('.mod-download-window');
         }
 
@@ -87,7 +83,7 @@
             },"删除弹窗公告时发生异常：");
             // 暂停音乐，删除音乐窗
             run(function(){
-                document.querySelector(".pause.fa.fa-pause-circle").click();
+                $qs(".pause.fa.fa-pause-circle").click();
                 removeElement("#myhkplayer.playing");
             },"暂停音乐并删除音乐窗时发生异常：",false,
                 "如果仍然存在播放请手动暂停,没有音乐窗请禁音标签页");
@@ -98,21 +94,27 @@
             removeElement(".app-download");// A站顶部app二维码
         }
 
-        if(urlMatching(href, "bilibili.com")){
-            removeElement('#van-popover-7919'); // B站顶部APP下载二维码
-            removeElement("#van-popover-2420"); // 未登录的登录提示
-            removeElement("#van-popover-3759"); // 大会员精彩内容提示
-        }
-
         if(urlMatching(href, ".bilibili.com/video/")){
+
             run(function(){
-                document.querySelector('video').onended=()=>{
-                    document.querySelector('.bilibili-player-electric-panel-jump-content').click();
+                addStyle(".video-page-card .card-box .info .title{height:54px;}");
+                let els = $qsa('.card-box>.info');
+                for (let info of els) {
+                    info.querySelector("a>.title").setAttribute("style", "height:54px;");
+                    let playCount = info.querySelectorAll(".count")[1];
+                    playCount.setAttribute("style", style_hidden);
+                    info.title = playCount.innerText;
+                }
+            });
+
+            run(function(){
+                $qs('video').onended=()=>{
+                    $qs('.bilibili-player-electric-panel-jump-content').click();
                 }
             }, "自动点击跳过【充电鸣谢】时异常：", "已自动跳过【充电鸣谢】");
 
             run(function(){
-                if ("成为大会员" == document.querySelector(".bili-dialog-m > .bili-dialog-bomb > .q1080p > .title").innerHTML)
+                if ("成为大会员" == $qs(".bili-dialog-m > .bili-dialog-bomb > .q1080p > .title").innerText)
                     hideElement(".bili-dialog-m");
             },"隐藏【大会员解锁高清画质】时异常：", "已隐藏【大会员解锁高清画质】", "此异常一般可忽略……");
 
@@ -122,8 +124,30 @@
         }
 
         if(urlMatching(href, ".zhihu.com/")){
+            console.log("知乎！！！");
             run(function(){
-                hideElement(".Modal-wrapper"); // 隐藏登录框
+                // 隐藏登录框
+                hideElement(".Modal-wrapper");
+                hideElement(".Modal-wrapper.Modal-enter-done");
+                // 移除登录框遮罩层
+                removeElement(".Modal.Modal--default.signFlowModal");
+                removeElement(".Modal-backdrop");
+
+                // 右上角登录按钮弹出提示
+                removeElement(".css-1hwwfws");
+                removeElement(".css-ysn1om");
+
+                // 右侧下载客户端二维码卡片
+                hideElement(".Card.AppBanner");
+
+                // 右侧广告
+                hideElement(".Card > .Pc-card.Card > .Banner-link");
+                removeElement(".Card > .Pc-card.Card > .Banner-link");
+
+                // 右下角浮动登录提示
+                removeElement(".css-1ynzxqw");
+                removeElement(".css-1izy64v");
+
             }, "隐藏【知乎登录弹框】时异常：", "已隐藏【知乎登录弹框】");
         }
 
@@ -141,6 +165,30 @@
         if(urlMatching(href, ".jianshu.com/p/")){
             hideElement('._1aCo37-mask'); // 简书页面一个奇怪的抽奖广告
             hideElement('._27yofX');
+        }
+
+        if(urlMatching(href, "bilibili.com")){
+
+            /*setTimeout(
+                run(function(){
+                    removeElement(".login-tip");
+
+                    let els = document.querySelectorAll(".van-popover.van-popper[role=tooltip]");
+                    for (let el of els) {
+                        if(el.querySelector(".title"))
+                            if(el.querySelector(".title").innerText.indexOf("登录后你可以：") >= 0)
+                                el.remove();
+
+                        if(el.querySelector(".txt"))
+                            if(el.querySelector(".txt").innerText.indexOf("扫码下载手机客户端") >= 0)
+                                el.remove();
+
+                        if(el.querySelector(".vip-m>.bubble-traditional>.recommand>.title"))
+                            if(el.querySelector(".vip-m>.bubble-traditional>.recommand>.title").innerText.indexOf("精彩推荐") >= 0)
+                                el.remove();
+                    }
+                })
+                , 5000);*/
         }
 
     };

@@ -1,26 +1,25 @@
 // ==UserScript==
 // @src_name     Micoua_谷歌访问助手首页跳转
 // @name         流氓网站重定向
-// @version      1.0.3
+// @version      1.0.4
 // @src_author   micoua
 // @author       DuangXT
 // @src_namespace    https://greasyfork.org/zh-CN/users/162781
 // @namespace    https://github.com/DuangXT/some_monkeys_js
-// @match        www.baidu.com/*
-// @match        123.hao245.com/*
-// @match        360.hao245.com/*
-// @match        hao123.com/*
-// @match        2345.com/*
-// @match        hao.360.cn/*
-// @match        hao360.com/*
-// @match        www.hao360.com/*
-// @match        hao.360.com/*
-// @match        hao.qq.com/*
-// @match        cn.hao123.com/*
-// @match        123.sogou.com/*
-// @match        www.sogou.com/*
-// @match        daohang.qq.com/*
-// @include      *
+// @match        *://www.baidu.com/*
+// @match        *://*.hao245.com/*
+// @match        *://hao123.com/*
+// @match        *://*.hao123.com/*
+// @match        *://2345.com/*
+// @match        *://www.2345.com/*
+// @match        *://hao.360.cn/*
+// @match        *://hao360.com/*
+// @match        *://www.hao360.com/*
+// @match        *://hao.360.com/*
+// @match        *://hao.qq.com/*
+// @match        *://123.sogou.com/*
+// @match        *://www.sogou.com/*
+// @match        *://daohang.qq.com/*
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/ban_rouge_url.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/ban_rouge_url.js
@@ -40,33 +39,29 @@
     /** 定义拦截站点 */
     const rogue_url = [
             "www.baidu.com", // 阻止手贱，强行跳转其它搜索引擎
-            "123.hao245.com",
-            "360.hao245.com",
-            "hao123.com",
-            "2345.com",
-            "hao.360.cn",
-            "hao360.com",
-            "www.hao360.com",
-            "hao.360.com",
+            "123.hao245.com", "360.hao245.com",
+            "hao123.com", "www.hao123.com", "cn.hao123.com",
+            "2345.com","www.2345.com",
+            "hao.360.cn", "hao360.com", "www.hao360.com", "hao.360.com",
             "hao.qq.com",
-            "cn.hao123.com",
-            "123.sogou.com",
-            "www.sogou.com", // 搜狗搜索
+            "123.sogou.com", "www.sogou.com", // 搜狗搜索
             "daohang.qq.com"
         ];
 
     let searche_url = [
+            "https://bing.com/search?q=",
+
             "https://www.google.com/search?ie=utf-8&q=",
             "https://duckduckgo.com/?q=",
-            "https://bing.com/search?q=",
-            "https://mijisou.com/?q=",
-            "https://mengso.com/search?q=",
             "https://yandex.com/search/?&text=",
+
             "https://peekier.com/#!",
             "https://www.gobaidugle.com/search4?one=bing&two=google&three=sogou&four=so&keyword=",
             "https://gibiru.com/results.html?ie=UTF-8&q=",
-            "https://www.oscobo.com/search.php?q=",
             "https://swisscows.com/web?query=",
+
+            // "https://www.oscobo.com/search.php?q=",
+            "https://search.becovi.com/serp.php?i=VZN9ERDLI8&atr=2CFZYE19XRV4LO38UD5AIPH1U5PI9KQ7&q=",
 
             // 国内另外的大厂搜索引擎，自选
             // "https://www.so.com/s?ie=utf-8&q=", // 360搜索
@@ -79,7 +74,11 @@
 
             // 没有中文内容
             // "https://www.discretesearch.com/search?eq=",
-            // "https://www.searchencrypt.com/search/suggest?q=", 网站做了限制，判断wd不存在再添加回去
+            // "https://www.searchencrypt.com/search/suggest?q=", // 网站做了限制，判断wd不存在再添加回去
+
+            // "https://mijisou.com/?q=", // 秘迹搜，似乎已倒闭
+            // "https://mengso.com/search?q=", // 需要邀请码
+
         ];
 
     // 存放没有搜索内容时不会跳转回主站的
@@ -108,6 +107,7 @@
         // 拦截网站并跳转
         for (let i = 0; i < rogue_url.length; i++) {
             if (hostname == rogue_url[i]) { // 当前链接在流氓名单内
+                console.log("跳转至非流氓搜索引擎...");
                 window.location.href = searche_url[j] + wd;
                 return;
             }

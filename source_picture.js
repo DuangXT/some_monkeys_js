@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         尽可能将预览图替换为高清图
-// @namespace    https://github.com/DuangXT/some_monkeys_js
+// @namespace    https://github.com/DuangXT/some_monkeys_js/source_picture.js
 // @version      0.0.3
 // @author       DuangXT
 // @match        www.4kbizhi.com/*
 // @match        www.pixiv.net/artworks/*
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/source_picture.js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/source_picture.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.js
