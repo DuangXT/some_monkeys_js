@@ -16,23 +16,23 @@ const CommonUtils = {
             console.log(e);
             if (err_tip1) console.log(err_tip1);
         }
-    }
+    },
 
     /** 校验字符串是否为空 */
     isBlank: function (object) {
         if (null === object) {
             console.log("object is null");
             return true;
-            if (undefined === object) {
-                console.log("object is undefined");
-                return true;
-            }
-            if ("" === object) {
         }
+        if (undefined === object) {
+            console.log("object is undefined");
+            return true;
+        }
+        if ("" === object) {
             console.log("object is empty");
             return true;
         }
-        if (0 == object.length) {
+        if (0 === object.length) {
             console.log("object.length is 0");
             return true;
         }
@@ -45,16 +45,16 @@ const CommonUtils = {
             return true;
         }
         let o = object.toString().trim();
-        if('NaN' == o){
+        if('NaN' === o){
             console.log("object is [NaN] string");
             return true;
         }
         o = o.toLowerCase();
-        if('undefined' == o){
+        if('undefined' === o){
             console.log("object is [undefined] string");
             return true;
         }
-        if('null' == o){
+        if('null' === o){
             console.log("object is [null] string");
             return true;
         }
@@ -64,7 +64,7 @@ const CommonUtils = {
 
     /** 任意一个参数为空时返回 true */
     isBlanks: function () {
-        for (var i = 0; i < arguments.length; i++) {
+        for (let i = 0; i < arguments.length; i++) {
             if (this.isBlank(arguments[i]))
                 return true;
         }
@@ -83,7 +83,7 @@ const CommonUtils = {
 
     /** 任意一个参数不为空时返回 true */
     isNotBlanks: function () {
-        for (var i = 0; i < arguments.length; i++) {
+        for (let i = 0; i < arguments.length; i++) {
             if (this.isNotBlank(arguments[i]))
                 return true;
         }
@@ -95,11 +95,11 @@ const CommonUtils = {
         if(this.isBlankOrInvalidString(object)){
             return false;
         }
-        if(0.0 == object){
+        if(0.0 === object){
             console.log("object is zero number");
             return false;
         }
-        if('false' == object.toString().trim()){
+        if('false' === object.toString().trim()){
             console.log("object is false string");
             return false;
         }
@@ -144,9 +144,7 @@ const CommonUtils = {
 
     /**判断一个对象是否为空 */
     objectIsBlank: function (obj) {
-        if (JSON.stringify(obj) == "{}" || Object.keys(obj).length === 0)
-            return true;
-        return false;
+        return JSON.stringify(obj) === "{}" || Object.keys(obj).length === 0;
     },
 
     /** 判断一个对象是否不为空 */
@@ -250,19 +248,19 @@ const CommonUtils = {
             m = ~~(leftTime % 86400 % 3600 / 60);
             s = ~~(leftTime % 86400 % 3600 % 60);
         }
-        if ((h + '').length == 1)
+        if ((h + '').length === 1)
             h = '0' + h;
-        if ((m + '').length == 1)
+        if ((m + '').length === 1)
             m = '0' + m;
-        if ((s + '').length == 1)
+        if ((s + '').length === 1)
             s = '0' + s;
         return d + '天 ' + h + '时' + m + '分';
-    }
+    },
 
     /** 设置浏览器UA标识 */
     setUserAgent: function(userAgent) {
         Object.defineProperty(navigator, "userAgent", { value: userAgent, writable: false, configurable: false, enumerable: true });
-    };
+    },
 
 };
 
