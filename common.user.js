@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.4.3
+// @version      0.0.5
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -18,43 +18,41 @@
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
 // const $doc = s => document;
-const querySelector = s => document.querySelector(s);
-const querySelectorAll = s => [...document.querySelectorAll(s)];
+const querySelector = s => document.querySelector(s); // document.querySelector.bind(document);
+const querySelectorAll = s => [...document.querySelectorAll(s)]; // document.querySelectorAll.bind(document);
 const $qs = querySelector;
 const $qsa = querySelectorAll;
+const $all = querySelectorAll;
 // const $ = querySelector; // 不建议，容易引起冲突
 const $$ = querySelectorAll;
 
+const log = s => console.log(s);
+
 // 样式
 /** 隐藏元素 */
-var style_hidden = "display:none;visibility:hidden!important;";
+const style_hidden = "display:none;visibility:hidden!important;";
 /** 彩色页面 */
-var style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
+const style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
 /** 自由滚动 */
-var style_overflow = "overflow:auto!important;";
+const style_overflow = "overflow:auto!important;";
 /** 文本选择 */
-var style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
+const style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
 
 
 /** 查找url中是否包含指定字符 */
-function urlMatching(url, match) {
-    return url.indexOf(match) > 0;
-}
+const urlMatching = (url, match) => url.indexOf(match) > 0;
+
 
 /** 匹配当前URL规则 */
-function currentUrlInclude(s){
-    return document.URL.includes(s);
-}
-function currentUrlIncludes(ss=[]){
-    ss.forEach(s => {
-        if(currentUrlInclude(s)) return true;
+function currentUrlIncludes(...s){
+    s.forEach(ss => {
+        if(document.URL.includes(ss)) return true;
     });
     return false;
 }
-function currentUrlHas(match){
-    return urlMatching(window.location.href, match);
-}
-function currentUrlContain(matchs=[]){
+const currentUrlHas = match => urlMatching(window.location.href, match);
+
+function currentUrlContain(...matchs){
     matchs.forEach(match => {
         if(currentUrlHas(match)) return true;
     });
@@ -73,8 +71,21 @@ function selectorClick(_selector){
     let s;
     selectorRunIfExist( s = $qs(_selector), function(){
         s.click();
-        console.log('执行了点击操作', _selector);
+        log('执行了点击操作', _selector);
     });
+}
+
+/** 选择器，存在时移除指定的class */
+function selectorRemoveClass(_selector, ...removeClasses){
+    if(typeof _selector !== 'string'){
+        throw new TypeError('_selector must be a string');
+    }
+    let selector = $qs(_selector);
+    if(selector) {
+        removeClasses.forEach(_class => {
+            selector.classList.remove(_class);
+        });
+    }
 }
 
 /**
@@ -87,20 +98,36 @@ function selectorClick(_selector){
 function run(func, err_tip0, tip, err_tip1) {
     try {
         func();
-        if (tip) console.log("[tip] " + tip);
+        if (tip) log("[tip] " + tip);
     } catch (e) {
-        if (err_tip0) console.log(err_tip0);
+        if (err_tip0) log(err_tip0);
         console.error(e);
-        if (err_tip1) console.log(err_tip1);
+        if (err_tip1) log(err_tip1);
     }
 }
 
-/** 向head内添加样式 */
-function addStyle(css) {
+const create = tagName => document.createElement(tagName);
+const add = create;
+
+/** 以插入style标签的形式，向head内添加样式 */
+function addStyleTag(css) {
     if (!document.head) return;
-    let style = document.createElement('style');
+    let style = add('style');
     style.innerHTML = css;
     document.head.appendChild(style);
+}
+
+/** 以插入script标签的形式，向页面body内插入新的脚本引用 */
+function addScriptTag(jslocation){
+    let script = add('script');
+    script.src = jslocation;
+    document.body.appendChild(script);
+}
+/** 以插入script标签的形式，向页面body内插入新的脚本代码 */
+function addScript(jscode){
+    let script = add('script');
+    script.innerHTML = jscode;
+    document.body.appendChild(script);
 }
 
 /**
@@ -108,9 +135,8 @@ function addStyle(css) {
  * @param tagName      标签名
  * @param tagLocation  标签位置
  */
-function getTagElem(tagName, tagLocation){
-    return document.getElementsByTagName(tagName)[tagLocation];
-}
+const getTagElem = (tagName, tagLocation) => document.getElementsByTagName(tagName)[tagLocation];
+
 
 /**
  * 指定标签设置属性
@@ -136,7 +162,7 @@ function setStyle(tagName, styleName, styleValue, tagLocation = 0){
 /** 设置浏览器UA标识 */
 function setUserAgent(userAgent) {
     Object.defineProperty(navigator, "userAgent", { value: userAgent, writable: false, configurable: false, enumerable: true });
-};
+}
 
 /**
  * 获取随机字符串
@@ -157,15 +183,16 @@ function removeElement(s) {
     let ele = $qs(s);
     if (ele) {
         ele.remove();
-        console.log("移除元素：" + s);
+        log("移除元素：" + s);
     }
 }
+const deleteElement = removeElement;
 
 /** 尝试隐藏单个指定的元素 */
 function hideElement(s) {
     let ele = $qs(s);
     if (ele) {
-        if (ele.style) console.log("元素 " + s + "隐藏前样式：" + ele.style);
+        if (ele.style) log("元素 " + s + "隐藏前样式：" + ele.style);
         ele.setAttribute("style", style_hidden);
     }
 }
@@ -185,7 +212,7 @@ function getLocationQueryVariables(){
 /** 获取url中的参数对象 */
 function getURLParams(url){
     if(!url){
-        console.log("没有指定url，获取当前页面url的参数集");
+        log("没有指定url，获取当前页面url的参数集");
         return getLocationQueryVariables();
     }
 
@@ -212,18 +239,9 @@ function getQueryParams(qs = document.location.search) {
 }
 
 /** 从url中获取一个指定的参数 */
-function getUrlParam(name, url){
-    return getURLParams(url)[name];
-}
+const getUrlParam = (name, url) => getURLParams(url)[name];
 
-/** 向页面写入新脚本 */
-function newScript(jslocation){
-    const script = document.createElement('script');
-    script.src = jslocation;
-    document.body.appendChild(script);
-}
-
-/** 加载新脚本 */
+/** 油猴-加载新脚本 */
 function evalScript(jsurl){
     GM_xmlhttpRequest({
         method: 'GET',
@@ -235,23 +253,21 @@ function evalScript(jsurl){
 }
 
 /** 刷新页面至指定链接 */
-function refesh(url=window.location.href){
-    window.location.href = url;
-}
+const refesh = (url=location.href) => location.href = url;
 
 function requestUrl(url, method='GET'){
     let s = '===============================================================';
-    console.log(s);
-    console.log('访问开始', url);
+    log(s);
+    log('访问开始', url);
     GM_xmlhttpRequest({
         method: method,
         url: url,
         onload: function(response) {
-            console.log(response.responseText);
+            log(response.responseText);
         }
     });
-    console.log('访问url结束');
-    console.log(s);
+    log('访问url结束');
+    log(s);
 }
 
 /** 重写fetch */
@@ -270,7 +286,7 @@ function rewriteFetch() {
 function setSearchParams(paramJson){
     XMLHttpRequest.prototype.open = function (method, url, async, user, password) {
         // 修改 GET 请求的参数
-        if (method === 'GET') {
+        if ('GET' === method) {
             const urlObj = new URL(url);
             for (const key in paramJson){
                 urlObj.searchParams.set(key, paramJson[key]);
@@ -282,17 +298,15 @@ function setSearchParams(paramJson){
         return originalOpen.apply(this, [method, url, async, user, password]);
     };
 }
-
-/** 添加一个查询参数 */
-function addSearchParam(paramName, paramValue) {
-    return setSearchParams({paramName: paramValue});
-}
+/** 添加一个查询参数 */ // setSearchParam
+const addSearchParam = (paramName, paramValue) => setSearchParams({paramName: paramValue});
 
 /** 添加请求头 */
 function addHeaders(headerJson){
     window.fetch = function(url, options) {
         for (const key in headerJson){
             // 修改请求头
+            log('修改了请求头：', key, headerJson[key]);
             options.headers[key] = headerJson[key];
         }
 
@@ -302,14 +316,16 @@ function addHeaders(headerJson){
 }
 
 /** 添加一个请求头 */
-function addHeader(headerName, headerValue){
-    return addHeaders({headerName: headerValue});
-}
+const addHeader = (headerName, headerValue) => addHeaders({headerName: headerValue});
 
 /** 暂停全部视频 */
 function pauseVideos() {
     let videos = $$("video");
     videos.forEach(video => video.pause());
+}
+
+function isForum(){
+    return location.href.includes("/forum") || location.href.includes("/bbs");
 }
 
 /** 判断当前页面是否可能是discuz论坛 */
@@ -340,4 +356,4 @@ function isDiscuz(){
 }
 
 
-console.log("------=======****** common.js loaded ******=======------");
+log("------=======****** common.js loaded ******=======------");

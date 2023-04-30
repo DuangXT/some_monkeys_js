@@ -4,16 +4,20 @@ const FileSuffixUtils = {
   imgFormats: ["gif", "webp", "png", "jpg", "jpeg", "bmp", "jpe", "jfif",
     "heif", "hif", "svg", "dib", "tif", "tiff",
     "raw", "crw", "cr2", "kdc", "nef", "arw", "rw2", "psd",
-    "image", 'picture', 'photo'],
+    'picture', 'photo',
+    // "image", 和镜像文件冲突
+  ],
   /** 视频格式 */
   videoFormats: ['ts', 'mp4', "webm", "flv", "mov", "3gp", 'm4s',
     "mkv", 'avi', "wmv", "rm", "rmvb", "mpeg", "mpg", 'M4V', 'ogv', 'qt',
     "vob", "asf", "mpe", "dat", "mpa", "asx", "avs", 'dv', 'ifo', "avx", 'swf',
     'video', 'movie', 'film', 'clip'],
+
   /** 音频格式 */
   audioFormats: ["mp3", "weba", "wma", "flac", "ape", "ogg", "aac", "wav", "m4a",
-    'amr', 'au', 'aiff', 'AIF', 'midi', "mid", "tta", "wv",
-    "tak", 'ra', 'lpac', 'la', "shorten", "optimFROG", 'voice', 'audio', 'sound', 'music'],
+    'amr', 'au', 'aiff', 'AIF', 'aifc', 'midi', "mid", 'sds', "tta", "wv", 'smp',
+    'xac', 'iff', 'voc', 'snd', "tak", 'ra', 'lpac', 'la', 'vox',
+    "shorten", "optimFROG", 'opus', 'voice', 'audio', 'sound', 'music'],
 
   /** 文本格式 */
   textFileFormats: ['txt', 'text'],
@@ -35,14 +39,18 @@ const FileSuffixUtils = {
   /** 压缩文件格式 */
   compressFormats: ['zip', '7z', 'rar', 'tar', 'z', 'gz', 'gzip', 'bz', 'bz2', 'tgz', 'cab', 'ace', 'sea', 'lzh', 'ARJ', "SIT", "SITX"],
   /** 镜像文件格式 */
-  mirrorFormats: ['bin', 'iso', 'img', 'gho', 'mds', 'ccd', 'fcd', 'cue', 'bwt', 'cdi', 'nrg', 'pdi', 'b5t', 'tao', 'dao', 'cif'],
+  mirrorFormats: ['iso', 'img', 'gho', 'mds', 'fcd',
+    'ccd', 'cue', 'bwt', 'cdi', 'nrg', 'pdi', 'b5t', 'tao', 'dao', 'cif',
+    'bin', // 二进制文件
+  ],
 
-  javaFormats: ['java', 'class', 'jar', 'jad', 'war'],
-  windowsProgramFormats: ['exe', 'msi', 'bat', 'cmd', 'msu'],
+  javaFormats: ['java', 'class', 'jar', 'jad', 'war', 'jsp'],
+  windowsProgramFormats: ['exe', 'msi', 'msu', 'bat', 'cmd', 'com', 'ps1', 'vbs'],
+  windowsProgramExtendFormats: ['dll', 'ocx', 'sys', 'cpl', 'scr', 'pif'], // 与windows应用程序相关联的后缀
   linuxPackageFormats: ['tgz', 'txz', 'deb', 'rpm', 'pkg', 'xz', 'gz', 'ebuild', 'tar.xz', 'tar.gz', 'pkg.tar.xz', 'pkg.tar.gz', 'package'],
   macosProgramFormats: ['app', 'application'],
   macosPackageFormats: ['dmg'],
-  androidPackageFormats: ['apk'],
+  androidPackageFormats: ['apk', 'apk.1', 'xapk', 'apkm', 'dapk'],
   iosPackageFormats: ['ipa'],
 
 
@@ -63,8 +71,8 @@ const FileSuffixUtils = {
       throw new TypeError('array link must be a Array');
     }
     array.forEach(s => {
-      if (link.split('.').pop() === s)
-        return true;
+      if (link.split('.').pop().toUpperCase() === s.toUpperCase()) return true;
+      // if(link.toUpperCase().endsWith("." + s.toUpperCase())) return true;
     });
     return false;
   },
@@ -72,18 +80,27 @@ const FileSuffixUtils = {
   isImageFile: function (fileLink) {
     return this.linkSuffixIs(this.imgFormats, fileLink);
   },
+  isPhotoFile: this.isImageFile,
+  isPictureFile: this.isImageFile,
 
   isVideoFile: function (fileLink) {
     return this.linkSuffixIs(this.videoFormats, fileLink);
   },
+  isMovieFile: this.isVideoFile,
+  isFilmFile: this.isVideoFile,
+  isClipFile: this.isVideoFile,
 
   isAudioFile: function (fileLink) {
     return this.linkSuffixIs(this.audioFormats, fileLink);
   },
+  isVoiceFile: this.isAudioFile,
+  isSoundFile: this.isAudioFile,
+  isMusicFile: this.isAudioFile,
 
   isCompressFile: function (fileLink) {
     return this.linkSuffixIs(this.compressFormats, fileLink);
   },
+
 
   isMirrorFile: function (fileLink) {
     return this.linkSuffixIs(this.mirrorFormats, fileLink);
@@ -92,5 +109,17 @@ const FileSuffixUtils = {
   isBookFile: function (fileLink) {
     return this.linkSuffixIs(this.bookFormats, fileLink);
   },
+  isEbookFile: this.isBookFile,
 
+  isWindowsProgramFile: function (fileLink) {
+    return this.linkSuffixIs(this.windowsProgramFormats, fileLink);
+  },
+
+  isJavaFile: function (fileLink) {
+    return this.linkSuffixIs(this.javaFormats, fileLink);
+  },
+
+  isLinuxPackageFile: function (fileLink) {
+    return this.linkSuffixIs(this.linuxPackageFormats, fileLink);
+  }
 }

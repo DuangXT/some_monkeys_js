@@ -23,9 +23,8 @@ const HtmlUtils = {
    * @param tagName      标签名
    * @param tagLocation  标签位置
    */
-  getTagElem: function (tagName, tagLocation) {
-    return this.tagName(tagName)[tagLocation];
-  },
+  getTagElem: (tagName, tagLocation) => this.tagName(tagName)[tagLocation],
+
 
   /**
    * 指定标签设置属性
@@ -55,6 +54,7 @@ const HtmlUtils = {
     let ele = this.qs(s);
     if (ele) ele.remove();
   },
+  deleteElement: removeElement,
 
   /** 尝试隐藏单个指定的元素 */
   hideElement: function (s) {

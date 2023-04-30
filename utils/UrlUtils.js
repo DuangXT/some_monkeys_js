@@ -1,9 +1,7 @@
 const UrlUtils = {
 
     /** 查找url中是否包含指定字符 */
-    urlMatching:function (url, match) {
-        return url.indexOf(match) > 0;
-    },
+    urlMatching: (url, match) => url.indexOf(match) > 0,
 
 
     /** 获取当前页面链接上的url参数对象 */
@@ -35,7 +33,7 @@ const UrlUtils = {
     },
 
     /** 从url中获取一个指定的参数 */
-    getUrlParam:function (name, url){
+    getUrlParam: function (name, url){
         let params = getURLParams(url);
         return params[name];
     },
