@@ -56,6 +56,9 @@ const HtmlUtils = {
   },
   deleteElement: removeElement,
 
+  removeElements: (...s) => s.forEach(removeElement),
+  deleteElements: removeElements,
+
   /** 尝试隐藏单个指定的元素 */
   hideElement: function (s) {
     let ele = this.qs(s);
@@ -64,6 +67,7 @@ const HtmlUtils = {
       ele.setAttribute("style", style_hidden);
     }
   },
+  hideElements: (...s) => s.forEach(hideElement),
 
 };
 

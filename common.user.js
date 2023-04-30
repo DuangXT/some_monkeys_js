@@ -60,6 +60,9 @@ function currentUrlContain(...matchs){
 }
 
 function selectorRunIfExist(obj, func){
+    if(typeof func !== 'function'){
+        throw new TypeError('func must be a function');
+    }
     if(obj){ func(); }
 }
 
@@ -83,7 +86,10 @@ function selectorRemoveClass(_selector, ...removeClasses){
     let selector = $qs(_selector);
     if(selector) {
         removeClasses.forEach(_class => {
-            selector.classList.remove(_class);
+            if(typeof _class === 'string'){
+                selector.classList.remove(_class);
+            }
+            else log("a parameter 'removeClasses', not type string  ", _class);
         });
     }
 }
@@ -96,6 +102,9 @@ function selectorRemoveClass(_selector, ...removeClasses){
  * @param err_tip1  异常额外的提示
  */
 function run(func, err_tip0, tip, err_tip1) {
+    if(typeof func !== 'function'){
+        throw new TypeError('func must be a function');
+    }
     try {
         func();
         if (tip) log("[tip] " + tip);
@@ -111,6 +120,9 @@ const add = create;
 
 /** 以插入style标签的形式，向head内添加样式 */
 function addStyleTag(css) {
+    if(typeof css !== 'string'){
+        throw new TypeError('parameter "css" must be a string');
+    }
     if (!document.head) return;
     let style = add('style');
     style.innerHTML = css;
@@ -119,6 +131,9 @@ function addStyleTag(css) {
 
 /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
 function addScriptTag(jslocation){
+    if(typeof jslocation !== 'string'){
+        throw new TypeError('parameter "jslocation" must be a url string');
+    }
     let script = add('script');
     script.src = jslocation;
     document.body.appendChild(script);
@@ -173,7 +188,7 @@ function setUserAgent(userAgent) {
 function getRandStr(str, len) {
     let ret = '';
     while (len--) {
-        ret += str[parseInt(Math.random() * str.length)];
+        ret += str[parseInt(Math.random() * str.length + '')];
     }
     return ret;
 }
@@ -188,6 +203,9 @@ function removeElement(s) {
 }
 const deleteElement = removeElement;
 
+const removeElements = (...s) => s.forEach(removeElement);
+const deleteElements = removeElements;
+
 /** 尝试隐藏单个指定的元素 */
 function hideElement(s) {
     let ele = $qs(s);
@@ -196,6 +214,7 @@ function hideElement(s) {
         ele.setAttribute("style", style_hidden);
     }
 }
+const hideElements = (...s) => s.forEach(hideElement);
 
 /** 获取当前页面链接上的url参数对象 */
 function getLocationQueryVariables(){
@@ -239,7 +258,7 @@ function getQueryParams(qs = document.location.search) {
 }
 
 /** 从url中获取一个指定的参数 */
-const getUrlParam = (name, url) => getURLParams(url)[name];
+const getUrlParam = (name, url=location.href) => getURLParams(url)[name];
 
 /** 油猴-加载新脚本 */
 function evalScript(jsurl){
