@@ -9,7 +9,7 @@
 // @run-at       document-start
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.user.js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
+// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
 // @grant        unsafeWindow
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
