@@ -40,21 +40,29 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 
 /** 查找url中是否包含指定字符 */
-const urlMatching = (url, match) => url.indexOf(match) > 0;
+const strMatching = (str, match) => str.indexOf(match) > 0;
 
 
 /** 匹配当前URL规则 */
-function currentUrlIncludes(...s){
-    s.forEach(ss => {
+function currentUrlIncludes(...searchString){
+    searchString.forEach(ss => {
         if(document.URL.includes(ss)) return true;
     });
     return false;
 }
-const currentUrlHas = match => urlMatching(window.location.href, match);
 
+/** 判断域名内是否包含匹配字符串 */
+const hostnameHas = (...matchs) => {
+    matchs.forEach(match => {
+        if(strMatching(location.hostname, match)) return true;
+    });
+    return false;
+};
+
+/** 判断链接内是否包含匹配字符串 */
 function currentUrlContain(...matchs){
     matchs.forEach(match => {
-        if(currentUrlHas(match)) return true;
+        if(strMatching(location.href, match)) return true;
     });
     return false;
 }
