@@ -26,7 +26,7 @@ const $all = querySelectorAll;
 // const $ = querySelector; // 不建议，容易引起冲突
 const $$ = querySelectorAll;
 
-const log = s => console.log(s);
+const log = (...s) => console.log(s);
 
 // 样式
 /** 隐藏元素 */
