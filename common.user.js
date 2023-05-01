@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.1
+// @version      0.0.5.2
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -18,15 +18,15 @@
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
 // const $doc = s => document;
-const querySelector = s => document.querySelector(s); // document.querySelector.bind(document);
-const querySelectorAll = s => [...document.querySelectorAll(s)]; // document.querySelectorAll.bind(document);
+const querySelector = document.querySelector.bind(document); // s => document.querySelector(s);
+const querySelectorAll = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 const $qs = querySelector;
 const $qsa = querySelectorAll;
 const $all = querySelectorAll;
 // const $ = querySelector; // 不建议，容易引起冲突
 const $$ = querySelectorAll;
 
-const log = (...s) => console.log(s);
+const log = (...s) => console.log.bind(console)(...s);
 
 // 样式
 /** 隐藏元素 */
