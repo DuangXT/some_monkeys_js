@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.2
+// @version      0.0.5.4
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -25,12 +25,17 @@ const $qsa = querySelectorAll;
 const $all = querySelectorAll;
 // const $ = querySelector; // 不建议，容易引起冲突
 const $$ = querySelectorAll;
+Document.prototype.$qs = Document.prototype.querySelector;
+Element.prototype.$qs = Element.prototype.querySelector;
+Document.prototype.$qsa = Document.prototype.querySelectorAll;
+Element.prototype.$qsa = Element.prototype.querySelectorAll;
+
 
 const log = (...s) => console.log.bind(console)(...s);
 
 // 样式
 /** 隐藏元素 */
-const style_hidden = "display:none;visibility:hidden!important;";
+const style_hidden = ";display:none;visibility:hidden!important;";
 /** 彩色页面 */
 const style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
 /** 自由滚动 */
@@ -40,7 +45,7 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 
 /** 查找url中是否包含指定字符 */
-const strMatching = (str, match) => str.indexOf(match) > 0;
+const strMatching = (str, match) => str.indexOf(match) >= 0;
 
 
 /** 匹配当前URL规则 */
@@ -68,7 +73,7 @@ function currentUrlContain(...matchs){
 }
 
 function selectorRunIfExist(obj, func){
-    if(typeof func !== 'function'){
+    if('function' !== typeof func){
         throw new TypeError('func must be a function');
     }
     if(obj){ func(); }
@@ -76,7 +81,7 @@ function selectorRunIfExist(obj, func){
 
 /** 选择器，存在时执行click() */
 function selectorClick(_selector){
-    if(typeof _selector !== 'string'){
+    if('string' !== typeof _selector){
         throw new TypeError('_selector must be a string');
     }
     let s;
@@ -88,7 +93,7 @@ function selectorClick(_selector){
 
 /** 选择器，存在时移除指定的class */
 function selectorRemoveClass(_selector, ...removeClasses){
-    if(typeof _selector !== 'string'){
+    if('string' !== typeof _selector){
         throw new TypeError('_selector must be a string');
     }
     let selector = $qs(_selector);
@@ -110,7 +115,7 @@ function selectorRemoveClass(_selector, ...removeClasses){
  * @param err_tip1  异常额外的提示
  */
 function run(func, err_tip0, tip, err_tip1) {
-    if(typeof func !== 'function'){
+    if('function' !== typeof func){
         throw new TypeError('func must be a function');
     }
     try {
@@ -124,41 +129,47 @@ function run(func, err_tip0, tip, err_tip1) {
 }
 
 const create = tagName => document.createElement(tagName);
-const add = create;
+const add = addTag = addElement = createElement = create ;
+
+
 
 /** 以插入style标签的形式，向head内添加样式 */
 function addStyleTag(css) {
-    if(typeof css !== 'string'){
+    if('string' !== typeof css){
         throw new TypeError('parameter "css" must be a string');
     }
     if (!document.head) return;
-    let style = add('style');
+    let style = createElement('style');
     style.innerHTML = css;
     document.head.appendChild(style);
 }
 
 /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
 function addScriptTag(jslocation){
-    if(typeof jslocation !== 'string'){
+    if('string' !== typeof jslocation){
         throw new TypeError('parameter "jslocation" must be a url string');
     }
-    let script = add('script');
+    let script = createElement('script');
     script.src = jslocation;
     document.body.appendChild(script);
 }
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
 function addScript(jscode){
-    let script = add('script');
+    let script = createElement('script');
     script.innerHTML = jscode;
     document.body.appendChild(script);
 }
 
+
+const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
  * 指定标签对象
  * @param tagName      标签名
  * @param tagLocation  标签位置
  */
-const getTagElem = (tagName, tagLocation) => document.getElementsByTagName(tagName)[tagLocation];
+const getTagElement = (tagName, tagLocation=0) => getTagElements(tagName)[tagLocation];
+/** 兼容以前用这个名字的脚本 */
+const getTagElem = (tagName, tagLocation) => getTagElement(tagName, tagLocation);
 
 
 /**
@@ -169,7 +180,7 @@ const getTagElem = (tagName, tagLocation) => document.getElementsByTagName(tagNa
  * @param tagLocation  标签位置
  */
 function setTagAttr(tagName, attrName, attrContent, tagLocation = 0) {
-    getTagElem(tagName, tagLocation).setAttribute(attrName, attrContent);
+    getTagElement(tagName, tagLocation).setAttribute(attrName, attrContent);
 }
 /**
  * 指定标签设置样式
@@ -179,7 +190,7 @@ function setTagAttr(tagName, attrName, attrContent, tagLocation = 0) {
  * @param tagLocation  标签位置
  */
 function setStyle(tagName, styleName, styleValue, tagLocation = 0){
-    getTagElem(tagName, tagLocation).style[styleName] = styleValue;
+    getTagElement(tagName, tagLocation).style[styleName] = styleValue;
 }
 
 /** 设置浏览器UA标识 */
@@ -219,7 +230,8 @@ function hideElement(s) {
     let ele = $qs(s);
     if (ele) {
         if (ele.style) log("元素 " + s + "隐藏前样式：" + ele.style);
-        ele.setAttribute("style", style_hidden);
+        // ele.setAttribute("style", style_hidden);
+        ele.style.cssText = ele.style.cssText + style_hidden;
     }
 }
 const hideElements = (...s) => s.forEach(hideElement);
@@ -352,29 +364,28 @@ function pauseVideos() {
 }
 
 function isForum(){
-    return location.href.includes("/forum") || location.href.includes("/bbs");
+    return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");
 }
 
 /** 判断当前页面是否可能是discuz论坛 */
 function isDiscuz(){
     // 检查页面源码是否包含 Discuz 关键词
-    if (!document.body.innerText.includes("Discuz") &&
-        !document.body.innerText.includes("Comsenz") &&
-        !document.body.innerText.includes("UCenter")) {
+    let bodyText = document.body.innerText;
+    if (!bodyText.includes("Discuz") &&
+        !bodyText.includes("Comsenz") &&
+        !bodyText.includes("UCenter")) {
         return false;
     }
 
     // 检查页面是否有 Discuz 论坛常用类名
-    if (!document.querySelector(".forum") &&
-        !document.querySelector(".thread") &&
-        !document.querySelector(".post")) {
+    if (!$qs(".forum") && !$qs(".thread") && !$qs(".post")) {
         return false;
     }
 
     // 检查页面 URL 是否提示是论坛页面
-    if (!location.href.includes("forum") &&
-        !location.href.includes("thread") &&
-        !location.href.includes("post")) {
+    if (!currentUrlIncludes("forum") &&
+        !currentUrlIncludes("thread") &&
+        !currentUrlIncludes("post")) {
         return false;
     }
 
