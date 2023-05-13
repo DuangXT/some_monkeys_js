@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.6
+// @version      0.0.5.7
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -50,25 +50,25 @@ const strMatching = (str, match) => str.indexOf(match) >= 0;
 
 /** 匹配当前URL规则 */
 function currentUrlIncludes(...searchString){
-    searchString.forEach(ss => {
+    for (let ss of searchString) {
         if(document.URL.includes(ss)) return true;
-    });
+    }
     return false;
 }
 
 /** 判断域名内是否包含匹配字符串 */
 const hostnameHas = (...matchs) => {
-    matchs.forEach(match => {
+    for (let match of matchs) {
         if(strMatching(location.hostname, match)) return true;
-    });
+    }
     return false;
 };
 
 /** 判断链接内是否包含匹配字符串 */
 function currentUrlContain(...matchs){
-    matchs.forEach(match => {
+    for (let match of matchs) {
         if(strMatching(location.href, match)) return true;
-    });
+    }
     return false;
 }
 
@@ -98,12 +98,13 @@ function selectorRemoveClass(_selector, ...removeClasses){
     }
     let selector = $qs(_selector);
     if(selector) {
-        removeClasses.forEach(_class => {
+        // removeClasses.forEach(_class => {
+        for(let _class of removeClasses){
             if(typeof _class === 'string'){
                 selector.classList.remove(_class);
             }
             else log("a parameter 'removeClasses', not type string  ", _class);
-        });
+        }
     }
 }
 
@@ -388,7 +389,10 @@ const addHeader = (headerName, headerValue) => addHeaders({headerName: headerVal
 /** 暂停全部视频 */
 function pauseVideos() {
     let videos = $$("video");
-    videos.forEach(video => video.pause());
+    // videos.forEach(video => video.pause());
+    for (const video of videos) {
+        video.pause();
+    }
 }
 
 function isForum(){
