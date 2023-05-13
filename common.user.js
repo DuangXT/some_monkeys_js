@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.4
+// @version      0.0.5.6
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -128,6 +128,33 @@ function run(func, err_tip0, tip, err_tip1) {
     }
 }
 
+/** 如果主站点匹配则执行动作 */
+function runIfHostIs(){
+    if(arguments.length < 2){
+        throw new TypeError('参数应至少传递两位，且最后一位为执行函数');
+    }
+    let callback = arguments[arguments.length-1];
+    if('function' !== typeof callback){
+        throw new TypeError('参数错误哦！最后一位参数应为执行函数');
+    }
+    let hosts = Array.prototype.slice.call(arguments);
+    hosts.splice(hosts.length - 1, 1);
+    if(hostnameHas(hosts)){
+        callback();
+    }
+}
+
+/** 函数加入等待队列 */
+function runLast(func){
+    if('function' !== typeof func){
+        throw new TypeError('func must be a function');
+    }
+    setTimeout(function () {
+        func();
+    }, 0);
+}
+const runAtLast = taskLast = functionLast = funcLast = runLast;
+
 const create = tagName => document.createElement(tagName);
 const add = addTag = addElement = createElement = create ;
 
@@ -150,6 +177,7 @@ function addScriptTag(jslocation){
         throw new TypeError('parameter "jslocation" must be a url string');
     }
     let script = createElement('script');
+    // script.setAttribute("src", jslocation);
     script.src = jslocation;
     document.body.appendChild(script);
 }
