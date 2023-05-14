@@ -435,21 +435,23 @@ function isDiscuz(){
 }
 
 /** 循环获取a标签元素的href，直到元素及href存在并跳转 */
-function urlJump(_selector, _property='href', flag=true){
+function urlJump(_selector, _property='href', timeout=3000, flag=true){
     let alink = $qs(_selector);
     let url; // url重定向
     if(alink && alink['_property']) url = alink['_property'];
     if(!url){
         setTimeout(function(){
             urlJump(_selector, _property); // 每3秒循环直到成功跳转
-        }, 3000);
+        }, timeout);
         return;
     }
+    log('即将跳转到链接', url);
     if(flag) refesh(url);
     else window.open(url);
 }
 const urlRedirect = urlJump;
-const urlJumpOpen = (_selector, _property='href') => urlJump(_selector, _property, false);
+const urlJumpOpen = (_selector, _property='href', timeout=3000) =>
+    urlJump(_selector, _property, timeout, false);
 
 
 
