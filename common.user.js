@@ -14,6 +14,13 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
+// 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。
+// (function () { })();
+
+// 事件监听函数；作用域=整个页面；所有资源加载完成后执行；后续加载的 window.onload 会覆盖之前加载的。
+// window.onload = function () { }
+
+
 // 全局元素
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
@@ -46,6 +53,9 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 /** 查找url中是否包含指定字符 */
 const strMatching = (str, match) => str.indexOf(match) >= 0;
+String.prototype.contains = function (string) {
+    return this.indexOf(string) >= 0
+}
 
 
 /** 匹配当前URL规则 */
@@ -267,13 +277,12 @@ const hideElements = (...s) => s.forEach(hideElement);
 
 /** 获取当前页面链接上的url参数对象 */
 function getLocationQueryVariables(){
-    let query = window.location.search.substring(1),
-      vars = query.split("&"),
-      params = {};
-    for (let i=0; i<vars.length; i++) {
-        let pair = vars[i].split("=");
+    let query = location.search.substring(1),
+      vars = query.split("&"), params = {};
+    vars.forEach(var1 => {
+        let pair = var1.split("=");
         params[pair[0]] = pair[1];
-    }
+    });
     return params;
 }
 
@@ -424,6 +433,24 @@ function isDiscuz(){
     // 综合判断页面很有可能是 Discuz 论坛
     return true;
 }
+
+/** 循环获取a标签元素的href，直到元素及href存在并跳转 */
+function urlJump(_selector, _property='href', flag=true){
+    let alink = $qs(_selector);
+    let url; // url重定向
+    if(alink && alink['_property']) url = alink['_property'];
+    if(!url){
+        setTimeout(function(){
+            urlJump(_selector, _property); // 每3秒循环直到成功跳转
+        }, 3000);
+        return;
+    }
+    if(flag) refesh(url);
+    else window.open(url);
+}
+const urlRedirect = urlJump;
+const urlJumpOpen = (_selector, _property='href') => urlJump(_selector, _property, false);
+
 
 
 log("------=======****** common.js loaded ******=======------");
