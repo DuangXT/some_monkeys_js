@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.8
+// @version      0.0.5.9
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -287,13 +287,14 @@ function getLocationQueryVariables(){
 }
 
 /** 获取url中的参数对象 */
+@Deprecated
 function getURLParams(url){
     if(!url){
         log("没有指定url，获取当前页面url的参数集");
         return getLocationQueryVariables();
     }
 
-    let params = {}, pattern = /(\w+)=(\w+)/ig;
+    let params = {}, pattern = /(\w+)=(\w+)/ig; // 表达式只用\w是有问题的
     url.replace(pattern, ($, $1, $2) => {
         params[$1] = $2;
     });
@@ -315,8 +316,11 @@ function getQueryParams(qs = document.location.search) {
     return params;
 }
 
+const getQueryParam = (name) => getQueryParams()[name];
+
 /** 从url中获取一个指定的参数 */
-const getUrlParam = (name, url=location.href) => getURLParams(url)[name];
+@Deprecated
+const getUrlParam = (name, url) => getURLParams(url)[name];
 
 /** 油猴-加载新脚本 */
 function evalScript(jsurl){
@@ -440,8 +444,9 @@ function urlJump(_selector, _property='href', timeout=3000, flag=true){
     let url; // url重定向
     if(alink && alink['_property']) url = alink['_property'];
     if(!url){
+        log('未获取到标签或链接，%s毫秒后重试', timeout);
         setTimeout(function(){
-            urlJump(_selector, _property); // 每3秒循环直到成功跳转
+            urlJump(_selector, _property); // 每n秒循环直到成功跳转
         }, timeout);
         return;
     }
