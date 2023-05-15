@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.9
+// @version      0.0.5.10
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -28,14 +28,12 @@ const originalOpen = XMLHttpRequest.prototype.open;
 const querySelector = document.querySelector.bind(document); // s => document.querySelector(s);
 const querySelectorAll = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 const $qs = querySelector;
-const $qsa = querySelectorAll;
-const $all = querySelectorAll;
+const $qsa = $all = $$ = querySelectorAll;
 // const $ = querySelector; // 不建议，容易引起冲突
-const $$ = querySelectorAll;
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
-Document.prototype.$qsa = Document.prototype.querySelectorAll;
-Element.prototype.$qsa = Element.prototype.querySelectorAll;
+Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
+Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
 
 
 const log = (...s) => console.log.bind(console)(...s);
@@ -52,9 +50,16 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 
 /** 查找url中是否包含指定字符 */
-const strMatching = (str, match) => str.indexOf(match) >= 0;
-String.prototype.contains = function (string) {
-    return this.indexOf(string) >= 0
+const strMatching = (str, substr) => str.indexOf(substr) >= 0;
+const strContains = (str, substr) => strMatching(str, substr);
+String.prototype.contain = function (string) {
+    return this.indexOf(string) >= 0;
+}
+String.prototype.contains = (...strings) => {
+    for (let string of strings) {
+        if(this.contains(string)) return true;
+    }
+    return false;
 }
 
 
@@ -67,12 +72,13 @@ function currentUrlIncludes(...searchString){
 }
 
 /** 判断域名内是否包含匹配字符串 */
-const hostnameHas = (...matchs) => {
+const hostnameContains = (...matchs) => {
     for (let match of matchs) {
         if(strMatching(location.hostname, match)) return true;
     }
     return false;
 };
+const hostnameHas = hostnameContains;
 
 /** 判断链接内是否包含匹配字符串 */
 function currentUrlContain(...matchs){
@@ -81,12 +87,25 @@ function currentUrlContain(...matchs){
     }
     return false;
 }
+const currentUrlContains = currentUrlContain;
+
+function searchParamsContains(...paramNames){
+    let params = getQueryParams();
+    for (let paramName of paramNames) {
+        if(params[paramName]) return true;
+    }
+    return false;
+}
 
 function selectorRunIfExist(obj, func){
     if('function' !== typeof func){
         throw new TypeError('func must be a function');
     }
-    if(obj){ func(); }
+    if('string' === typeof obj){
+        obj = $qs(obj);
+    }
+    if(obj) func(obj);
+    return obj;
 }
 
 /** 选择器，存在时执行click() */
@@ -99,7 +118,10 @@ function selectorClick(_selector){
         s.click();
         log('执行了点击操作', _selector);
     });
+    return s;
 }
+const clickSelector = selectorClick;
+const clickSelectors = selectorsClick = (...selectors) => selectors.forEach(selector => selectorClick(selector));
 
 /** 选择器，存在时移除指定的class */
 function selectorRemoveClass(_selector, ...removeClasses){
@@ -111,12 +133,15 @@ function selectorRemoveClass(_selector, ...removeClasses){
         // removeClasses.forEach(_class => {
         for(let _class of removeClasses){
             if(typeof _class === 'string'){
+                // if(selector.classList.contains(_class))
                 selector.classList.remove(_class);
             }
             else log("a parameter 'removeClasses', not type string  ", _class);
         }
     }
+    return selector;
 }
+
 
 /**
  * 执行方法并捕获异常
@@ -180,6 +205,7 @@ function addStyleTag(css) {
     let style = createElement('style');
     style.innerHTML = css;
     document.head.appendChild(style);
+    return style;
 }
 
 /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
@@ -191,12 +217,14 @@ function addScriptTag(jslocation){
     // script.setAttribute("src", jslocation);
     script.src = jslocation;
     document.body.appendChild(script);
+    return script;
 }
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
 function addScript(jscode){
     let script = createElement('script');
     script.innerHTML = jscode;
     document.body.appendChild(script);
+    return script;
 }
 
 
@@ -207,8 +235,7 @@ const getTagElements = (tagName) => document.getElementsByTagName(tagName);
  * @param tagLocation  标签位置
  */
 const getTagElement = (tagName, tagLocation=0) => getTagElements(tagName)[tagLocation];
-/** 兼容以前用这个名字的脚本 */
-const getTagElem = (tagName, tagLocation) => getTagElement(tagName, tagLocation);
+const getTagElem = getTagElement; // 兼容以前用这个名字的脚本
 
 
 /**
@@ -252,16 +279,29 @@ function getRandStr(str, len) {
 }
 
 /** 尝试移除单个指定的元素 */
-function removeElement(s) {
-    let ele = $qs(s);
-    if (ele) {
-        ele.remove();
-        log("移除元素：" + s);
-    }
+function removeElement(...s) {
+    s.forEach(()=>{
+        let ele = $qs(s);
+        if (ele) {
+            ele.remove();
+            log("移除元素：", s);
+        }
+    });
 }
 const deleteElement = removeElement;
 
-const removeElements = (...s) => s.forEach(removeElement);
+/** 删除全部匹配的selector */
+const removeElements = (...s) => {
+    s.forEach(()=>{
+        let eles = $qsa(s);
+        if (eles.length > 0) {
+            for (let ele of eles) {
+                ele.remove();
+                log("移除元素：", s);
+            }
+        }
+    });
+};
 const deleteElements = removeElements;
 
 /** 尝试隐藏单个指定的元素 */
@@ -270,8 +310,9 @@ function hideElement(s) {
     if (ele) {
         if (ele.style) log("元素 " + s + "隐藏前样式：" + ele.style);
         // ele.setAttribute("style", style_hidden);
-        ele.style.cssText = ele.style.cssText + style_hidden;
+        ele.style.cssText += style_hidden;
     }
+    return ele;
 }
 const hideElements = (...s) => s.forEach(hideElement);
 
@@ -401,7 +442,7 @@ const addHeader = (headerName, headerValue) => addHeaders({headerName: headerVal
 
 /** 暂停全部视频 */
 function pauseVideos() {
-    let videos = $$("video");
+    let videos = $qsa("video");
     // videos.forEach(video => video.pause());
     for (const video of videos) {
         video.pause();

@@ -8,6 +8,9 @@ const CommonUtils = {
      * @param err_tip1  异常额外的提示
      */
     runFunction: function(func, err_tip0, tip, err_tip1) {
+        if('function' !== typeof func){
+            throw new TypeError('func must be a function');
+        }
         try {
             func();
             if (tip) console.log("[tip] " + tip);
@@ -24,15 +27,15 @@ const CommonUtils = {
             console.log("object is null");
             return true;
         }
-        if (undefined === object) {
+        if (undefined === object || 'undefined' === typeof object) {
             console.log("object is undefined");
             return true;
         }
-        if ("" === object) {
+        if ("" === object.trim()) {
             console.log("object is empty");
             return true;
         }
-        if (0 === object.length) {
+        if (0 === object.trim().length) {
             console.log("object.length is 0");
             return true;
         }
@@ -45,7 +48,7 @@ const CommonUtils = {
             return true;
         }
         let o = object.toString().trim();
-        if('NaN' === o){
+        if('NaN' === o || isNaN(o)){
             console.log("object is [NaN] string");
             return true;
         }
@@ -64,8 +67,8 @@ const CommonUtils = {
 
     /** 任意一个参数为空时返回 true */
     isBlanks: function () {
-        for (let i = 0; i < arguments.length; i++) {
-            if (this.isBlank(arguments[i]))
+        for (let argument of arguments) {
+            if (this.isBlank(argument))
                 return true;
         }
         return false;
@@ -83,8 +86,8 @@ const CommonUtils = {
 
     /** 任意一个参数不为空时返回 true */
     isNotBlanks: function () {
-        for (let i = 0; i < arguments.length; i++) {
-            if (this.isNotBlank(arguments[i]))
+        for (let argument of arguments) {
+            if (this.isNotBlank(argument))
                 return true;
         }
         return false;
@@ -112,8 +115,7 @@ const CommonUtils = {
      * @param symbol
      * @returns {string}
      */
-    formatCurrency: function (account, symbol) {
-        // if(this.isBlank(symbol)) symbol = '¥';
+    formatCurrency: function (account, symbol = '¥') {
         if (this.isBlank(account)) {
             return symbol + '0.00';
         }
@@ -204,10 +206,10 @@ const CommonUtils = {
             "S": date.getMilliseconds()                     // 毫秒
         };
         if (/(y+)/.test(fmt))
-            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substring(4 - RegExp.$1.length));
         for (let k in o) {
             if (new RegExp("(" + k + ")").test(fmt))
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                fmt = fmt.replace(RegExp.$1, (1 === RegExp.$1.length) ? (o[k]) : (("00" + o[k]).substring(("" + o[k]).length)));
         }
         return fmt;
     },
