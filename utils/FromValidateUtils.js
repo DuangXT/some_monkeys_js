@@ -13,12 +13,11 @@ const FromValidateUtils= {
     },
 
     length: function (value, param) {
-        var message = "长度必须在在" + param[0] + "与" + param[1] + "之间";
+        let message = "长度必须在在" + param[0] + "与" + param[1] + "之间";
         if (value.length >= param[0] && value.length <= param[1]) {
-            return [true]
-        } else {
-            return [false, message]
+            return [true];
         }
+        else return [false, message];
     },
 
     QQ: function (value, param) {

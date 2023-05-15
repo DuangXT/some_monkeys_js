@@ -21,7 +21,7 @@ const UrlUtils = {
     @Deprecated
     getURLParams:function (url){
         if(!url){
-            log("没有指定url，获取当前页面url的参数集");
+            console.log("没有指定url，获取当前页面url的参数集");
             return this.getLocationQueryVariables();
         }
 

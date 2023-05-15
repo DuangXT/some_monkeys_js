@@ -25,10 +25,8 @@
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
 // const $doc = s => document;
-const querySelector = document.querySelector.bind(document); // s => document.querySelector(s);
-const querySelectorAll = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
-const $qs = querySelector;
-const $qsa = $all = $$ = querySelectorAll;
+const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
+const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const $ = querySelector; // 不建议，容易引起冲突
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
