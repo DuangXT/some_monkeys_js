@@ -17,7 +17,7 @@ const HtmlUtils = {
   createElement: tagName => document.createElement(tagName),
   create: this.createElement, addElement: this.create, addTag: this.create,
 
-  /** 隐藏元素 */
+  /** 隐藏元素css */
   style_hidden: ";display:none;visibility:hidden!important;",
 
   /** 向head内添加样式 */
@@ -84,43 +84,61 @@ const HtmlUtils = {
     this.getTagElement(tagName, tagLocation).style[styleName] = styleValue;
   },
 
-  /** 尝试移除单个指定的元素 */
-  removeElement: (...s) => {
-    s.forEach(() => {
-      let ele = this.$qs(s);
+  /** 移除指定的每个元素 */
+  removeElement: (...selectors) => {
+    selectors.forEach((selector)=>{
+      let ele = this.$qs(selector);
       if (ele) {
         ele.remove();
-        console.log("移除元素：", s);
+        console.log("移除元素：", selector);
       }
     });
   },
   deleteElement: removeElement,
 
-  /** 删除全部匹配的selector */
-  removeElements: (...s) => {
-    s.forEach(() => {
-      let eles = this.$qsa(s);
-      if (eles.length > 0) {
-        for (let ele of eles) {
-          ele.remove();
-          console.log("移除元素：", s);
-        }
+  /** 移除指定的所有元素 */
+  removeElements: (...selectors) => {
+    selectors.forEach((selector)=>{
+      for (let ele of $qsa(selector)) {
+        ele.remove();
+        console.log("移除元素：", selector, 'id=' + ele.id, 'class=' + ele.className);
       }
     });
   },
   deleteElements: removeElements,
 
-  /** 尝试隐藏单个指定的元素 */
-  hideElement: function (s) {
-    let ele = this.$qs(s);
+  /** 将对象的属性设置为隐藏 */
+  setStyleHidden: (obj)=>{
+    if(!obj || 'object' !== typeof obj){
+      throw new TypeError('obj must be a object');
+    }
+    obj.style.display = "none!important";
+    obj.style.visibility = "hidden!important";
+    return obj;
+  },
+
+  /** 隐藏单个指定的元素 */
+  hideElement: function (_selector) {
+    let ele = this.$qs(_selector);
     if (ele) {
-      if (ele.style) console.log("元素 " + s + "隐藏前样式：" + ele.style);
-      // ele.setAttribute("style", thisstyle_hidden);
-      ele.style.cssText += this.style_hidden;
+      if (ele.style) console.log("元素 " + _selector + "隐藏前样式：" + ele.style);
+      // ele.setAttribute("style", style_hidden);
+      // ele.style.cssText += style_hidden;
+      this.setStyleHidden(ele);
     }
     return ele;
   },
-  hideElements: (...s) => s.forEach(hideElement),
+  /** 隐藏每个指定元素 */
+  hideElements: (...selectors) => selectors.forEach(hideElement),
+
+  /** 隐藏指定的所有元素 */
+  hideAllElements: (...selectors)=>{
+    selectors.forEach((selector)=>{
+      for (let ele of $qsa(selector)) {
+        this.setStyleHidden(ele);
+      }
+    });
+  },
 
   selectorRunIfExist: function (obj, func) {
     if('function' !== typeof func){
@@ -139,7 +157,7 @@ const HtmlUtils = {
       throw new TypeError('_selector must be a string');
     }
     let s;
-    this.selectorRunIfExist( s = $qs(_selector), function(){
+    this.selectorRunIfExist( s = this.$qs(_selector), function(){
       s.click();
       console.log('执行了点击操作', _selector);
     });

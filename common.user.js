@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.5.11.0
+// @version      0.0.6.0
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -37,8 +37,17 @@ Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelecto
 const log = (...s) => console.log.bind(console)(...s);
 
 // 样式
-/** 隐藏元素 */
+/** 隐藏元素css */
 const style_hidden = ";display:none;visibility:hidden!important;";
+/** 将对象的属性设置为隐藏 */
+function setStyleHidden(obj){
+    if(!obj || 'object' !== typeof obj){
+        throw new TypeError('obj must be a object');
+    }
+    obj.style.display = "none!important";
+    obj.style.visibility = "hidden!important";
+    return obj;
+}
 /** 彩色页面 */
 const style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=0);filter:grayscale(0%)!important;-webkit-filter:grayscale(0%)!important;-moz-filter:grayscale(0%)!important;-ms-filter:grayscale(0)!important;-o-filter:grayscale(0%)!important;";
 /** 自由滚动 */
@@ -276,43 +285,52 @@ function getRandStr(str, len) {
     return ret;
 }
 
-/** 尝试移除单个指定的元素 */
-function removeElement(...s) {
-    s.forEach(()=>{
-        let ele = $qs(s);
+/** 移除指定的每个元素 */
+function removeElement(...selectors) {
+    selectors.forEach((selector)=>{
+        let ele = $qs(selector);
         if (ele) {
             ele.remove();
-            log("移除元素：", s);
+            log("移除元素：", selector);
         }
     });
 }
 const deleteElement = removeElement;
 
-/** 删除全部匹配的selector */
-const removeElements = (...s) => {
-    s.forEach(()=>{
-        let eles = $qsa(s);
-        if (eles.length > 0) {
-            for (let ele of eles) {
-                ele.remove();
-                log("移除元素：", s);
-            }
+/** 移除指定的所有元素 */
+const removeElements = (...selectors) => {
+    selectors.forEach((selector)=>{
+        for (let ele of $qsa(selector)) {
+            ele.remove();
+            log("移除元素：", selector, 'id=' + ele.id, 'class=' + ele.className);
         }
     });
 };
 const deleteElements = removeElements;
 
-/** 尝试隐藏单个指定的元素 */
-function hideElement(s) {
-    let ele = $qs(s);
+/** 隐藏单个指定的元素 */
+function hideElement(_selector) {
+    let ele = $qs(_selector);
     if (ele) {
-        if (ele.style) log("元素 " + s + "隐藏前样式：" + ele.style);
+        if (ele.style) log("元素 " + _selector + "隐藏前样式：" + ele.style);
         // ele.setAttribute("style", style_hidden);
-        ele.style.cssText += style_hidden;
+        // ele.style.cssText += style_hidden;
+        setStyleHidden(ele);
     }
     return ele;
 }
-const hideElements = (...s) => s.forEach(hideElement);
+/** 隐藏每个指定元素 */
+const hideElements = (...selectors) => selectors.forEach(hideElement);
+
+/** 隐藏指定的所有元素 */
+function hideAllElements(...selectors){
+    selectors.forEach((selector)=>{
+        for (let ele of $qsa(selector)) {
+            setStyleHidden(ele);
+        }
+    });
+}
+
 
 /** 获取当前页面链接上的url参数对象 */
 function getLocationQueryVariables(){
@@ -445,6 +463,11 @@ function pauseVideos() {
     for (const video of videos) {
         video.pause();
     }
+}
+
+/** 页面不处于前台(焦点)时暂停全部视频 */
+function pauseVideosIfPageIsBackground(){
+    // thinking of....
 }
 
 function isForum(){
