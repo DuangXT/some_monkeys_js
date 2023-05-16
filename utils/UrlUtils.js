@@ -17,8 +17,10 @@ const UrlUtils = {
         return params;
     },
 
-    /** 获取url中的参数对象 */
-    @Deprecated
+    /** 获取url中的参数对象
+     *
+     * @Deprecated 这个函数中的正则表达式使用 \w 进行匹配，会导致转义问题
+     */
     getURLParams:function (url){
         if(!url){
             console.log("没有指定url，获取当前页面url的参数集");
@@ -49,8 +51,10 @@ const UrlUtils = {
 
     getQueryPara: (name) => getQueryParams()[name],
 
-    /** 从url中获取一个指定的参数 */
-    @Deprecated
+    /** 从url中获取一个指定的参数
+     *
+     * @Deprecated see getURLParams() documentation
+     */
     getUrlParam: (name, url) => getURLParams(url)[name],
 
     /** 设置查询参数 */

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.2.1
+// @version      0.0.6.2.3
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -359,8 +359,10 @@ function getLocationQueryVariables(){
     return params;
 }
 
-/** 获取url中的参数对象 */
-@Deprecated
+/** 获取url中的参数对象
+ *
+ * @Deprecated 这个函数中的正则表达式使用 \w 进行匹配，会导致转义问题
+ */
 function getURLParams(url){
     if(!url){
         log("没有指定url，获取当前页面url的参数集");
@@ -391,8 +393,10 @@ function getQueryParams(qs = document.location.search) {
 
 const getQueryParam = (name) => getQueryParams()[name];
 
-/** 从url中获取一个指定的参数 */
-@Deprecated
+/** 从url中获取一个指定的参数
+ *
+ * @Deprecated see getURLParams() documentation
+ */
 const getUrlParam = (name, url) => getURLParams(url)[name];
 
 /** 油猴-加载新脚本 */
