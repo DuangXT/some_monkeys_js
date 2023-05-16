@@ -1,4 +1,4 @@
-String.prototype.contains = (...strings) => {
+String.prototype.contains = function (...strings) {
     for (let string of strings) {
         if(this.indexOf(string) >= 0) return true;
     }

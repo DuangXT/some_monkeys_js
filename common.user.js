@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.3.3
+// @version      0.0.6.3.4
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -73,7 +73,7 @@ const strContains = (str, ...substrs) => {
     return false;
 }
 
-String.prototype.contains = (...strings) => {
+String.prototype.contains = function (...strings) {
     for (let string of strings) {
         if(this.indexOf(string) >= 0) return true;
     }
