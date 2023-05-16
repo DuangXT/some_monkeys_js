@@ -1,6 +1,3 @@
-String.prototype.contain = function (string) {
-    return this.indexOf(string) >= 0;
-}
 String.prototype.contains = (...strings) => {
     for (let string of strings) {
         if(this.indexOf(string) >= 0) return true;
