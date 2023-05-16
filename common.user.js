@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.0
+// @version      0.0.6.1
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -20,6 +20,10 @@
 // 事件监听函数；作用域=整个页面；所有资源加载完成后执行；后续加载的 window.onload 会覆盖之前加载的。
 // window.onload = function () { }
 
+const log = (...s) => console.log.bind(console)(...s);
+log("------=======****** common.user.js start load ******=======------");
+
+try{
 
 // 全局元素
 const originalFetch = window.fetch;
@@ -33,8 +37,6 @@ Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
 
-
-const log = (...s) => console.log.bind(console)(...s);
 
 // 样式
 /** 隐藏元素css */
@@ -56,9 +58,9 @@ const style_overflow = "overflow:auto!important;";
 const style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
 
 
-/** 查找url中是否包含指定字符 */
-const strMatching = (str, substr) => str.indexOf(substr) >= 0;
-const strContains = (str, substr) => strMatching(str, substr);
+/** 查找字符串中是否包含指定字符 */
+const strContains = (str, substr) => str.indexOf(substr) >= 0;
+
 String.prototype.contain = function (string) {
     return this.indexOf(string) >= 0;
 }
@@ -81,7 +83,7 @@ function currentUrlIncludes(...searchString){
 /** 判断域名内是否包含匹配字符串 */
 const hostnameContains = (...matchs) => {
     for (let match of matchs) {
-        if(strMatching(location.hostname, match)) return true;
+        if(strContains(location.hostname, match)) return true;
     }
     return false;
 };
@@ -90,7 +92,7 @@ const hostnameHas = hostnameContains;
 /** 判断链接内是否包含匹配字符串 */
 function currentUrlContain(...matchs){
     for (let match of matchs) {
-        if(strMatching(location.href, match)) return true;
+        if(strContains(location.href, match)) return true;
     }
     return false;
 }
@@ -520,6 +522,5 @@ const urlRedirect = urlJump;
 const urlJumpOpen = (_selector, _property='href', timeout=3000) =>
     urlJump(_selector, _property, timeout, false);
 
-
-
-log("------=======****** common.js loaded ******=======------");
+}catch(e){log('!!!!!!!!!!!!!!', e)}
+log("------=======****** common.user.js loaded ******=======------");
