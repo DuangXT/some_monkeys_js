@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.2.3
+// @version      0.0.6.3.3
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -27,14 +27,21 @@ log("------=======****** common.user.js start load ******=======------");
 // 全局元素
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
-// const $doc = s => document;
+const body = ()=> document.body;
+const head = ()=> document.head;
 const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
 const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const $ = querySelector; // 不建议，容易引起冲突
+const html = ()=> $qs('html');
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
+Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
+Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
+// head().add = head().append ? head().append : head().append = head().appendChild;
+// body().add = body().append ? body().append : body().append = body().appendChild;
+// html().add = html().append ? html().append : html().append = html().appendChild;
 
 
 // 样式
@@ -208,15 +215,29 @@ const add = addTag = addElement = createElement = create ;
 
 
 /** 以插入style标签的形式，向head内添加样式 */
-function addStyleTag(css) {
+function addStyleTagByCSS(css) {
     if('string' !== typeof css){
         throw new TypeError('parameter "css" must be a string');
     }
     if (!document.head) return;
-    let style = createElement('style');
+    let style = create('style');
     style.innerHTML = css;
-    document.head.appendChild(style);
+    document.head.add(style);
     return style;
+}
+
+/** 添加新的link标签 */
+function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
+    if('string' !== typeof linkHref){
+        throw new TypeError('parameter "css" must be a string');
+    }
+    if (!document.head) return;
+    let link = create('link');
+    link.type = linkType;
+    link.rel = linkRel;
+    link.href = linkHref;
+    document.head.add(link);
+    return link;
 }
 
 /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
@@ -224,19 +245,22 @@ function addScriptTag(jslocation){
     if('string' !== typeof jslocation){
         throw new TypeError('parameter "jslocation" must be a url string');
     }
-    let script = createElement('script');
-    // script.setAttribute("src", jslocation);
+    let script = create('script');
+    script.type = "text/javascript";
     script.src = jslocation;
-    document.body.appendChild(script);
+    document.body.add(script);
     return script;
 }
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
 function addScript(jscode){
-    let script = createElement('script');
+    let script = create('script');
+    script.type = "text/javascript";
     script.innerHTML = jscode;
-    document.body.appendChild(script);
+    document.body.add(script);
     return script;
 }
+
+
 
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
@@ -292,6 +316,15 @@ function getRandStr(str, len) {
 /** 范围内获取一个随机整数 */
 function getRandomInt(max, min=0) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+/** 随机获取对象内的一个值 */
+function getRandomValue(obj){
+    if(Array.isArray(obj)){
+        return obj[getRandomInt(obj.length)];
+    } // 非数组类型的作为对象处理
+    let keys = Object.keys(obj);
+    return obj[keys[getRandomInt(keys.length)]];
 }
 
 
@@ -411,7 +444,14 @@ function evalScript(jsurl){
 }
 
 /** 刷新页面至指定链接 */
-const refesh = (url=location.href) => location.href = url;
+const refesh = (url=location.href, replace) => {
+    if(!url.startsWith("http")) url = 'https://' + url;
+    if(replace || location.href !== url){
+        location.replace(url);
+        return;
+    }
+    location.href = url;
+}
 
 function requestUrl(url, method='GET'){
     let s = '===============================================================';

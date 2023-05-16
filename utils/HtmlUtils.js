@@ -1,8 +1,12 @@
 
+
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
+Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
+Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
+
 
 const HtmlUtils = {
 
@@ -16,6 +20,10 @@ const HtmlUtils = {
   tagName: s => document.getElementsByTagName(s),
   createElement: tagName => document.createElement(tagName),
   create: this.createElement, addElement: this.create, addTag: this.create,
+
+  body: ()=> document.body,
+  head: ()=> document.head,
+  html: ()=> this.$qs('html'),
 
   /** 隐藏元素css */
   style_hidden: ";display:none;visibility:hidden!important;",

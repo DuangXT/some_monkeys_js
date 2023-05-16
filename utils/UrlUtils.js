@@ -4,7 +4,14 @@ const originalOpen = XMLHttpRequest.prototype.open;
 const UrlUtils = {
 
     /** 刷新页面至指定链接 */
-    refesh: (url=location.href) => location.href = url,
+    refesh: (url=location.href, replace) => {
+        if(!url.startsWith("http")) url = 'https://' + url;
+        if(replace || location.href !== url){
+            location.replace(url);
+            return;
+        }
+        location.href = url;
+    },
 
     /** 获取当前页面链接上的url参数对象 */
     getLocationQueryVariables: function (){
