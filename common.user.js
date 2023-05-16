@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.1
+// @version      0.0.6.2
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -23,7 +23,6 @@
 const log = (...s) => console.log.bind(console)(...s);
 log("------=======****** common.user.js start load ******=======------");
 
-try{
 
 // 全局元素
 const originalFetch = window.fetch;
@@ -59,14 +58,20 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 
 /** 查找字符串中是否包含指定字符 */
-const strContains = (str, substr) => str.indexOf(substr) >= 0;
+const strContains = (str, ...substrs) => {
+    if(!str || 'string' !== typeof str || substrs.length<1) return false;
+    for (let substr of substrs) {
+        if(str.indexOf(substr) >= 0) return true;
+    }
+    return false;
+}
 
 String.prototype.contain = function (string) {
     return this.indexOf(string) >= 0;
 }
 String.prototype.contains = (...strings) => {
     for (let string of strings) {
-        if(this.contains(string)) return true;
+        if(this.indexOf(string) >= 0) return true;
     }
     return false;
 }
@@ -287,6 +292,12 @@ function getRandStr(str, len) {
     return ret;
 }
 
+/** 范围内获取一个随机整数 */
+function getRandomInt(max, min=0) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 /** 移除指定的每个元素 */
 function removeElement(...selectors) {
     selectors.forEach((selector)=>{
@@ -309,6 +320,12 @@ const removeElements = (...selectors) => {
     });
 };
 const deleteElements = removeElements;
+
+function removeIfTextContrains(obj, ...s){
+    if(obj && obj.innerText.contains(s)){
+        obj.remove();
+    }
+}
 
 /** 隐藏单个指定的元素 */
 function hideElement(_selector) {
@@ -522,5 +539,4 @@ const urlRedirect = urlJump;
 const urlJumpOpen = (_selector, _property='href', timeout=3000) =>
     urlJump(_selector, _property, timeout, false);
 
-}catch(e){log('!!!!!!!!!!!!!!', e)}
 log("------=======****** common.user.js loaded ******=======------");

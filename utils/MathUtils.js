@@ -12,9 +12,12 @@ const MathUtils = {
             ret += str[parseInt(Math.random() * str.length)];
         }
         return ret;
-    }
+    },
 
-
+    /** 范围内获取一个随机整数 */
+    getRandomInt: (max, min=0) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
 
 
 };
