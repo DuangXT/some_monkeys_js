@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.5.0
+// @version      0.0.6.6.0
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -376,10 +376,15 @@ const removeElements = (...selectors) => {
 };
 const deleteElements = removeElements;
 
-function removeIfTextContrains(obj, ...s){
+function removeIfTextContrains(obj, ...strs){
+    if('object' !== typeof obj){
+        throw new TypeError('obj must be a object');
+    }
     function _remove(o){
-        if(o && o.innerText.contains(s)){
-            o.remove();
+        for (const s in strs) {
+            if(o && s && o.innerText.contains(s.toString())){
+                o.remove();
+            }
         }
     }
     if(Array.isArray(obj)){
@@ -477,6 +482,7 @@ function evalScript(jsurl){
 
 /** 刷新页面至指定链接 */
 const refesh = (url=location.href, replace) => {
+    if(!url) url = location.href;
     if(!url.startsWith("http")) url = 'https://' + url;
     if(replace || location.href !== url){
         location.replace(url);
