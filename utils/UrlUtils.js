@@ -41,6 +41,12 @@ const UrlUtils = {
         return params;
     },
 
+    /** 从url中获取一个指定的参数
+     *
+     * @Deprecated see getURLParams() documentation
+     */
+    getUrlParam: (name, url) => getURLParams(url)[name],
+
     /**
      * 获取查询参数
      * //by http://stackoverflow.com/a/1099670
@@ -57,12 +63,6 @@ const UrlUtils = {
     },
 
     getQueryPara: (name) => getQueryParams()[name],
-
-    /** 从url中获取一个指定的参数
-     *
-     * @Deprecated see getURLParams() documentation
-     */
-    getUrlParam: (name, url) => getURLParams(url)[name],
 
     /** 设置查询参数 */
     setSearchParams: (paramJson)=>{

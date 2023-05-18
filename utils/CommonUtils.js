@@ -1,3 +1,7 @@
+Array.prototype.contains = function (...values){
+    return values.every(value => this.includes(value));
+}
+
 const CommonUtils = {
 
     /**

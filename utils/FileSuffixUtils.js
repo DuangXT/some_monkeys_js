@@ -62,7 +62,7 @@ const FileSuffixUtils = {
 
   /** 书籍格式 */
   bookFormats: ['pdf', 'mobi', 'epub', 'ebk3', 'chm',
-    'fb2', 'cbz', 'cbr', 'cbt', 'cth',
+    'fb2', 'cbz', 'cbr', 'cbt', 'cth', 'caj',
     'azw3', 'azw', 'kfx', 'book'],
   isBookFile: function (fileLink) {
     return this.linkSuffixIs(this.bookFormats, fileLink);

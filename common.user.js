@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.3.4
+// @version      0.0.6.5.0
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -42,7 +42,22 @@ Element.prototype.add = Element.prototype.append ? Element.prototype.append : El
 // head().add = head().append ? head().append : head().append = head().appendChild;
 // body().add = body().append ? body().append : body().append = body().appendChild;
 // html().add = html().append ? html().append : html().append = html().appendChild;
-
+String.prototype.contains = function (...strings) {
+    for (let string of strings) {
+        if(this.indexOf(string.toString()) >= 0) return true;
+    }
+    return false;
+}
+String.prototype.notContains = !String.prototype.contains;
+String.prototype.containsIgnoreCase = function (...substrs){
+    let newSubStrs = [];
+    substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
+    return this.toLowerCase().contains(...newSubStrs);
+}
+String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;
+Array.prototype.contains = function (...values){
+    return values.every(value => this.includes(value));
+}
 
 // 样式
 /** 隐藏元素css */
@@ -52,6 +67,8 @@ function setStyleHidden(obj){
     if(!obj || 'object' !== typeof obj){
         throw new TypeError('obj must be a object');
     }
+    // obj.setAttribute("style", style_hidden);
+    // obj.style.cssText += style_hidden;
     obj.style.display = "none!important";
     obj.style.visibility = "hidden!important";
     return obj;
@@ -66,19 +83,22 @@ const style_freetext = "user-select:text!important;-webkit-user-select:text!impo
 
 /** 查找字符串中是否包含指定字符 */
 const strContains = (str, ...substrs) => {
-    if(!str || 'string' !== typeof str || substrs.length<1) return false;
+    if(!str && !substrs) return true; // 两个都是无效值
+    if(!str || !substrs || 'string' !== typeof str || substrs.length<1) return false;
     for (let substr of substrs) {
-        if(str.indexOf(substr) >= 0) return true;
+        if(str.indexOf(substr.toString()) >= 0) return true;
     }
     return false;
 }
+const strNotContain = !strContains;
 
-String.prototype.contains = function (...strings) {
-    for (let string of strings) {
-        if(this.indexOf(string) >= 0) return true;
-    }
-    return false;
+const strContainsIgnoreCase = (str, ...substrs) => {
+    let newSubStrs = [];
+    substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
+    return strContains(str.toLowerCase(), ...newSubStrs);
 }
+const strNotContainsIgnoreCase = !strContainsIgnoreCase;
+
 
 
 /** 匹配当前URL规则 */
@@ -92,20 +112,20 @@ function currentUrlIncludes(...searchString){
 /** 判断域名内是否包含匹配字符串 */
 const hostnameContains = (...matchs) => {
     for (let match of matchs) {
-        if(strContains(location.hostname, match)) return true;
+        if(strContainsIgnoreCase(location.hostname, match)) return true;
     }
     return false;
 };
 const hostnameHas = hostnameContains;
 
 /** 判断链接内是否包含匹配字符串 */
-function currentUrlContain(...matchs){
+function currentUrlContains(...matchs){
     for (let match of matchs) {
         if(strContains(location.href, match)) return true;
     }
     return false;
 }
-const currentUrlContains = currentUrlContain;
+const currentUrlContain = currentUrlContains;
 
 function searchParamsContains(...paramNames){
     let params = getQueryParams();
@@ -214,7 +234,9 @@ const add = addTag = addElement = createElement = create ;
 
 
 
-/** 以插入style标签的形式，向head内添加样式 */
+/** 以插入style标签的形式，向head内添加样式
+ * @deprecated 用 GM_addStyle() 啊
+ */
 function addStyleTagByCSS(css) {
     if('string' !== typeof css){
         throw new TypeError('parameter "css" must be a string');
@@ -323,6 +345,9 @@ function getRandomValue(obj){
     if(Array.isArray(obj)){
         return obj[getRandomInt(obj.length)];
     } // 非数组类型的作为对象处理
+    if('object' !== typeof obj){
+        throw new TypeError('obj must be a object');
+    }
     let keys = Object.keys(obj);
     return obj[keys[getRandomInt(keys.length)]];
 }
@@ -352,9 +377,18 @@ const removeElements = (...selectors) => {
 const deleteElements = removeElements;
 
 function removeIfTextContrains(obj, ...s){
-    if(obj && obj.innerText.contains(s)){
-        obj.remove();
+    function _remove(o){
+        if(o && o.innerText.contains(s)){
+            o.remove();
+        }
     }
+    if(Array.isArray(obj)){
+        for (let o of obj) {
+            _remove(o);
+        }
+        return;
+    }
+    _remove(obj);
 }
 
 /** 隐藏单个指定的元素 */
@@ -362,8 +396,6 @@ function hideElement(_selector) {
     let ele = $qs(_selector);
     if (ele) {
         if (ele.style) log("元素 " + _selector + "隐藏前样式：" + ele.style);
-        // ele.setAttribute("style", style_hidden);
-        // ele.style.cssText += style_hidden;
         setStyleHidden(ele);
     }
     return ele;
@@ -579,5 +611,10 @@ function urlJump(_selector, _property='href', timeout=3000, flag=true){
 const urlRedirect = urlJump;
 const urlJumpOpen = (_selector, _property='href', timeout=3000) =>
     urlJump(_selector, _property, timeout, false);
+
+
+
+
+
 
 log("------=======****** common.user.js loaded ******=======------");
