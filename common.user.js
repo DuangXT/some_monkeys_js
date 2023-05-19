@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.6.3
+// @version      0.0.7.0.0
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -493,13 +493,13 @@ const refesh = (url=location.href, replace) => {
     location.href = url;
 }
 
-function requestUrl(url, method='GET'){
+function requestUrl(url, method='GET', referer){
     let s = '===============================================================';
     log(s);
     log('访问开始', url);
     GM_xmlhttpRequest({
-        method: method,
-        url: url,
+        url: url, method: method,
+        referrer: referer, referer: referer,
         onload: function(response) {
             log(response.responseText);
         }
