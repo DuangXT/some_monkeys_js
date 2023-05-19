@@ -487,9 +487,11 @@ const refesh = (url=location.href, replace) => {
     if(!url) url = location.href;
     if(!url.startsWith("http")) url = 'https://' + url;
     if(replace || location.href !== url){
+        log('替换链接为：', url);
         location.replace(url);
         return;
     }
+    log('跳转链接：', url);
     location.href = url;
 }
 
