@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.6.6.0
+// @version      0.0.6.6.3
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -134,6 +134,7 @@ function searchParamsContains(...paramNames){
     }
     return false;
 }
+const queryParamsContains = searchParamsContains;
 
 function selectorRunIfExist(obj, func){
     if('function' !== typeof func){
@@ -391,9 +392,10 @@ function removeIfTextContrains(obj, ...strs){
         for (let o of obj) {
             _remove(o);
         }
-        return;
+        return obj;
     }
     _remove(obj);
+    return obj;
 }
 
 /** 隐藏单个指定的元素 */
@@ -534,6 +536,8 @@ function setSearchParams(paramJson){
         return originalOpen.apply(this, [method, url, async, user, password]);
     };
 }
+const setQueryParams = setSearchParams;
+
 /** 添加一个查询参数 */ // setSearchParam
 const addSearchParam = (paramName, paramValue) => setSearchParams({paramName: paramValue});
 
@@ -599,14 +603,14 @@ function isDiscuz(){
 }
 
 /** 循环获取a标签元素的href，直到元素及href存在并跳转 */
-function urlJump(_selector, _property='href', timeout=3000, flag=true){
+function selectorUrlJump(_selector, _property='href', timeout=3000, flag=true){
     let alink = $qs(_selector);
     let url; // url重定向
-    if(alink && alink['_property']) url = alink['_property'];
+    if(alink && alink[_property]) url = alink[_property];
     if(!url){
         log('未获取到标签或链接，%s毫秒后重试', timeout);
         setTimeout(function(){
-            urlJump(_selector, _property); // 每n秒循环直到成功跳转
+            selectorUrlJump(_selector, _property); // 每n秒循环直到成功跳转
         }, timeout);
         return;
     }
@@ -614,11 +618,21 @@ function urlJump(_selector, _property='href', timeout=3000, flag=true){
     if(flag) refesh(url);
     else window.open(url);
 }
-const urlRedirect = urlJump;
-const urlJumpOpen = (_selector, _property='href', timeout=3000) =>
-    urlJump(_selector, _property, timeout, false);
+const selectorUrlRedirect = selectorUrlJump;
+const selectorUrlJumpOpen = (_selector, _property='href', timeout=3000) =>
+    selectorUrlJump(_selector, _property, timeout, false);
 
-
+/** 当域名匹配时，询问是否跳转到目标地址 */
+function askRedirect(wasHost, targetUrl, targetInfo) {
+    if(hostnameHas(wasHost)){
+        let confText = "您是否想访问【 " + targetUrl +" 】？";
+        if(targetInfo) confText += "\n\n    " + targetInfo;
+        if(confirm(confText)){
+            refesh(targetUrl, true);
+        }
+    }
+}
+const wantRedirect = askRedirect;
 
 
 

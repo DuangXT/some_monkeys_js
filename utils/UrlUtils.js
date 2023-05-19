@@ -13,6 +13,42 @@ const UrlUtils = {
         location.href = url;
     },
 
+    /** 匹配当前URL规则 */
+    currentUrlIncludes: function(...searchString){
+        for (let ss of searchString) {
+            if(document.URL.includes(ss)) return true;
+        }
+        return false;
+    },
+
+    /** 判断域名内是否包含匹配字符串 */
+    hostnameContains: function (...matchs) {
+        for (let match of matchs) {
+            if (StringUtils.strContainsIgnoreCase(location.hostname, match)) return true;
+        }
+        return false;
+    },
+    hostnameHas: this.hostnameContains,
+
+    /** 判断链接内是否包含匹配字符串 */
+    currentUrlContains: function(...matchs){
+        for (let match of matchs) {
+            if(StringUtils.strContains(location.href, match)) return true;
+        }
+        return false;
+    },
+    currentUrlContain: this.currentUrlContains,
+
+    searchParamsContains: function(...paramNames){
+        let params = this.getQueryParams();
+        for (let paramName of paramNames) {
+            if(params[paramName]) return true;
+        }
+        return false;
+    },
+    queryParamsContains: this.searchParamsContains,
+
+
     /** 获取当前页面链接上的url参数对象 */
     getLocationQueryVariables: function (){
         let query = location.search.substring(1),
@@ -24,28 +60,6 @@ const UrlUtils = {
         return params;
     },
 
-    /** 获取url中的参数对象
-     *
-     * @Deprecated 这个函数中的正则表达式使用 \w 进行匹配，会导致转义问题
-     */
-    getURLParams:function (url){
-        if(!url){
-            console.log("没有指定url，获取当前页面url的参数集");
-            return this.getLocationQueryVariables();
-        }
-
-        let params = {}, pattern = /(\w+)=(\w+)/ig; // 表达式只用\w是有问题的
-        url.replace(pattern, ($, $1, $2) => {
-            params[$1] = $2;
-        });
-        return params;
-    },
-
-    /** 从url中获取一个指定的参数
-     *
-     * @Deprecated see getURLParams() documentation
-     */
-    getUrlParam: (name, url) => getURLParams(url)[name],
 
     /**
      * 获取查询参数
@@ -62,7 +76,7 @@ const UrlUtils = {
         return params;
     },
 
-    getQueryPara: (name) => getQueryParams()[name],
+    getQueryParam: (name) => this.getQueryParams()[name],
 
     /** 设置查询参数 */
     setSearchParams: (paramJson)=>{
@@ -80,11 +94,22 @@ const UrlUtils = {
             return originalOpen.apply(this, [method, url, async, user, password]);
         };
     },
+    setQueryParams: this.setSearchParams,
 
     /** 添加一个查询参数 */ // setSearchParam
-    addSearchParam: (paramName, paramValue) => setSearchParams({paramName: paramValue}),
+    addSearchParam: (paramName, paramValue) => this.setSearchParams({paramName: paramValue}),
 
-
+    /** 当域名匹配时，询问是否跳转到目标地址 */
+    askRedirect: (wasHost, targetUrl, targetInfo) => {
+        if (this.hostnameHas(wasHost)) {
+            let confText = "您是否想访问【 " + targetUrl + " 】？";
+            if (targetInfo) confText += "\n\n    " + targetInfo;
+            if (confirm(confText)) {
+                refesh(targetUrl, true);
+            }
+        }
+    },
+    wantRedirect: this.askRedirect,
 
 
 };

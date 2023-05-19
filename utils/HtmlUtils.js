@@ -194,5 +194,25 @@ const HtmlUtils = {
     return selector;
   },
 
+  /** 循环获取a标签元素的href，直到元素及href存在并跳转 */
+  selectorUrlJump: (_selector, _property = 'href', timeout = 3000, flag = true) => {
+    let alink = this.$qs(_selector);
+    let url; // url重定向
+    if (alink && alink[_property]) url = alink[_property];
+    if (!url) {
+      log('未获取到标签或链接，%s毫秒后重试', timeout);
+      setTimeout(function () {
+        this.selectorUrlJump(_selector, _property); // 每n秒循环直到成功跳转
+      }, timeout);
+      return;
+    }
+    log('即将跳转到链接', url);
+    if (flag) UrlUtils.refesh(url);
+    else window.open(url);
+  },
+  selectorUrlRedirect: selectorUrlJump,
+  selectorUrlJumpOpen: (_selector, _property = 'href', timeout = 3000) =>
+      selectorUrlJump(_selector, _property, timeout, false),
+
 };
 
