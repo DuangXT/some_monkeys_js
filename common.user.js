@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.7.0.2
+// @version      0.0.7.0.3
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -16,6 +16,7 @@
 
 // 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。
 // (function () { })();
+// (()=>{ })();
 
 // 事件监听函数；作用域=整个页面；所有资源加载完成后执行；后续加载的 window.onload 会覆盖之前加载的。
 // window.onload = function () { }
@@ -627,13 +628,25 @@ const selectorUrlAlwaysJumpOpen = (_selector, _property='href', timeout=3000) =>
 
 /** 当域名匹配时，询问是否跳转到目标地址 */
 function askRedirect(wasHost, targetUrl, targetInfo) {
-    if(hostnameHas(wasHost)){
-        let confText = "您是否想访问【 " + targetUrl +" 】？";
-        if(targetInfo) confText += "\n\n    " + targetInfo;
-        if(confirm(confText)){
-            refesh(targetUrl, true);
+    function jump(host){
+        if(host && 'string' === typeof host){
+            if(hostnameHas(host)){
+                let confText = "您是否想访问【 " + targetUrl +" 】？";
+                if(targetInfo) confText += "\n\n    " + targetInfo;
+                if(confirm(confText)){
+                    refesh(targetUrl, true);
+                    return;
+                }
+            }
         }
+        else log('askRedirect(wasHost): 域名对象不是字符串', host);
     }
+    if(Array.isArray(wasHost)){
+        wasHost.forEach(host => {
+            jump(host);
+        });
+    }
+    else jump(wasHost);
 }
 const wantRedirect = askRedirect;
 
