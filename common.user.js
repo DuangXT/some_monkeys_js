@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.7.0.0
+// @version      0.0.7.0.1
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -605,14 +605,14 @@ function isDiscuz(){
 }
 
 /** 循环获取a标签元素的href，直到元素及href存在并跳转 */
-function selectorUrlJump(_selector, _property='href', timeout=3000, flag=true){
+function selectorUrlAlwaysJump(_selector, _property='href', timeout=3000, flag=true){
     let alink = $qs(_selector);
     let url; // url重定向
     if(alink && alink[_property]) url = alink[_property];
     if(!url){
         log('未获取到标签或链接，%s毫秒后重试', timeout);
         setTimeout(function(){
-            selectorUrlJump(_selector, _property); // 每n秒循环直到成功跳转
+            selectorUrlAlwaysJump(_selector, _property, timeout, flag); // 每n秒循环直到成功跳转
         }, timeout);
         return;
     }
@@ -620,9 +620,9 @@ function selectorUrlJump(_selector, _property='href', timeout=3000, flag=true){
     if(flag) refesh(url);
     else window.open(url);
 }
-const selectorUrlRedirect = selectorUrlJump;
-const selectorUrlJumpOpen = (_selector, _property='href', timeout=3000) =>
-    selectorUrlJump(_selector, _property, timeout, false);
+const selectorUrlAlwaysRedirect = selectorUrlAlwaysJump;
+const selectorUrlAlwaysJumpOpen = (_selector, _property='href', timeout=3000) =>
+    selectorUrlAlwaysJump(_selector, _property, timeout, false);
 
 /** 当域名匹配时，询问是否跳转到目标地址 */
 function askRedirect(wasHost, targetUrl, targetInfo) {
