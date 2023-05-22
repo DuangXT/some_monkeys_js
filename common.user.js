@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.7.0.3
+// @version      0.0.7.0.5
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -59,6 +59,24 @@ String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;
 Array.prototype.contains = function (...values){
     return values.every(value => this.includes(value));
 }
+Object.prototype.containsKey = function(...keys){
+    for (let key of keys) {
+        if(this[key]) return this[key];
+    }
+    return false;
+}
+Object.prototype.containsValue = function(...values){
+    for (const key in this) {
+        for (const value of values) {
+            if(this[key] === value) return value;
+        }
+    }
+    return false;
+}
+Object.prototype.contains = function(...substrs){
+    return this.containsKey(substrs) || this.containsValue(substrs);
+}
+
 
 // 样式
 /** 隐藏元素css */
