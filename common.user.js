@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.7.0.5
+// @version      0.0.8.0
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -25,24 +25,20 @@ const log = (...s) => console.log.bind(console)(...s);
 log("------=======****** common.user.js start load ******=======------");
 
 
-// 全局元素
-const originalFetch = window.fetch;
-const originalOpen = XMLHttpRequest.prototype.open;
-const body = ()=> document.body;
-const head = ()=> document.head;
-const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
-const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
-// const $ = querySelector; // 不建议，容易引起冲突
-const html = ()=> $qs('html');
-Document.prototype.$qs = Document.prototype.querySelector;
-Element.prototype.$qs = Element.prototype.querySelector;
-Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
-Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
-Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
-Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
-// head().add = head().append ? head().append : head().append = head().appendChild;
-// body().add = body().append ? body().append : body().append = body().appendChild;
-// html().add = html().append ? html().append : html().append = html().appendChild;
+// 全局定义
+Object.prototype.containsKey = function(...keys){
+    for (let key of keys) {
+        if(key in this) return this[key];
+    }
+    return false;
+}
+Object.prototype.containsValue = function(...values){
+    let arr = Object.values(this);
+    return values.every(value => arr.includes(value));
+}
+Object.prototype.contains = function(...substrs){
+    return this.containsKey(substrs) || this.containsValue(substrs);
+}
 String.prototype.contains = function (...strings) {
     for (let string of strings) {
         if(this.indexOf(string.toString()) >= 0) return true;
@@ -59,23 +55,26 @@ String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;
 Array.prototype.contains = function (...values){
     return values.every(value => this.includes(value));
 }
-Object.prototype.containsKey = function(...keys){
-    for (let key of keys) {
-        if(this[key]) return this[key];
-    }
-    return false;
-}
-Object.prototype.containsValue = function(...values){
-    for (const key in this) {
-        for (const value of values) {
-            if(this[key] === value) return value;
-        }
-    }
-    return false;
-}
-Object.prototype.contains = function(...substrs){
-    return this.containsKey(substrs) || this.containsValue(substrs);
-}
+
+const originalFetch = window.fetch;
+const originalOpen = XMLHttpRequest.prototype.open;
+const body = ()=> document.body;
+const head = ()=> document.head;
+const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
+const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
+// const $ = querySelector; // 不建议，容易引起冲突
+const html = ()=> $qs('html');
+
+Document.prototype.$qs = Document.prototype.querySelector;
+Element.prototype.$qs = Element.prototype.querySelector;
+Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
+Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
+Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
+Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
+// head().add = head().append ? head().append : head().append = head().appendChild;
+// body().add = body().append ? body().append : body().append = body().appendChild;
+// html().add = html().append ? html().append : html().append = html().appendChild;
+
 
 
 // 样式
