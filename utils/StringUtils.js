@@ -1,13 +1,17 @@
 String.prototype.contains = function (...strings) {
     for (let string of strings) {
-        if(this.indexOf(string.toString()) >= 0) return true;
+        string = string.toString();
+        if(
+            // this.indexOf(string) >= 0 // <ES6
+            this.includes(string) // >=ES6
+        ) return true;
     }
     return false;
 }
 String.prototype.notContains = !String.prototype.contains;
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
-    substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
+    substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
     return this.toLowerCase().contains(...newSubStrs);
 }
 String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;

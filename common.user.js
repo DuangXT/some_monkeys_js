@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.1
+// @version      0.0.8.2.1
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -39,16 +39,21 @@ Object.prototype.containsValue = function(...values){
 Object.prototype.contains = function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
 }
+Object.prototype.toJson = function(){return JSON.stringify(this);}
 String.prototype.contains = function (...strings) {
     for (let string of strings) {
-        if(this.indexOf(string.toString()) >= 0) return true;
+        string = string.toString();
+        if(
+            // this.indexOf(string) >= 0 // <ES6
+            this.includes(string) // >=ES6
+        ) return true;
     }
     return false;
 }
 String.prototype.notContains = !String.prototype.contains;
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
-    substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
+    substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
     return this.toLowerCase().contains(...newSubStrs);
 }
 String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;
@@ -414,13 +419,13 @@ function removeIfTextContrains(obj, ...strs){
 function hideElement(_selector) {
     let ele = $qs(_selector);
     if (ele) {
-        if (ele.style) log("元素 " + _selector + "隐藏前样式：" + ele.style);
+        if (ele.style) log("元素 " + _selector + " 隐藏前样式：" + ele.style.toJson());
         setStyleHidden(ele);
     }
     return ele;
 }
 /** 隐藏每个指定元素 */
-const hideAllElements = hideElements = (...selectors) => selectors.forEach(hideElement);
+const hideElements = (...selectors) => selectors.forEach(hideElement);
 
 /** 隐藏指定的所有元素 */
 function hideAllElements(...selectors){

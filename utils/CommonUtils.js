@@ -1,3 +1,18 @@
+Object.prototype.containsKey = function(...keys){
+    for (let key of keys) {
+        if(key in this) return this[key];
+    }
+    return false;
+}
+Object.prototype.containsValue = function(...values){
+    let arr = Object.values(this);
+    return values.every(value => arr.includes(value));
+}
+Object.prototype.contains = function(...substrs){
+    return this.containsKey(substrs) || this.containsValue(substrs);
+}
+Object.prototype.toJson = function(){return JSON.stringify(this);}
+
 Array.prototype.contains = function (...values){
     return values.every(value => this.includes(value));
 }

@@ -4,9 +4,9 @@ Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
+
 Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
 Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
-
 
 const HtmlUtils = {
 
@@ -113,7 +113,7 @@ const HtmlUtils = {
       }
     });
   },
-  deleteElements: removeElements,
+  deleteElements: removeElements, deleteAllElements:removeElements, removeAllElements: removeElements,
 
   /** 将对象的属性设置为隐藏 */
   setStyleHidden: (obj)=>{
@@ -210,9 +210,9 @@ const HtmlUtils = {
     if (flag) UrlUtils.refesh(url);
     else window.open(url);
   },
-  selectorUrlRedirect: selectorUrlJump,
+  selectorUrlRedirect: selectorUrlAlwaysJump,
   selectorUrlJumpOpen: (_selector, _property = 'href', timeout = 3000) =>
-      selectorUrlJump(_selector, _property, timeout, false),
+      selectorUrlAlwaysJump(_selector, _property, timeout, false),
 
 };
 
