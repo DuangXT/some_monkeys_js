@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.0
+// @version      0.0.8.1
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -69,13 +69,11 @@ Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
-Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
-Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
 // head().add = head().append ? head().append : head().append = head().appendChild;
 // body().add = body().append ? body().append : body().append = body().appendChild;
 // html().add = html().append ? html().append : html().append = html().appendChild;
 
-
+const createElement = addTag = addElement = tagName => document.createElement(tagName);
 
 // 样式
 /** 隐藏元素css */
@@ -248,10 +246,6 @@ function runLast(func){
 }
 const runAtLast = taskLast = functionLast = funcLast = runLast;
 
-const create = tagName => document.createElement(tagName);
-const add = addTag = addElement = createElement = create ;
-
-
 
 /** 以插入style标签的形式，向head内添加样式
  * @deprecated 用 GM_addStyle() 啊
@@ -261,7 +255,7 @@ function addStyleTagByCSS(css) {
         throw new TypeError('parameter "css" must be a string');
     }
     if (!document.head) return;
-    let style = create('style');
+    let style = createElement('style');
     style.innerHTML = css;
     document.head.add(style);
     return style;
@@ -273,7 +267,7 @@ function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
         throw new TypeError('parameter "css" must be a string');
     }
     if (!document.head) return;
-    let link = create('link');
+    let link = createElement('link');
     link.type = linkType;
     link.rel = linkRel;
     link.href = linkHref;
@@ -286,7 +280,7 @@ function addScriptTag(jslocation){
     if('string' !== typeof jslocation){
         throw new TypeError('parameter "jslocation" must be a url string');
     }
-    let script = create('script');
+    let script = createElement('script');
     script.type = "text/javascript";
     script.src = jslocation;
     document.body.add(script);
@@ -294,7 +288,7 @@ function addScriptTag(jslocation){
 }
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
 function addScript(jscode){
-    let script = create('script');
+    let script = createElement('script');
     script.type = "text/javascript";
     script.innerHTML = jscode;
     document.body.add(script);
@@ -393,7 +387,7 @@ const removeElements = (...selectors) => {
         }
     });
 };
-const deleteElements = removeElements;
+const deleteElements = deleteAllElements = removeAllElements = removeElements;
 
 function removeIfTextContrains(obj, ...strs){
     if('object' !== typeof obj){
@@ -426,7 +420,7 @@ function hideElement(_selector) {
     return ele;
 }
 /** 隐藏每个指定元素 */
-const hideElements = (...selectors) => selectors.forEach(hideElement);
+const hideAllElements = hideElements = (...selectors) => selectors.forEach(hideElement);
 
 /** 隐藏指定的所有元素 */
 function hideAllElements(...selectors){
@@ -668,6 +662,15 @@ function askRedirect(wasHost, targetUrl, targetInfo) {
 const wantRedirect = askRedirect;
 
 
+// 一些需要留意的，非常同名的函数名称重定向
+Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
+Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
+const remove = removeElement;
+const removeAll = removeElements;
+const hide = hideElements;
+const hideAll = hideElements;
+const add = create = createElement;
+const click = selectorClick;
 
 
 log("------=======****** common.user.js loaded ******=======------");
