@@ -125,7 +125,7 @@ const HtmlUtils = {
     return obj;
   },
 
-  /** 隐藏单个指定的元素 */
+  /** 隐藏单个指定的标签（返回被隐藏的标签对象） */
   hideElement: function (_selector) {
     let ele = this.$qs(_selector);
     if (ele) {
@@ -136,10 +136,13 @@ const HtmlUtils = {
     }
     return ele;
   },
-  /** 隐藏每个指定元素 */
+  hide: hideElement,
+  /** 隐藏每个选择器的一个标签 */
   hideElements: (...selectors) => selectors.forEach(hideElement),
+  hides: hideElements,
 
-  /** 隐藏指定的所有元素 */
+
+  /** 隐藏每个选择器的所有标签 */
   hideAllElements: (...selectors)=>{
     selectors.forEach((selector)=>{
       for (let ele of $qsa(selector)) {
@@ -147,6 +150,8 @@ const HtmlUtils = {
       }
     });
   },
+
+  hideAll: hideAllElements,
 
   selectorRunIfExist: function (obj, func) {
     if('function' !== typeof func){

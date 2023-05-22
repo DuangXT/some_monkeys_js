@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.1
+// @version      0.0.8.2.2
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -415,19 +415,19 @@ function removeIfTextContrains(obj, ...strs){
     return obj;
 }
 
-/** 隐藏单个指定的元素 */
+/** 隐藏单个指定的标签（返回被隐藏的标签对象） */
 function hideElement(_selector) {
     let ele = $qs(_selector);
     if (ele) {
-        if (ele.style) log("元素 " + _selector + " 隐藏前样式：" + ele.style.toJson());
+        if (ele.style) log("元素 " + _selector + " 隐藏前样式：" + ele.style.toJson().slice(0,100));
         setStyleHidden(ele);
     }
     return ele;
 }
-/** 隐藏每个指定元素 */
+/** 隐藏每个选择器的一个标签 */
 const hideElements = (...selectors) => selectors.forEach(hideElement);
 
-/** 隐藏指定的所有元素 */
+/** 隐藏每个选择器的所有标签 */
 function hideAllElements(...selectors){
     selectors.forEach((selector)=>{
         for (let ele of $qsa(selector)) {
@@ -672,8 +672,9 @@ Document.prototype.add = Document.prototype.append ? Document.prototype.append :
 Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
 const remove = removeElement;
 const removeAll = removeElements;
-const hide = hideElements;
-const hideAll = hideElements;
+const hide = hideElement;
+const hides = hideElements;
+const hideAll = hideAllElements;
 const add = create = createElement;
 const click = selectorClick;
 
