@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.8
+// @version      0.0.8.2.9
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -510,6 +510,16 @@ const refesh = (url=location.href, replace) => {
     }
     log('跳转链接：', url);
     location.href = url;
+}
+
+/** 打开一个定时关闭的迷你小窗口 */
+function openTheTimingCloseMiniWindow(url, timeout=10000){
+    let hideWindowFeatures = // 'noopener,noreferrer,hidden,'+
+        'height=1,width=1,left=-1000,top=-1000,location=no,menubar=no,toolbar=no,status=no,titlebar=no,scrollbars=no';
+    let miniPopup = window.open(url, '_blank', hideWindowFeatures);
+    window.setTimeout(function() {
+        miniPopup.close();
+    }, timeout);
 }
 
 /**
