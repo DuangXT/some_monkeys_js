@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.2
+// @version      0.0.8.2.3
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -11,7 +11,12 @@
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
 // @grant        unsafeWindow
-// @grant        GM_xmlhttpRequest
+
+/** @require      https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js */
+// see https://stackoverflow.com/questions/16736320/referenceerror-gm-xmlhttprequest-is-not-defined
+// 油猴4.0开始下划线的方法被抛弃，改为对象内函数。需要向下兼容的话就require gm4-polyfill.js
+// @grant        GM.xmlHttpRequest
+
 // ==/UserScript==
 
 // 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。
@@ -40,6 +45,8 @@ Object.prototype.contains = function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
 }
 Object.prototype.toJson = function(){return JSON.stringify(this);}
+Object.prototype.isNode = function(){return this instanceof HTMLElement;}
+
 String.prototype.contains = function (...strings) {
     for (let string of strings) {
         string = string.toString();
@@ -399,11 +406,15 @@ function removeIfTextContrains(obj, ...strs){
         throw new TypeError('obj must be a object');
     }
     function _remove(o){
-        for (const s in strs) {
-            if(o && s && o.innerText.contains(s.toString())){
-                o.remove();
+        if(o && o.isNode()){
+            for (const s in strs) {
+                if(s && o.innerText.contains(s.toString())){
+                    o.remove();
+                }
             }
+            return;
         }
+        log('无法操作非节点对象', o);
     }
     if(Array.isArray(obj)){
         for (let o of obj) {
@@ -490,7 +501,7 @@ const getUrlParam = (name, url) => getURLParams(url)[name];
 
 /** 油猴-加载新脚本 */
 function evalScript(jsurl){
-    GM_xmlhttpRequest({
+    GM.xmlhttpRequest({
         method: 'GET',
         url: jsurl,
         onload: function(response) {
@@ -516,7 +527,7 @@ function requestUrl(url, method='GET', referer){
     let s = '===============================================================';
     log(s);
     log('访问开始', url);
-    GM_xmlhttpRequest({
+    GM.xmlhttpRequest({
         url: url, method: method,
         referrer: referer, referer: referer,
         onload: function(response) {
