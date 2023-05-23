@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.6
+// @version      0.0.8.2.7
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -513,12 +513,13 @@ const refesh = (url=location.href, replace) => {
 }
 
 function xmlHttpRequest(url, callback, method='GET', referer){
+    if(referer) referer = allowRefererJson(referer);
     try {
         let gmXmlHttpRequest = GM.xmlHttpRequest || GM_xmlhttpRequest;
         if(gmXmlHttpRequest){
             gmXmlHttpRequest({
                 url: url, method: method,
-                referrer: referer, referer: referer,
+                header: referer,
                 onload: function(response) {
                     callback(response.responseText);
                 }
@@ -532,8 +533,9 @@ function xmlHttpRequest(url, callback, method='GET', referer){
     let request = new XMLHttpRequest();
     request.open(method, url, true);
     if(referer){
-        request.setRequestHeader('referrer', referer);
-        request.setRequestHeader('referer', referer);
+        for (let key in referer) {
+            request.setRequestHeader(key, referer[key]);
+        }
     }
     request.onreadystatechange = function() {
         if (request.readyState === 4 && request.status === 200) {
@@ -609,6 +611,20 @@ function addHeaders(headerJson){
 
 /** 添加一个请求头 */
 const addHeader = (headerName, headerValue) => addHeaders({headerName: headerValue});
+
+/** 允许设置referer */
+const allowRefererJson = function(referer) {
+    let j = {
+        "Referrer-Policy": "unsafe-url",
+        "Access-Control-Allow-Headers": "Referer",
+        'Access-Control-Allow-Origin':'*',
+        'Cross-Origin-Resource-Policy':'cross-origin',}
+    if(referer) {
+        j["referer"] = referer;
+        j["referrer"] = referer;
+    }
+    return j;
+}
 
 /** 暂停全部视频 */
 function pauseVideos() {
