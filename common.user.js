@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.7
+// @version      0.0.8.2.8
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -293,9 +293,9 @@ function addScriptTag(jslocation){
         throw new TypeError('parameter "jslocation" must be a url string');
     }
     let script = createElement('script');
-    script.type = "text/javascript";
+    // script.type = "text/javascript";
     script.src = jslocation;
-    document.body.add(script);
+    document.head.add(script);
     return script;
 }
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
@@ -512,6 +512,9 @@ const refesh = (url=location.href, replace) => {
     location.href = url;
 }
 
+/**
+ * @deprecated 跨域问题无法解决
+ */
 function xmlHttpRequest(url, callback, method='GET', referer){
     if(referer) referer = allowRefererJson(referer);
     try {
@@ -532,6 +535,7 @@ function xmlHttpRequest(url, callback, method='GET', referer){
 
     let request = new XMLHttpRequest();
     request.open(method, url, true);
+    request.withCredentials = true;
     if(referer){
         for (let key in referer) {
             request.setRequestHeader(key, referer[key]);
@@ -545,6 +549,9 @@ function xmlHttpRequest(url, callback, method='GET', referer){
     request.send();
 }
 
+/**
+ * @deprecated 跨域问题无法解决
+ */
 function requestUrl(url, method='GET', referer){
     let s = '===============================================================';
     log(s);
@@ -555,9 +562,10 @@ function requestUrl(url, method='GET', referer){
 }
 
 
-
-
-/** 油猴-加载新脚本 */
+/**
+ * 油猴-加载新脚本
+ * @deprecated 跨域问题无法解决
+ */
 function evalScript(jsurl){
     xmlHttpRequest(jsurl, eval, 'GET');
 }
