@@ -16,7 +16,7 @@
 // see https://stackoverflow.com/questions/16736320/referenceerror-gm-xmlhttprequest-is-not-defined
 // 油猴4.0开始下划线的方法被抛弃，改为对象内函数。需要向下兼容的话就require gm4-polyfill.js
 // @grant        GM.xmlHttpRequest
-
+// @connect      *
 // ==/UserScript==
 
 // 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。
@@ -501,7 +501,7 @@ const getUrlParam = (name, url) => getURLParams(url)[name];
 
 /** 油猴-加载新脚本 */
 function evalScript(jsurl){
-    GM.xmlhttpRequest({
+    GM.xmlHttpRequest({
         method: 'GET',
         url: jsurl,
         onload: function(response) {
@@ -527,7 +527,7 @@ function requestUrl(url, method='GET', referer){
     let s = '===============================================================';
     log(s);
     log('访问开始', url);
-    GM.xmlhttpRequest({
+    GM.xmlHttpRequest({
         url: url, method: method,
         referrer: referer, referer: referer,
         onload: function(response) {
