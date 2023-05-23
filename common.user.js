@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.3
+// @version      0.0.8.2.4
 // @author       DuangXT
 // @grant        none
 // @match        *
