@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.4
+// @version      0.0.8.2.5
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -499,17 +499,6 @@ const getQueryParam = (name) => getQueryParams()[name];
  */
 const getUrlParam = (name, url) => getURLParams(url)[name];
 
-/** 油猴-加载新脚本 */
-function evalScript(jsurl){
-    GM.xmlHttpRequest({
-        method: 'GET',
-        url: jsurl,
-        onload: function(response) {
-            eval(response.responseText);
-        }
-    });
-}
-
 /** 刷新页面至指定链接 */
 const refesh = (url=location.href, replace) => {
     if(!url) url = location.href;
@@ -523,19 +512,48 @@ const refesh = (url=location.href, replace) => {
     location.href = url;
 }
 
+function xmlHttpRequest(url, callback, method='GET', referer){
+    let gmXmlHttpRequest = GM.xmlHttpRequest || GM_xmlhttpRequest;
+    if(gmXmlHttpRequest){
+        gmXmlHttpRequest({
+            url: url, method: method,
+            referrer: referer, referer: referer,
+            onload: function(response) {
+                callback(response.responseText);
+            }
+        });
+        return;
+    }
+
+    let request = new XMLHttpRequest();
+    request.open(method, url, true);
+    if(referer){
+        request.setRequestHeader('referrer', referer);
+        request.setRequestHeader('referer', referer);
+    }
+    request.onreadystatechange = function() {
+        if (request.readyState === 4 && request.status === 200) {
+            callback(request.responseText);
+        }
+    };
+    request.send();
+}
+
 function requestUrl(url, method='GET', referer){
     let s = '===============================================================';
     log(s);
     log('访问开始', url);
-    GM.xmlHttpRequest({
-        url: url, method: method,
-        referrer: referer, referer: referer,
-        onload: function(response) {
-            log(response.responseText);
-        }
-    });
+    xmlHttpRequest(url, log, method, referer);
     log('访问url结束');
     log(s);
+}
+
+
+
+
+/** 油猴-加载新脚本 */
+function evalScript(jsurl){
+    xmlHttpRequest(jsurl, eval, 'GET');
 }
 
 /** 重写fetch */
