@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.5
+// @version      0.0.8.2.6
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -513,16 +513,20 @@ const refesh = (url=location.href, replace) => {
 }
 
 function xmlHttpRequest(url, callback, method='GET', referer){
-    let gmXmlHttpRequest = GM.xmlHttpRequest || GM_xmlhttpRequest;
-    if(gmXmlHttpRequest){
-        gmXmlHttpRequest({
-            url: url, method: method,
-            referrer: referer, referer: referer,
-            onload: function(response) {
-                callback(response.responseText);
-            }
-        });
-        return;
+    try {
+        let gmXmlHttpRequest = GM.xmlHttpRequest || GM_xmlhttpRequest;
+        if(gmXmlHttpRequest){
+            gmXmlHttpRequest({
+                url: url, method: method,
+                referrer: referer, referer: referer,
+                onload: function(response) {
+                    callback(response.responseText);
+                }
+            });
+            return;
+        }
+    }catch (e) {
+        log('你报错你吗呢？', e);
     }
 
     let request = new XMLHttpRequest();
