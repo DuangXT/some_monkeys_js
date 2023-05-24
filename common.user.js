@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.9
+// @version      0.0.8.2.10
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -70,12 +70,16 @@ Array.prototype.contains = function (...values){
 
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
+/** 只用一次的话使用这个函数，多次使用的话请直接 document.body */
 const body = ()=> document.body;
+/** 只用一次的话使用这个函数，多次使用的话请直接 document.head */
 const head = ()=> document.head;
 const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
 const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const $ = querySelector; // 不建议，容易引起冲突
+/** 只用一次的话使用这个函数，多次使用的话请直接 document.html */
 const html = ()=> $qs('html');
+const allTag = allElement = () => $qs('*');
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
@@ -513,9 +517,11 @@ const refesh = (url=location.href, replace) => {
 }
 
 /** 打开一个定时关闭的迷你小窗口 */
-function openTheTimingCloseMiniWindow(url, timeout=10000){
-    let hideWindowFeatures = // 'noopener,noreferrer,hidden,'+
-        'height=1,width=1,left=-1000,top=-1000,location=no,menubar=no,toolbar=no,status=no,titlebar=no,scrollbars=no';
+function openMiniWindowWithTimingClose(url, timeout=10000){
+    let hideWindowFeatures = // 'noopener,noreferrer,'+
+        'hidden,height=1,width=1,left=-1000,top=-1000,location=no,' +
+        'menubar=no,toolbar=no,status=no,titlebar=no,scrollbars=no';
+    log('打开一个迷你小窗：', url);
     let miniPopup = window.open(url, '_blank', hideWindowFeatures);
     window.setTimeout(function() {
         miniPopup.close();
