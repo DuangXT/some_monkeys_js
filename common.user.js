@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.10
+// @version      0.0.8.2.12
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -159,6 +159,7 @@ function currentUrlContains(...matchs){
 }
 const currentUrlContain = currentUrlContains;
 
+/** 查询参数是否包含 */
 function searchParamsContains(...paramNames){
     let params = getQueryParams();
     for (let paramName of paramNames) {
@@ -168,7 +169,9 @@ function searchParamsContains(...paramNames){
 }
 const queryParamsContains = searchParamsContains;
 
+/** 选择对象如果存在，执行指定函数 */
 function selectorRunIfExist(obj, func){
+    if(!obj) return false;
     if('function' !== typeof func){
         throw new TypeError('func must be a function');
     }
@@ -179,17 +182,15 @@ function selectorRunIfExist(obj, func){
     return obj;
 }
 
-/** 选择器，存在时执行click() */
+/** 选择对象存在时执行click() */
 function selectorClick(_selector){
     if('string' !== typeof _selector){
         throw new TypeError('_selector must be a string');
     }
-    let s;
-    selectorRunIfExist( s = $qs(_selector), function(){
+    return selectorRunIfExist( _selector, function(s){
         s.click();
         log('执行了点击操作', _selector);
     });
-    return s;
 }
 const clickSelector = selectorClick;
 const clickSelectors = selectorsClick = (...selectors) => selectors.forEach(selector => selectorClick(selector));
@@ -199,8 +200,7 @@ function selectorRemoveClass(_selector, ...removeClasses){
     if('string' !== typeof _selector){
         throw new TypeError('_selector must be a string');
     }
-    let selector = $qs(_selector);
-    if(selector) {
+    return selectorRunIfExist(_selector, function(selector){
         // removeClasses.forEach(_class => {
         for(let _class of removeClasses){
             if(typeof _class === 'string'){
@@ -209,8 +209,7 @@ function selectorRemoveClass(_selector, ...removeClasses){
             }
             else log("a parameter 'removeClasses', not type string  ", _class);
         }
-    }
-    return selector;
+    });
 }
 
 
@@ -302,17 +301,32 @@ function addScriptTag(jslocation){
     document.head.add(script);
     return script;
 }
+
 /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
-function addScript(jscode){
+function addScriptByCode(jscode, mainLocation=document.body){
+    if(typeof mainLocation === 'string'){
+        switch (mainLocation){
+            case 'body':
+                mainLocation = body();
+                break;
+            case 'head':
+                mainLocation = head();
+                break;
+            default:
+                mainLocation = $qs(mainLocation);
+        }
+    }
+
     let script = createElement('script');
     script.type = "text/javascript";
     script.innerHTML = jscode;
-    document.body.add(script);
+    mainLocation.appendChild(script);
     return script;
 }
 
-
-
+const addHeadScriptByCode = jscode => addScriptByCode(jscode, head());
+const addBodyScriptByCode = jscode => addScriptByCode(jscode, body());
+const addScript = addScriptByCode;
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
@@ -412,7 +426,7 @@ function removeIfTextContrains(obj, ...strs){
     function _remove(o){
         if(o && o.isNode()){
             for (const s in strs) {
-                if(s && o.innerText.contains(s.toString())){
+                if(s && o.textContent.contains(s.toString())){
                     o.remove();
                 }
             }
@@ -671,7 +685,7 @@ function isForum(){
 /** 判断当前页面是否可能是discuz论坛 */
 function isDiscuz(){
     // 检查页面源码是否包含 Discuz 关键词
-    let bodyText = document.body.innerText;
+    let bodyText = document.body.textContent;
     if (!bodyText.includes("Discuz") &&
         !bodyText.includes("Comsenz") &&
         !bodyText.includes("UCenter")) {
