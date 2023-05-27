@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.12
+// @version      0.0.8.2.13
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -15,8 +15,9 @@
 /** @require      https://greasemonkey.github.io/gm4-polyfill/gm4-polyfill.js */
 // see https://stackoverflow.com/questions/16736320/referenceerror-gm-xmlhttprequest-is-not-defined
 // 油猴4.0开始下划线的方法被抛弃，改为对象内函数。需要向下兼容的话就require gm4-polyfill.js
-// @grant        GM.xmlHttpRequest
-// @connect      *
+// @grant GM.xmlHttpRequest
+// @grant GM_log
+// @connect *
 // ==/UserScript==
 
 // 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。
@@ -44,7 +45,9 @@ Object.prototype.containsValue = function(...values){
 Object.prototype.contains = function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
 }
-Object.prototype.toJson = function(){return JSON.stringify(this);}
+// Object.prototype.toJson = function(){return JSON.stringify(this);}
+const toJson = (obj) => JSON.stringify(obj);
+
 Object.prototype.isNode = function(){return this instanceof HTMLElement;}
 
 String.prototype.contains = function (...strings) {
@@ -135,14 +138,17 @@ const strNotContainsIgnoreCase = !strContainsIgnoreCase;
 
 /** 匹配当前URL规则 */
 function currentUrlIncludes(...searchString){
+    return window.location.href.contains(...searchString);
     for (let ss of searchString) {
         if(document.URL.includes(ss)) return true;
     }
     return false;
 }
+const currentUrlContain = currentUrlContains = currentUrlIncludes;
 
 /** 判断域名内是否包含匹配字符串 */
 const hostnameContains = (...matchs) => {
+    return location.hostname.containsIgnoreCase(...matchs);
     for (let match of matchs) {
         if(strContainsIgnoreCase(location.hostname, match)) return true;
     }
@@ -150,14 +156,6 @@ const hostnameContains = (...matchs) => {
 };
 const hostnameHas = hostnameContains;
 
-/** 判断链接内是否包含匹配字符串 */
-function currentUrlContains(...matchs){
-    for (let match of matchs) {
-        if(strContains(location.href, match)) return true;
-    }
-    return false;
-}
-const currentUrlContain = currentUrlContains;
 
 /** 查询参数是否包含 */
 function searchParamsContains(...paramNames){
