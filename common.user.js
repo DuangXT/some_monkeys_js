@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.13
+// @version      0.0.8.2.14
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -446,7 +446,7 @@ function removeIfTextContrains(obj, ...strs){
 function hideElement(_selector) {
     let ele = $qs(_selector);
     if (ele) {
-        if (ele.style) log("元素 " + _selector + " 隐藏前样式：" + ele.style.toJson().slice(0,100));
+        if (ele.style) log("元素 " + _selector + " 隐藏前样式：" + toJson(ele.style).slice(0,100));
         setStyleHidden(ele);
     }
     return ele;
