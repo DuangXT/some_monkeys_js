@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.14
+// @version      0.0.8.2.15
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -51,11 +51,11 @@ const toJson = (obj) => JSON.stringify(obj);
 Object.prototype.isNode = function(){return this instanceof HTMLElement;}
 
 String.prototype.contains = function (...strings) {
-    for (let string of strings) {
-        string = string.toString();
+    for (let s of strings) {
+        s = s.toString();
         if(
-            // this.indexOf(string) >= 0 // <ES6
-            this.includes(string) // >=ES6
+            // this.indexOf(s) >= 0 // <ES6
+            this.includes(s) // >=ES6
         ) return true;
     }
     return false;
@@ -66,31 +66,29 @@ String.prototype.containsIgnoreCase = function (...substrs){
     substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
     return this.toLowerCase().contains(...newSubStrs);
 }
-String.prototype.NotContainsIgnoreCase = !String.prototype.containsIgnoreCase;
+String.prototype.notContainsIgnoreCase = !String.prototype.containsIgnoreCase;
 Array.prototype.contains = function (...values){
     return values.every(value => this.includes(value));
 }
 
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
-/** 只用一次的话使用这个函数，多次使用的话请直接 document.body */
-const body = ()=> document.body;
-/** 只用一次的话使用这个函数，多次使用的话请直接 document.head */
-const head = ()=> document.head;
+
 const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
 const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const $ = querySelector; // 不建议，容易引起冲突
-/** 只用一次的话使用这个函数，多次使用的话请直接 document.html */
-const html = ()=> $qs('html');
-const allTag = allElement = () => $qs('*');
+const html = document.html;
+const body = document.body;
+const head = document.head;
+const allTag = allElements = () => $qsa('*');
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
 Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
 Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
-// head().add = head().append ? head().append : head().append = head().appendChild;
-// body().add = body().append ? body().append : body().append = body().appendChild;
-// html().add = html().append ? html().append : html().append = html().appendChild;
+// head.add = head.append ? head.append : head.append = head.appendChild;
+// body.add = body.append ? body.append : body.append = body.appendChild;
+// html.add = html.append ? html.append : html.append = html.appendChild;
 
 const createElement = addTag = addElement = tagName => document.createElement(tagName);
 
@@ -136,24 +134,12 @@ const strNotContainsIgnoreCase = !strContainsIgnoreCase;
 
 
 
-/** 匹配当前URL规则 */
-function currentUrlIncludes(...searchString){
-    return window.location.href.contains(...searchString);
-    for (let ss of searchString) {
-        if(document.URL.includes(ss)) return true;
-    }
-    return false;
-}
+/** 判断当前URL内是否包含匹配的字符串 */
+const currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
 const currentUrlContain = currentUrlContains = currentUrlIncludes;
 
 /** 判断域名内是否包含匹配字符串 */
-const hostnameContains = (...matchs) => {
-    return location.hostname.containsIgnoreCase(...matchs);
-    for (let match of matchs) {
-        if(strContainsIgnoreCase(location.hostname, match)) return true;
-    }
-    return false;
-};
+const hostnameContains = (...matchs) => location.hostname.containsIgnoreCase(...matchs);
 const hostnameHas = hostnameContains;
 
 
@@ -270,7 +256,7 @@ function addStyleTagByCSS(css) {
     if (!document.head) return;
     let style = createElement('style');
     style.innerHTML = css;
-    document.head.add(style);
+    head.add(style);
     return style;
 }
 
@@ -284,7 +270,7 @@ function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
     link.type = linkType;
     link.rel = linkRel;
     link.href = linkHref;
-    document.head.add(link);
+    head.add(link);
     return link;
 }
 
@@ -296,7 +282,7 @@ function addScriptTag(jslocation){
     let script = createElement('script');
     // script.type = "text/javascript";
     script.src = jslocation;
-    document.head.add(script);
+    head.add(script);
     return script;
 }
 
@@ -305,10 +291,10 @@ function addScriptByCode(jscode, mainLocation=document.body){
     if(typeof mainLocation === 'string'){
         switch (mainLocation){
             case 'body':
-                mainLocation = body();
+                mainLocation = body;
                 break;
             case 'head':
-                mainLocation = head();
+                mainLocation = head;
                 break;
             default:
                 mainLocation = $qs(mainLocation);
@@ -322,8 +308,8 @@ function addScriptByCode(jscode, mainLocation=document.body){
     return script;
 }
 
-const addHeadScriptByCode = jscode => addScriptByCode(jscode, head());
-const addBodyScriptByCode = jscode => addScriptByCode(jscode, body());
+const addHeadScriptByCode = jscode => addScriptByCode(jscode, head);
+const addBodyScriptByCode = jscode => addScriptByCode(jscode, body);
 const addScript = addScriptByCode;
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
@@ -387,7 +373,7 @@ function getRandomValue(obj){
         return obj[getRandomInt(obj.length)];
     } // 非数组类型的作为对象处理
     if('object' !== typeof obj){
-        throw new TypeError('obj must be a object');
+        throw new TypeError('not a object');
     }
     let keys = Object.keys(obj);
     return obj[keys[getRandomInt(keys.length)]];
