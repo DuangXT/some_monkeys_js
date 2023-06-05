@@ -7,6 +7,7 @@
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @match *
 // @include *
 // @run-at document-start
@@ -15,9 +16,6 @@
 // ==/UserScript==
 
 gmlog('公共库：对象');
-
-// Object.prototype.toJson = function(){return JSON.stringify(this);}
-const toJson = (obj) => JSON.stringify(obj);
 
 /** 随机获取对象内的一个值 */
 function getRandomValue(obj){

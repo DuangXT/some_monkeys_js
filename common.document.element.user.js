@@ -52,9 +52,15 @@ const getTagElem = getTagElement; // 兼容以前用这个名字的脚本
 /** 移除指定的每个元素 */
 function removeElement(...selectors) {
     selectors.forEach((selector)=>{
-        let ele = $qs(selector);
+        let ele;
+        if('string' === typeof selector) ele = $qs(selector);
+        else ele = selector;
         if (ele) {
-            ele.remove();
+            try{
+                ele.remove();
+            }catch (e){
+                logerror(e);
+            }
             log("移除元素：", selector);
         }
     });
@@ -64,10 +70,12 @@ const deleteElement = removeElement;
 /** 移除指定的所有元素 */
 const removeElements = (...selectors) => {
     selectors.forEach((selector)=>{
+        if('string' === typeof selector)
         for (let ele of $qsa(selector)) {
             ele.remove();
             log("移除元素：", selector, 'id=' + ele.id, 'class=' + ele.className);
         }
+        else logwarn('参数不是字符串', selector);
     });
 };
 const deleteElements = deleteAllElements = removeAllElements = removeElements;
