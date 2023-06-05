@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.15
+// @version      0.0.8.2.18
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -17,6 +17,7 @@
 // 油猴4.0开始下划线的方法被抛弃，改为对象内函数。需要向下兼容的话就require gm4-polyfill.js
 // @grant GM.xmlHttpRequest
 // @grant GM_log
+// @grant GM.log
 // @connect *
 // ==/UserScript==
 
@@ -26,10 +27,17 @@
 
 // 事件监听函数；作用域=整个页面；所有资源加载完成后执行；后续加载的 window.onload 会覆盖之前加载的。
 // window.onload = function () { }
+// window.onload = ()=>{ }
 
-const log = (...s) => console.log.bind(console)(...s);
+// (()=>{window.onload = ()=>{
+// }})();
+
+
+const isFunction = func => func && 'function' === typeof func;
+
+const log = (...s) => console.log.bind(console)(...s); // GM_log(...s); GM.log(...s);
 log("------=======****** common.user.js start load ******=======------");
-
+const gmlog = title => log('...... 脚本加载：%s ......', title);
 
 // 全局定义
 Object.prototype.containsKey = function(...keys){
@@ -137,10 +145,19 @@ const strNotContainsIgnoreCase = !strContainsIgnoreCase;
 /** 判断当前URL内是否包含匹配的字符串 */
 const currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
 const currentUrlContain = currentUrlContains = currentUrlIncludes;
+const currentUrl = location.href;
 
+
+const hostname = location.hostname;
 /** 判断域名内是否包含匹配字符串 */
-const hostnameContains = (...matchs) => location.hostname.containsIgnoreCase(...matchs);
+const hostnameContains = (...matchs) => hostname.containsIgnoreCase(...matchs);
 const hostnameHas = hostnameContains;
+const hostnameIs = (...hostnames) => {
+    for (let host of hostnames) {
+        if(host.toLowerCase() === hostname.toLowerCase()) return true;
+    }
+    return false;
+}
 
 
 /** 查询参数是否包含 */
@@ -156,7 +173,7 @@ const queryParamsContains = searchParamsContains;
 /** 选择对象如果存在，执行指定函数 */
 function selectorRunIfExist(obj, func){
     if(!obj) return false;
-    if('function' !== typeof func){
+    if(!isFunction(func)){
         throw new TypeError('func must be a function');
     }
     if('string' === typeof obj){
@@ -205,7 +222,7 @@ function selectorRemoveClass(_selector, ...removeClasses){
  * @param err_tip1  异常额外的提示
  */
 function run(func, err_tip0, tip, err_tip1) {
-    if('function' !== typeof func){
+    if(!isFunction(func)){
         throw new TypeError('func must be a function');
     }
     try {
@@ -224,7 +241,7 @@ function runIfHostIs(){
         throw new TypeError('参数应至少传递两位，且最后一位为执行函数');
     }
     let callback = arguments[arguments.length-1];
-    if('function' !== typeof callback){
+    if(!isFunction(callback)){
         throw new TypeError('参数错误哦！最后一位参数应为执行函数');
     }
     let hosts = Array.prototype.slice.call(arguments);
@@ -236,7 +253,7 @@ function runIfHostIs(){
 
 /** 函数加入等待队列 */
 function runLast(func){
-    if('function' !== typeof func){
+    if(!isFunction(func)){
         throw new TypeError('func must be a function');
     }
     setTimeout(function () {
@@ -342,6 +359,23 @@ function setTagAttr(tagName, attrName, attrContent, tagLocation = 0) {
 function setStyle(tagName, styleName, styleValue, tagLocation = 0){
     getTagElement(tagName, tagLocation).style[styleName] = styleValue;
 }
+
+/** 判断是否最终节点 */
+function isLeafNode(element) {
+    if (!element || !element.nodeType || 'number' !== typeof element.nodeType){
+        log('parameter not a element object', element);
+        return false;
+    }
+    const childNodes = element.childNodes;
+    if (childNodes.length > 0) {
+        for (const childNode of childNodes) {
+            if (childNode.nodeType === 1 || childNode.nodeType === 3)
+                return false;
+        }
+    }
+    return true;
+}
+
 
 /** 设置浏览器UA标识 */
 function setUserAgent(userAgent) {
@@ -501,6 +535,7 @@ const getQueryParam = (name) => getQueryParams()[name];
  */
 const getUrlParam = (name, url) => getURLParams(url)[name];
 
+
 /** 刷新页面至指定链接 */
 const refesh = (url=location.href, replace) => {
     if(!url) url = location.href;
@@ -513,6 +548,8 @@ const refesh = (url=location.href, replace) => {
     log('跳转链接：', url);
     location.href = url;
 }
+// 尝试禁用页面刷新
+window.location.reload = ()=>log('页面刷新已被禁用');
 
 /** 打开一个定时关闭的迷你小窗口 */
 function openMiniWindowWithTimingClose(url, timeout=10000){
