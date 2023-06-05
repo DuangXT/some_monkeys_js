@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.18
+// @version      0.0.8.2.19
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -82,8 +82,9 @@ Array.prototype.contains = function (...values){
 const originalFetch = window.fetch;
 const originalOpen = XMLHttpRequest.prototype.open;
 
-const querySelector = $qs = document.querySelector.bind(document); // s => document.querySelector(s);
-const querySelectorAll = $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
+// 定义 querySelector 和 querySelectorAll 的别名可能会导致一些大厂的页面问题（说的就是你，渣浪！）
+const /*querySelector =*/ $qs = document.querySelector.bind(document); // s => document.querySelector(s);
+const /*querySelectorAll =*/ $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const $ = querySelector; // 不建议，容易引起冲突
 const html = document.html;
 const body = document.body;
