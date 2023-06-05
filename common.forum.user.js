@@ -7,6 +7,7 @@
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @match *
 // @include *
 // @run-at document-start
@@ -23,7 +24,7 @@ function isForum(){
 /** 判断当前页面是否可能是discuz论坛 */
 function isDiscuz(){
     // 检查页面源码是否包含 Discuz 关键词
-    let bodyText = document.body.textContent;
+    let bodyText = body.textContent;
     if (!bodyText.includes("Discuz") &&
         !bodyText.includes("Comsenz") &&
         !bodyText.includes("UCenter")) {

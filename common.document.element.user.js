@@ -26,7 +26,7 @@ const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...d
 const html = document.html;
 const body = document.body;
 const head = document.head;
-const allTag = allElements = () => $qsa('*');
+const tags = allTag = allElements = () => $qsa('*');
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
