@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.19
+// @version      0.0.8.2.20
 // @author       DuangXT
 // @grant        none
 // @match        *
@@ -40,7 +40,7 @@ log("------=======****** common.user.js start load ******=======------");
 const gmlog = title => log('...... 脚本加载：%s ......', title);
 
 // 全局定义
-Object.prototype.containsKey = function(...keys){
+/*Object.prototype.containsKey = function(...keys){
     for (let key of keys) {
         if(key in this) return this[key];
     }
@@ -52,7 +52,7 @@ Object.prototype.containsValue = function(...values){
 }
 Object.prototype.contains = function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
-}
+}*/
 // Object.prototype.toJson = function(){return JSON.stringify(this);}
 const toJson = (obj) => JSON.stringify(obj);
 
