@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：对象
 // @description
-// @version      0.0.1
+// @version      0.0.1.1
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.object.user.js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
@@ -42,4 +42,14 @@ Object.prototype.containsValue = function(...values){
 }
 Object.prototype.contains = function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
+}
+
+/** 对象长路径快捷获取值(key.key.key) */
+function getPathValue(obj, path) {
+    const keys = path.split('.');
+    let result = obj;
+    for (let key of keys) {
+        result = result[key];
+    }
+    return result;
 }

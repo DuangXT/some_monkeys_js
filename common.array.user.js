@@ -16,7 +16,5 @@
 
 gmlog('公共库：数组');
 
-Array.prototype.contains = function (...values){
-    return values.every(value => this.includes(value));
-}
+Array.prototype.contains=function(...values){return values.every(value=>this.includes(value));}
 const arraySortHeavy=(array)=>JSON.stringify([...new Set(array)]);

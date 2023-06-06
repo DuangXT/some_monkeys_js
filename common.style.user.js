@@ -10,6 +10,8 @@
 // @match *
 // @include *
 // @run-at document-start
+// @grant GM_addStyle
+// @grant GM.addStyle
 // @grant none
 // @grant unsafeWindow
 // ==/UserScript==
@@ -44,6 +46,8 @@ function addStyleTagByCSS(css) {
     if('string' !== typeof css){
         throw new TypeError('parameter "css" must be a string');
     }
+    if(GM_addStyle) return GM_addStyle(css);
+    if(GM.addStyle) return GM.addStyle(css);
     if (!document.head) return;
     let style = createElement('style');
     style.innerHTML = css;
