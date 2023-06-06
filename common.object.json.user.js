@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：JSON对象
 // @description
-// @version      0.0.1.2
+// @version      0.0.1.3
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
@@ -9,7 +9,6 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @match *
 // @include *
-// @run-at document-start
 // ==/UserScript==
 
 // common level 0

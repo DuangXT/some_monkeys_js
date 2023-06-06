@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：视频元素
-// @version      0.0.3
+// @version      0.0.4
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
@@ -18,7 +18,6 @@
 
 // @match *
 // @include *
-// @run-at document-start
 // @grant unsafeWindow
 // ==/UserScript==
 

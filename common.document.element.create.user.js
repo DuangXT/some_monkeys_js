@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：创建新的文档元素
 // @description
-// @version      0.0.1
+// @version      0.0.2
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
@@ -9,7 +9,6 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @match *
 // @include *
-// @run-at document-start
 // @grant unsafeWindow
 // ==/UserScript==
 

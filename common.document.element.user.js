@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.1.5
+// @version      0.0.1.6
 // @author       DuangXT
+// @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
@@ -18,8 +19,6 @@
 
 // @match *
 // @include *
-// @run-at document-start
-// @grant unsafeWindow
 // ==/UserScript==
 
 // common level 2

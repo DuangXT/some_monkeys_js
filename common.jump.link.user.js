@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：跳转链接
 // @description
-// @version      0.0.2
+// @version      0.0.3
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
@@ -18,7 +18,6 @@
 
 // @match *
 // @include *
-// @run-at document-start
 // ==/UserScript==
 
 // common level 3
