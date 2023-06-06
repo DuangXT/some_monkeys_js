@@ -12,7 +12,6 @@
 // @run-at document-start
 // @grant GM_addStyle
 // @grant GM.addStyle
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 

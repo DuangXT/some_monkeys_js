@@ -10,7 +10,6 @@
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 

@@ -11,8 +11,6 @@
 // @run-at document-start
 // @grant GM_log
 // @grant GM.log
-// @grant none
-// @grant unsafeWindow
 // ==/UserScript==
 
 // common level 0

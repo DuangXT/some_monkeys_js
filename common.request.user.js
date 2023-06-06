@@ -12,7 +12,6 @@
 // @run-at document-start
 // @grant GM.xmlHttpRequest
 // @grant GM_xmlhttpRequest
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 

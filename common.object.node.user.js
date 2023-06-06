@@ -10,7 +10,6 @@
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 
@@ -21,6 +20,7 @@ gmlog('公共库：节点对象');
 Object.prototype.isNode = function(){return this instanceof HTMLElement;}
 
 Node.prototype.nodeNameIs = function(...nodeNames){return this.nodeName.containsIgnoreCase(...nodeNames);}
+Element.prototype.tagNameIs = function(...tagNames){return this.tagName.containsIgnoreCase(...tagNames);}
 
 /** 判断是否最终节点 */
 function isLeafNode(element) {

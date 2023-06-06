@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：页面脚本
 // @description
-// @version      0.0.1
+// @version      0.0.1.1
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
@@ -9,16 +9,12 @@
 
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
 
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 
@@ -34,7 +30,7 @@ function addScriptTag(jslocation){
     let script = createElement('script');
     // script.type = "text/javascript";
     script.src = jslocation;
-    head.add(script);
+    document.head.add(script);
     return script;
 }
 
@@ -43,10 +39,10 @@ function addScriptByCode(jscode, mainLocation=document.body){
     if(typeof mainLocation === 'string'){
         switch (mainLocation){
             case 'body':
-                mainLocation = body;
+                mainLocation = document.body;
                 break;
             case 'head':
-                mainLocation = head;
+                mainLocation = document.head;
                 break;
             default:
                 mainLocation = $qs(mainLocation);
@@ -60,6 +56,6 @@ function addScriptByCode(jscode, mainLocation=document.body){
     return script;
 }
 
-const addHeadScriptByCode = jscode => addScriptByCode(jscode, head);
-const addBodyScriptByCode = jscode => addScriptByCode(jscode, body);
+const addHeadScriptByCode = jscode => addScriptByCode(jscode, document.head);
+const addBodyScriptByCode = jscode => addScriptByCode(jscode, document.body);
 const addScript = addScriptByCode;

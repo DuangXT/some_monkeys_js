@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：文档元素对象
+// @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.1.3
+// @version      0.0.1.4
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
@@ -13,37 +13,31 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
 
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
 // @grant unsafeWindow
 // ==/UserScript==
 
 // common level 2
 
-gmlog('公共库：文档元素对象');
+gmlog('公共库：文档元素');
 
-const $qs = document.querySelector.bind(document); // s => document.querySelector(s);
-const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
-// const querySelector = $qs;
-// const querySelectorAll = $qsa;
-// const $ = querySelector; // 不建议，容易引起冲突
+
 const html = document.html;
 const body = document.body;
 const head = document.head;
+const cookie = document.cookie;
 const tags = allTag = allElements = () => $qsa('*');
 
-Document.prototype.$qs = Document.prototype.querySelector;
-Element.prototype.$qs = Element.prototype.querySelector;
-Document.prototype.$qsa = Document.prototype.$all = Document.prototype.querySelectorAll;
-Element.prototype.$qsa = Element.prototype.$all = Element.prototype.querySelectorAll;
 // head.add = head.append ? head.append : head.append = head.appendChild;
 // body.add = body.append ? body.append : body.append = body.appendChild;
 // html.add = html.append ? html.append : html.append = html.appendChild;
 
-const createElement = addTag = addElement = tagName => document.createElement(tagName);
+
 
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
@@ -202,7 +196,7 @@ function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
     if('string' !== typeof linkHref){
         throw new TypeError('parameter "css" must be a string');
     }
-    if (!document.head) return;
+    if (!head) return;
     let link = createElement('link');
     link.type = linkType;
     link.rel = linkRel;
@@ -220,5 +214,4 @@ const removeAll = removeElements;
 const hide = hideElement;
 const hides = hideElements;
 const hideAll = hideAllElements;
-const add = create = createElement;
 const click = selectorClick;

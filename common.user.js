@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.21
+// @version      0.0.8.2.22
 // @author       DuangXT
 // @match        *
 // @include      *
@@ -24,6 +24,8 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
 
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
@@ -31,7 +33,6 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
 
-// @grant        none
 // @grant        unsafeWindow
 // @connect *
 // ==/UserScript==
@@ -47,6 +48,6 @@
 // (()=>{window.onload = ()=>{
 // }})();
 
-// common level: 引用同级的不重复。 0-最基本的参数函数。等级越大引用越多。
+// common level: 0-最基本的参数函数。等级越大需要引用的依赖脚本越多。
 
 log("------=======****** common.user.js loaded ******=======------");

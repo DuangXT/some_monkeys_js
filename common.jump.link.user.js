@@ -14,13 +14,11 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
 
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
-// @grant unsafeWindow
 // ==/UserScript==
 
 // common level 3

@@ -13,8 +13,6 @@
 // @match *
 // @include *
 // @run-at document-start
-// @grant none
-// @grant unsafeWindow
 // ==/UserScript==
 
 // common level 1
@@ -27,7 +25,7 @@ const hostname = location.hostname;
 const refesh = (url=location.href, replace) => {
     if(!url) url = location.href;
     if(!url.startsWith("http")) url = 'https://' + url;
-    if(replace || location.href !== url){
+    if(replace && location.href !== url){
         log('替换链接为：', url);
         location.replace(url);
         return;
