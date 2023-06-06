@@ -6,7 +6,10 @@
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+
 // @match *
 // @include *
 // @run-at document-start

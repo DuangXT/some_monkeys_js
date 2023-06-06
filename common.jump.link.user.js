@@ -6,8 +6,16 @@
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
+
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
+
 // @match *
 // @include *
 // @run-at document-start
