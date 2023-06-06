@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：页面脚本
 // @description
-// @version      0.0.1.1
+// @version      0.0.1.2
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js

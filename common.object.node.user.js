@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：节点对象
 // @description
-// @version      0.0.1.2
+// @version      0.0.1.3
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
