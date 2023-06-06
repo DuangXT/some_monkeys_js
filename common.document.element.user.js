@@ -1,14 +1,15 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素对象
 // @description
-// @version      0.0.1
+// @version      0.0.1.1
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.document.element.user.js
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @match *
 // @include *
 // @run-at document-start
