@@ -3,11 +3,11 @@
 // @description
 // @version      0.0.1
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.jump.link.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @match *
 // @include *
 // @run-at document-start
@@ -15,6 +15,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 3
 gmlog('公共库：跳转链接');
 
 /** 循环获取a标签元素的href，直到元素及href存在并跳转 */

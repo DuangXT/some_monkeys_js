@@ -3,7 +3,7 @@
 // @description
 // @version      0.0.1
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.script.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
@@ -14,6 +14,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 3
 gmlog('公共库：页面脚本');
 
 

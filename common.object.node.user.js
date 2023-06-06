@@ -3,7 +3,7 @@
 // @description
 // @version      0.0.1.2
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.object.node.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
@@ -14,6 +14,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 0
 gmlog('公共库：节点对象');
 
 

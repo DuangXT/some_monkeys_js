@@ -3,7 +3,7 @@
 // @description
 // @version      0.0.1
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.string.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
@@ -14,6 +14,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 0
 gmlog('公共库：字符串');
 
 String.prototype.contains = function (...strings) {
@@ -29,8 +30,8 @@ String.prototype.contains = function (...strings) {
 String.prototype.notContains = !String.prototype.contains;
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
-    substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
-    return this.toLowerCase().contains(...newSubStrs);
+    substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
+    return this.toUpperCase().contains(...newSubStrs);
 }
 String.prototype.notContainsIgnoreCase = !String.prototype.containsIgnoreCase;
 

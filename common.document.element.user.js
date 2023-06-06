@@ -1,13 +1,14 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素对象
 // @description
-// @version      0.0.1.1
+// @version      0.0.1.3
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.document.element.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @match *
@@ -16,6 +17,8 @@
 // @grant none
 // @grant unsafeWindow
 // ==/UserScript==
+
+// common level 2
 
 gmlog('公共库：文档元素对象');
 
@@ -81,6 +84,13 @@ const removeElements = (...selectors) => {
 };
 const deleteElements = deleteAllElements = removeAllElements = removeElements;
 
+Element.prototype.removeIfIncludesText = function(...strs){
+    for (const s in strs) {
+        if(s && this.textContent.contains(s.toString())){
+            this.remove();
+        }
+    }
+}
 function removeIfTextContrains(obj, ...strs){
     if('object' !== typeof obj){
         throw new TypeError('obj must be a object');
@@ -105,6 +115,7 @@ function removeIfTextContrains(obj, ...strs){
     _remove(obj);
     return obj;
 }
+const removeIfIncludesText = removeIfTextContrains;
 
 /** 隐藏单个指定的标签（返回被隐藏的标签对象） */
 function hideElement(_selector) {

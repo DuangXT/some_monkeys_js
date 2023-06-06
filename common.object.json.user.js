@@ -3,7 +3,7 @@
 // @description
 // @version      0.0.1.1
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.object.json.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
@@ -14,6 +14,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 0
 gmlog('公共库：JSON对象');
 
 // Object.prototype.toJson = function(){return JSON.stringify(this);}

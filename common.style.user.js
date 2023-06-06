@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：样式
 // @description
-// @version      0.0.1
+// @version      0.0.1.1
 // @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/common.style.user.js
+// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
+// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @match *
 // @include *
 // @run-at document-start
@@ -16,6 +16,7 @@
 // @grant unsafeWindow
 // ==/UserScript==
 
+// common level 0
 gmlog('公共库：样式');
 
 /** 隐藏元素css */
@@ -49,9 +50,9 @@ function addStyleTagByCSS(css) {
     if(GM_addStyle) return GM_addStyle(css);
     if(GM.addStyle) return GM.addStyle(css);
     if (!document.head) return;
-    let style = createElement('style');
+    let style = document.createElement('style');
     style.innerHTML = css;
-    head.add(style);
+    document.head.add(style);
     return style;
 }
 
@@ -63,5 +64,5 @@ function addStyleTagByCSS(css) {
  * @param tagLocation  标签位置
  */
 function setStyle(tagName, styleName, styleValue, tagLocation = 0){
-    getTagElement(tagName, tagLocation).style[styleName] = styleValue;
+    document.getElementsByTagName(tagName)[tagLocation].style[styleName] = styleValue;
 }
