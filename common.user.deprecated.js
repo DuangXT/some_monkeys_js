@@ -5,7 +5,7 @@
 // @author       DuangXT
 
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
+// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.deprecated.js
 
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
