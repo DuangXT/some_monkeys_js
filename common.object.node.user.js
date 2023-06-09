@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：节点对象
 // @description
-// @version      0.0.1.4
+// @version      0.0.1.5
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
@@ -16,10 +16,10 @@
 gmlog('公共库：节点对象');
 
 
-Object.prototype.isNode = function(){return this instanceof HTMLElement;}
+Object.prototype.isNode = Object.prototype.isNode ? Object.prototype.isNode : function(){return this instanceof HTMLElement;}
 
 Node.prototype.nodeNameIs = function(...nodeNames){return this.nodeName.containsIgnoreCase(...nodeNames);}
-Element.prototype.tagNameIs = function(...tagNames){return this.tagName.containsIgnoreCase(...tagNames);}
+
 
 /** 判断是否最终节点 */
 function isLeafNode(element) {

@@ -1,13 +1,10 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
-// @description  避免总是复制粘贴的东西
-// @version      0.0.8.2.23
+// @description  已弃用 / 请根据@require声明选择需要使用的脚本 / 如要继续使用旧版请指定版本号：0.0.8.2.20
+// @version      0.0.9-deprecated
 // @author       DuangXT
-// @match        *
-// @include      *
 
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.js
 
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
@@ -33,8 +30,6 @@
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
 
-// @grant        unsafeWindow
-// @connect *
 // ==/UserScript==
 
 // 作用域=当前脚本；只执行一次；脚本加载完成后立即执行。

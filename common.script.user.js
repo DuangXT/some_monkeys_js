@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：页面脚本
 // @description
-// @version      0.0.2
+// @version      0.0.3
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
@@ -49,8 +49,9 @@ function addScriptByCode(jscode, mainLocation=document.body){
     }
 
     let script = createElement('script');
-    script.type = "text/javascript";
-    script.innerHTML = jscode;
+    script.type = "application/javascript";
+    // script.innerText = jscode;
+    script.textContent = jscode;
     mainLocation.appendChild(script);
     return script;
 }
@@ -58,3 +59,13 @@ function addScriptByCode(jscode, mainLocation=document.body){
 const addHeadScriptByCode = jscode => addScriptByCode(jscode, document.head);
 const addBodyScriptByCode = jscode => addScriptByCode(jscode, document.body);
 const addScript = addScriptByCode;
+
+
+/** 一次性加载脚本，脚本加载完即刻删除。适合只需要运行一次的脚本。 */
+function burnAfterscripting(jscode){
+    let script = addBodyScriptByCode(jscode);
+    document.body.removeChild(script);
+}
+
+
+

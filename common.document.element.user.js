@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.1.6
+// @version      0.0.1.7
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -25,19 +25,7 @@
 
 gmlog('公共库：文档元素');
 
-
-const html = document.html;
-const body = document.body;
-const head = document.head;
-const cookie = document.cookie;
-const tags = allTag = allElements = () => $qsa('*');
-
-// head.add = head.append ? head.append : head.append = head.appendChild;
-// body.add = body.append ? body.append : body.append = body.appendChild;
-// html.add = html.append ? html.append : html.append = html.appendChild;
-
-
-
+Element.prototype.tagNameIs = function(...tagNames){return this.tagName.containsIgnoreCase(...tagNames);}
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
@@ -46,8 +34,6 @@ const getTagElements = (tagName) => document.getElementsByTagName(tagName);
  * @param tagLocation  标签位置
  */
 const getTagElement = (tagName, tagLocation=0) => getTagElements(tagName)[tagLocation];
-const getTagElem = getTagElement; // 兼容以前用这个名字的脚本
-
 
 /** 移除指定的每个元素 */
 function removeElement(...selectors) {
@@ -204,6 +190,14 @@ function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
     return link;
 }
 
+const html = document.html || getTagElement('html');
+const body = document.body || getTagElement('body');
+const head = document.head || getTagElement('head');
+const cookie = document.cookie;
+const tags = allTag = allElements = () => $qsa('*');
+// head.add = head.append ? head.append : head.append = head.appendChild;
+// body.add = body.append ? body.append : body.append = body.appendChild;
+// html.add = html.append ? html.append : html.append = html.appendChild;
 
 // 一些需要留意的，非常同名的函数名称重定向
 Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
