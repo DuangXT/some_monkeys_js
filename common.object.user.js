@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：对象
 // @description
-// @version      0.0.1.3
+// @version      0.0.2
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
@@ -31,19 +31,22 @@ function getRandomValue(obj){
 }
 
 
-Object.prototype.containsKey = function(...keys){
+Object.prototype.containsKey = Object.prototype.containsKey ? Object.prototype.containsKey
+    : function(...keys){
     for (let key of keys) {
         if(key in this) return this[key];
     }
     return false;
-}
-Object.prototype.containsValue = function(...values){
+};
+Object.prototype.containsValue = Object.prototype.containsValue ? Object.prototype.containsValue
+    : function(...values){
     let arr = Object.values(this);
     return values.every(value => arr.includes(value));
-}
-Object.prototype.contains = function(...substrs){
+};
+Object.prototype.contains = Object.prototype.contains ? Object.prototype.contains
+    : function(...substrs){
     return this.containsKey(substrs) || this.containsValue(substrs);
-}
+};
 
 /** 对象长路径快捷获取值(key.key.key) */
 function getPathValue(obj, path) {

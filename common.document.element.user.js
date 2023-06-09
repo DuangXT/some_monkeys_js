@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.1.7
+// @version      0.0.2
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -190,21 +190,23 @@ function addLinkTag(linkHref, linkType='text/css', linkRel='stylesheet') {
     return link;
 }
 
-const html = document.html || getTagElement('html');
-const body = document.body || getTagElement('body');
-const head = document.head || getTagElement('head');
-const cookie = document.cookie;
+const html = html ? html : document.html || getTagElement('html');
+const body = body ? body : document.body || getTagElement('body');
+const head = head ? head : document.head || getTagElement('head');
+const cookie = cookie ? cookie : document.cookie;
 const tags = allTag = allElements = () => $qsa('*');
 // head.add = head.append ? head.append : head.append = head.appendChild;
 // body.add = body.append ? body.append : body.append = body.appendChild;
 // html.add = html.append ? html.append : html.append = html.appendChild;
 
 // 一些需要留意的，非常同名的函数名称重定向
-Document.prototype.add = Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
-Element.prototype.add = Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
-const remove = removeElement;
-const removeAll = removeElements;
-const hide = hideElement;
+Document.prototype.add = Document.prototype.add ? Document.prototype.add :
+    Document.prototype.append ? Document.prototype.append : Document.prototype.append = Document.prototype.appendChild;
+Element.prototype.add = Element.prototype.add ? Element.prototype.add :
+    Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
+const remove = remove ? remove : removeElement;
+const removeAll = removeAll ? removeAll : removeElements;
+const hide = hide ? hide : hideElement;
 const hides = hideElements;
 const hideAll = hideAllElements;
-const click = selectorClick;
+const click = click ? click : selectorClick;
