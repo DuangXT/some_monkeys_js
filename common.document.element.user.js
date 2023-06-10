@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.4
+// @version      0.0.4.1
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -205,7 +205,7 @@ Document.prototype.add = Document.prototype.add ? Document.prototype.add :
 Element.prototype.add = Element.prototype.add ? Element.prototype.add :
     Element.prototype.append ? Element.prototype.append : Element.prototype.append = Element.prototype.appendChild;
 var remove = remove ? remove : removeElement;
-const removeAll = removeAll ? removeAll : removeElements;
+const removeAll = removeElements;
 var hide = hide ? hide : hideElement;
 const hides = hideElements;
 const hideAll = hideAllElements;
