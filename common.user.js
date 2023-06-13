@@ -50,8 +50,6 @@ function getPathValue(obj, path) {
 }
 const toJson = (obj) => JSON.stringify(obj);
 
-Object.prototype.isNode = function(){return this instanceof HTMLElement;}
-
 String.prototype.contains = function (...strings) {
     for (let s of strings) {
         s = s.toString();
