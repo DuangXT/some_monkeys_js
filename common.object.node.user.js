@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：节点对象
 // @description
-// @version      0.0.1.6
+// @version      0.0.1.7
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
@@ -35,4 +35,22 @@ function isLeafNode(element) {
         }
     }
     return true;
+}
+
+/** 获取当前元素节点下面的最大节点长度（包括当前节点自身）
+ * 0：对象不是元素；1：元素是最终节点，没有任何子节点；n-1：元素下面最长的子节点长度
+ */
+function getMaxChildNodeLength(element) {
+    if (!element || !(element instanceof HTMLElement)){
+        log('parameter not a element object', element);
+        return 0;
+    }
+    let maxLen = 0;
+    Array.from(element.childNodes).forEach((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) { // 判断是否为元素节点
+            const len = getMaxChildNodeLength(node);
+            maxLen = Math.max(maxLen, len);
+        }
+    });
+    return maxLen + 1;
 }
