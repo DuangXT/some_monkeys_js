@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：对象
 // @description
-// @version      0.0.2
+// @version      0.0.3
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
@@ -20,7 +20,7 @@ gmlog('公共库：对象');
 
 /** 随机获取对象内的一个值 */
 function getRandomValue(obj){
-    if(Array.isArray(obj)){
+    if(Array.isArray(obj) || isNodeList(obj)){
         return obj[getRandomInt(obj.length)];
     } // 非数组类型的作为对象处理
     if('object' !== typeof obj){

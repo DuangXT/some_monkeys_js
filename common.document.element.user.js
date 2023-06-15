@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.4.3
+// @version      0.0.4.4
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -88,9 +88,9 @@ function removeIfTextContrains(obj, ...strs){
         }
         log('无法操作非节点对象', o);
     }
-    if(Array.isArray(obj)){
+    if(Array.isArray(obj) || isNodeList(obj)){
         for (let o of obj) {
-            _remove(o);
+            _remove(isString(o) ? $qs(o) :o);
         }
         return obj;
     }
