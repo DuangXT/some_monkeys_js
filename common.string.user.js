@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：字符串
 // @description
-// @version      0.0.7
+// @version      0.0.8
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
@@ -14,7 +14,8 @@
 // common level 0
 gmlog('公共库：字符串');
 
-Object.prototype.isStr = function(){return '[object String]' === Object.prototype.toString.call(this)}
+// Object.prototype.isString = function(){return '[object String]' === Object.prototype.toString.call(this)}
+let isString = (s)=> '[object String]' === Object.prototype.toString.call(s);
 
 String.prototype.equals = function(...string){
     for (const s of string) {
