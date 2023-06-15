@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：节点对象
 // @description
-// @version      0.0.1.8
+// @version      0.0.1.9
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
@@ -15,15 +15,16 @@
 // common level 0
 gmlog('公共库：节点对象');
 
-
-// Object.prototype.isNode = Object.prototype.isNode ? Object.prototype.isNode : function(){return this instanceof HTMLElement;}
-
 Node.prototype.nodeNameIs = function(...nodeNames){return this.nodeName.containsIgnoreCase(...nodeNames);}
 
+// Object.prototype.isNode = Object.prototype.isNode ? Object.prototype.isNode : function(){return this instanceof HTMLElement;}
+function isElementNode(node){
+    return node && (node instanceof HTMLElement || (node.nodeType && 'number' === typeof node.nodeType));
+}
 
 /** 判断是否最终节点 */
 function isLeafNode(element) {
-    if (!element || !element.nodeType || 'number' !== typeof element.nodeType){
+    if (!isElementNode(element)){
         log('parameter not a element object', element);
         return false;
     }
@@ -41,7 +42,7 @@ function isLeafNode(element) {
  * 0：对象不是元素；1：元素是最终节点，没有任何子节点；n-1：元素下面最长的子节点长度
  */
 function getMaxChildNodeLength(element) {
-    if (!element){
+    if (!isElementNode(element)){
         log('parameter invalid', element);
         return 0;
     }

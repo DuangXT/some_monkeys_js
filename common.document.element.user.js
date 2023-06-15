@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.4.2
+// @version      0.0.4.3
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -78,7 +78,7 @@ function removeIfTextContrains(obj, ...strs){
         throw new TypeError('obj must be a object');
     }
     function _remove(o){
-        if(o && o.isNode()){
+        if(isElementNode(o)){
             for (const s in strs) {
                 if(s && o.textContent.contains(s.toString())){
                     o.remove();
