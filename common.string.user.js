@@ -28,8 +28,9 @@ String.prototype.equalsIgnoreCase = function(...string){
     return false;
 }
 
-const strEquals = (s1, s2, ignoreCase=false) =>
+const strEquals = (s1, s2, ignoreCase = false) =>
     ignoreCase && s1 && s2 ? s1.toUpperCase() === s2.toUpperCase() : s1 === s2;
+const strEqualsIgnoreCase = (s1, s2) => strEquals(s1, s2, true);
 
 String.prototype.contains = function (...strings) {
     for (let s of strings) {

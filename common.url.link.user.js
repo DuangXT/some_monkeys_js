@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：链接
 // @description
-// @version      0.0.4
+// @version      0.0.5
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
@@ -42,12 +42,7 @@ const currentUrlContain = currentUrlContains = currentUrlIncludes;
 /** 判断域名内是否包含匹配字符串 */
 const hostnameContains = (...matchs) => hostname.containsIgnoreCase(...matchs);
 const hostnameHas = hostnameContains;
-const hostnameIs = (...hostnames) => {
-    for (let host of hostnames) {
-        if(host.toLowerCase() === hostname.toLowerCase()) return true;
-    }
-    return false;
-}
+const hostnameIs = (...hostnames) => hostname.equalsIgnoreCase(...hostnames);
 
 
 /** 如果主站点匹配则执行动作 */
@@ -61,7 +56,7 @@ function runIfHostIs(){
     }
     let hosts = Array.prototype.slice.call(arguments);
     hosts.splice(hosts.length - 1, 1);
-    if(hostnameHas(hosts)){
+    if(hostnameIs(hosts)){
         callback();
     }
 }
