@@ -60,13 +60,13 @@ String.prototype.contains = function (...strings) {
     }
     return false;
 }
-String.prototype.notContains = !String.prototype.contains;
+String.prototype.notContains=(...s)=>!String.prototype.contains(...s);
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
     substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
     return this.toUpperCase().contains(...newSubStrs);
 }
-String.prototype.notContainsIgnoreCase = !String.prototype.containsIgnoreCase;
+String.prototype.notContainsIgnoreCase=(...s)=>!String.prototype.containsIgnoreCase(...s);
 Array.prototype.contains = Array.prototype.contains ? Array.prototype.contains
     : function(...values){return values.every(value=>this.includes(value));}
 
