@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：论坛
 // @description
-// @version      0.0.4
+// @version      0.0.5
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
@@ -19,7 +19,7 @@
 
 gmlog('公共库：论坛');
 
-const currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
+let currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
 
 function isForum(){
     return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");

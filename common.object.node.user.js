@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：节点对象
 // @description
-// @version      0.0.1.10
+// @version      0.0.1.11
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
@@ -21,7 +21,7 @@ Node.prototype.nodeNameIs = function(...nodeNames){return this.nodeName.contains
 function isElementNode(node){
     return node && (node instanceof HTMLElement || (node.nodeType && 'number' === typeof node.nodeType));
 }
-const isNodeList=(nodeList)=>nodeList instanceof NodeList;
+let isNodeList=(nodeList)=>nodeList instanceof NodeList;
 
 
 /** 判断是否最终节点 */

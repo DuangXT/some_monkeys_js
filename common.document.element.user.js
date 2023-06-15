@@ -79,7 +79,7 @@ function removeIfTextContrains(obj, ...strs){
     }
     function _remove(o){
         if(isElementNode(o)){
-            for (const s in strs) {
+            for (let s of strs) {
                 if(s && o.textContent.contains(s.toString())){
                     o.remove();
                 }
@@ -90,7 +90,7 @@ function removeIfTextContrains(obj, ...strs){
     }
     if(Array.isArray(obj) || isNodeList(obj)){
         for (let o of obj) {
-            _remove(isString(o) ? $qs(o) :o);
+            _remove(isStr(o) ? $qs(o) :o);
         }
         return obj;
     }

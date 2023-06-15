@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：函数方法
 // @description
-// @version      0.0.3
+// @version      0.0.4
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
@@ -15,7 +15,7 @@
 // common level 0
 gmlog('公共库：函数方法');
 
-const isFunction = func => func && 'function' === typeof func;
+let isFunction = func => func && 'function' === typeof func;
 
 /**
  * 执行方法并捕获异常
