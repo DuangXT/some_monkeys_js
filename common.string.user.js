@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：字符串
 // @description
-// @version      0.0.3
+// @version      0.0.4
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
@@ -24,6 +24,7 @@ String.prototype.contains = function (...strings) {
     }
     return false;
 }
+
 String.prototype.notContains = !String.prototype.contains;
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
@@ -31,6 +32,22 @@ String.prototype.containsIgnoreCase = function (...substrs){
     return this.toUpperCase().contains(...newSubStrs);
 }
 String.prototype.notContainsIgnoreCase = !String.prototype.containsIgnoreCase;
+
+String.prototype.equals = function(...string){
+    for (const s of string) {
+        if (this === s)
+            return true;
+    }
+    return false;
+}
+String.prototype.equalsIgnoreCase = function(...string){
+    for (const s of string) {
+        if (this.toUpperCase() === s.toUpperCase())
+            return true;
+    }
+    return false;
+}
+
 
 /** 查找字符串中是否包含指定字符 */
 const strContains = (str, ...substrs) => {

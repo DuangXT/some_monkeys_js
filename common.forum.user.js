@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：论坛
 // @description
-// @version      0.0.3
+// @version      0.0.4
 // @author       DuangXT
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
@@ -9,22 +9,17 @@
 
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
 // @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 
 // @match *
 // @include *
 // ==/UserScript==
 
-// common level 3
+// common level 1
 
 gmlog('公共库：论坛');
+
+const currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
 
 function isForum(){
     return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");
@@ -33,7 +28,7 @@ function isForum(){
 /** 判断当前页面是否可能是discuz论坛 */
 function isDiscuz(){
     // 检查页面源码是否包含 Discuz 关键词
-    let bodyText = body.textContent;
+    let bodyText = document.body.textContent;
     if (!bodyText.includes("Discuz") &&
         !bodyText.includes("Comsenz") &&
         !bodyText.includes("UCenter")) {

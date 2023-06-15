@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         常用油猴脚本方法：文档元素
 // @description
-// @version      0.0.4.1
+// @version      0.0.4.2
 // @author       DuangXT
 // @grant unsafeWindow
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
@@ -25,7 +25,7 @@
 
 gmlog('公共库：文档元素');
 
-Element.prototype.tagNameIs = function(...tagNames){return this.tagName.containsIgnoreCase(...tagNames);}
+Element.prototype.tagNameIs = function(...tagNames){return this.tagName.equalsIgnoreCase(...tagNames);}
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
