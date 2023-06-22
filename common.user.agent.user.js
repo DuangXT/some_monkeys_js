@@ -1,16 +1,9 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：User-Agnet
-// @description
-// @version      0.0.3
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.agent.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.agent.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @match *
-// @include *
+// @name 常用油猴脚本方法：User-Agnet
+// @version 0.0.3
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // ==/UserScript==
-
 // common level 0
 gmlog('公共库：User-Agnet');
 

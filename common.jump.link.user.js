@@ -1,25 +1,16 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：跳转链接
-// @description
-// @version      0.0.3
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
-
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
-
-// @match *
-// @include *
+// @name 常用油猴脚本方法：跳转链接
+// @version 0.0.3
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
 // ==/UserScript==
-
 // common level 3
 gmlog('公共库：跳转链接');
 

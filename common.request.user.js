@@ -1,14 +1,8 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：发起请求
-// @description
-// @version      0.0.3
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.request.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.request.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @match *
-// @include *
+// @name 常用油猴脚本方法：发起请求
+// @version 0.0.3
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @grant GM.xmlHttpRequest
 // @grant GM_xmlhttpRequest
 // @grant unsafeWindow

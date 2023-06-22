@@ -1,19 +1,12 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：样式
-// @description
-// @version      0.0.1.3
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @match *
-// @include *
+// @name 常用油猴脚本方法：样式
+// @version 0.0.1.3
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @grant GM_addStyle
 // @grant GM.addStyle
 // @grant unsafeWindow
 // ==/UserScript==
-
 // common level 0
 gmlog('公共库：样式');
 

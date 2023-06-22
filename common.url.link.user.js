@@ -1,19 +1,10 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：链接
-// @description
-// @version      0.0.5
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
-
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-
-// @match *
-// @include *
+// @name 常用油猴脚本方法：链接
+// @version 0.0.5
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // ==/UserScript==
-
 // common level 1
 gmlog('公共库：链接');
 

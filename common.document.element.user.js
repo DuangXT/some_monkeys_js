@@ -1,26 +1,17 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：文档元素
-// @description
-// @version      0.0.4.5
-// @author       DuangXT
+// @name 常用油猴脚本方法：文档元素
+// @version 0.0.4.5
+// @author DuangXT
 // @grant unsafeWindow
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
-
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
-
-// @match *
-// @include *
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
 // ==/UserScript==
-
 // common level 2
 
 gmlog('公共库：文档元素');

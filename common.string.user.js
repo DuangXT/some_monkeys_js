@@ -1,16 +1,9 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：字符串
-// @description
-// @version      0.0.8
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @match *
-// @include *
+// @name 常用油猴脚本方法：字符串
+// @version 0.0.9
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // ==/UserScript==
-
 // common level 0
 gmlog('公共库：字符串');
 

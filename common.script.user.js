@@ -1,22 +1,13 @@
 // ==UserScript==
-// @name         常用油猴脚本方法：页面脚本
-// @description
-// @version      0.0.3
-// @author       DuangXT
-// @homepageURL  https://github.com/DuangXT/some_monkeys_js/
-// @updateURL    https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
-// @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
-
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
-
-// @match *
-// @include *
+// @name 常用油猴脚本方法：页面脚本
+// @version 0.0.3
+// @author DuangXT
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
 // @grant unsafeWindow
 // ==/UserScript==
-
 // common level 3
 gmlog('公共库：页面脚本');
 

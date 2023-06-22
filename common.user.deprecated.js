@@ -7,28 +7,28 @@
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.deprecated.js
 
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.math.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.array.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.requst.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.agent.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.math.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.array.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.requst.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.agent.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
 
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
 
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
-// @require      https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
 
 // ==/UserScript==
 
