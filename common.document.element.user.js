@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：文档元素
-// @version 0.0.4.5
+// @version 0.0.4.6
 // @author DuangXT
 // @grant unsafeWindow
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
@@ -200,4 +200,13 @@ const removeAll = removeElements;
 var hide = hide ? hide : hideElement;
 const hides = hideElements;
 const hideAll = hideAllElements;
-var click = click ? click : selectorClick;
+var click = click ? click : obj=>{
+    if(isString(obj)){
+        return selectorClick(obj);
+    }else if('object' === typeof obj){
+        log("执行点击", obj);
+        obj.click();
+        return obj;
+    }
+    throw new Error("Invalid object");
+}

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：链接
-// @version 0.0.5
+// @version 0.0.6
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
@@ -8,14 +8,14 @@
 // common level 1
 gmlog('公共库：链接');
 
-const currentUrl = location.href;
-const hostname = location.hostname;
+const currentUrl = location.href.toString();
+const hostname = location.hostname.toString();
 
 /** 刷新页面至指定链接 */
-const refesh = (url=location.href, replace) => {
-    if(!url) url = location.href;
+const refesh = (url=currentUrl, replace) => {
+    if(!url) url = currentUrl;
     if(!url.startsWith("http")) url = 'https://' + url;
-    if(replace && location.href !== url){
+    if(replace && currentUrl !== url){
         log('替换链接为：', url);
         location.replace(url);
         return;
@@ -27,7 +27,7 @@ const refesh = (url=location.href, replace) => {
 window.location.reload = ()=>log('页面刷新已被禁用');
 
 /** 判断当前URL内是否包含匹配的字符串 */
-const currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
+const currentUrlIncludes = (...searchString) => currentUrl.contains(...searchString);
 const currentUrlContain = currentUrlContains = currentUrlIncludes;
 
 /** 判断域名内是否包含匹配字符串 */
