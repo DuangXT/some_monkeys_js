@@ -1,3 +1,9 @@
+console.log("工具类：文件后缀");
+
+/**
+ * 工具类：文件后缀
+ * @version 0.0.1
+ */
 const FileSuffixUtils = {
 
   linkSuffixIs: function (array, link) {

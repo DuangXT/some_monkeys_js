@@ -1,132 +1,10 @@
-Object.prototype.containsKey = function(...keys){
-    for (let key of keys) {
-        if(key in this) return this[key];
-    }
-    return false;
-}
-Object.prototype.containsValue = function(...values){
-    let arr = Object.values(this);
-    return values.every(value => arr.includes(value));
-}
-Object.prototype.contains = function(...substrs){
-    return this.containsKey(substrs) || this.containsValue(substrs);
-}
-Object.prototype.toJson = function(){return JSON.stringify(this);}
 
-Array.prototype.contains = function (...values){
-    return values.every(value => this.includes(value));
-}
-
+/**
+ * 通用工具类
+ * @version 0.0.1
+ */
 const CommonUtils = {
 
-    /**
-     * 执行方法并捕获异常
-     * @param func      执行方法
-     * @param err_tip0  异常提示
-     * @param tip       执行完成的提示
-     * @param err_tip1  异常额外的提示
-     */
-    runFunction: function(func, err_tip0, tip, err_tip1) {
-        if('function' !== typeof func){
-            throw new TypeError('func must be a function');
-        }
-        try {
-            func();
-            if (tip) console.log("[tip] " + tip);
-        } catch (e) {
-            if (err_tip0) console.log(err_tip0);
-            console.log(e);
-            if (err_tip1) console.log(err_tip1);
-        }
-    },
-
-    /** 校验字符串是否为空 */
-    isBlank: function (object) {
-        if (null === object) {
-            console.log("object is null");
-            return true;
-        }
-        if (undefined === object || 'undefined' === typeof object) {
-            console.log("object is undefined");
-            return true;
-        }
-        if ("" === object.trim()) {
-            console.log("object is empty");
-            return true;
-        }
-        if (0 === object.trim().length) {
-            console.log("object.length is 0");
-            return true;
-        }
-        return false;
-    },
-
-    /** 校验字符串是否为空或无效的字符串（null、undefined 和 NaN） */
-    isBlankOrInvalidString: function (object) {
-        if(this.isBlank(object)) {
-            return true;
-        }
-        let o = object.toString().trim();
-        if('NaN' === o || isNaN(o)){
-            console.log("object is [NaN] string");
-            return true;
-        }
-        o = o.toLowerCase();
-        if('undefined' === o){
-            console.log("object is [undefined] string");
-            return true;
-        }
-        if('null' === o){
-            console.log("object is [null] string");
-            return true;
-        }
-        return false;
-    },
-
-
-    /** 任意一个参数为空时返回 true */
-    isBlanks: function () {
-        for (let argument of arguments) {
-            if (this.isBlank(argument))
-                return true;
-        }
-        return false;
-    },
-
-    /** 校验字符串是否不为空 */
-    isNotBlank: function (object) {
-        return !(this.isBlank(object))
-    },
-
-    /** 校验字符串是否不为空或无效的字符串（null、undefined 和 NaN） */
-    isNotBlankOrInvalidString: function (object) {
-        return !(this.isBlankOrInvalidString(object))
-    },
-
-    /** 任意一个参数不为空时返回 true */
-    isNotBlanks: function () {
-        for (let argument of arguments) {
-            if (this.isNotBlank(argument))
-                return true;
-        }
-        return false;
-    },
-
-    /** 是否设置有真值内容（空、0、false、空格等都为假值） */
-    isSet: function (object) {
-        if(this.isBlankOrInvalidString(object)){
-            return false;
-        }
-        if(0.0 === object){
-            console.log("object is zero number");
-            return false;
-        }
-        if('false' === object.toString().trim()){
-            console.log("object is false string");
-            return false;
-        }
-        return true;
-    },
 
     /**
      * 格式化金额
@@ -163,15 +41,6 @@ const CommonUtils = {
         return s;
     },
 
-    /**判断一个对象是否为空 */
-    objectIsBlank: function (obj) {
-        return JSON.stringify(obj) === "{}" || Object.keys(obj).length === 0;
-    },
-
-    /** 判断一个对象是否不为空 */
-    objectIsNotBlank: function (obj) {
-        return !(this.objectIsBlank(obj))
-    },
 
     /** 反转义HTML转义符 */
     htmlDecode: function (text) {
@@ -180,28 +49,7 @@ const CommonUtils = {
         return temp.innerText || temp.textContent;
     },
 
-    /** 拿取form表单数据转成json格式返回(基于jquery) */
-    formToJson: function (select) {
-        let arry = $(select).serializeArray();
-        let data = {};
-        arry.forEach(function (element, index) {
-            if (data[element.name])
-                data[element.name] = data[element.name] + '$#' + element.value;
-            else data[element.name] = element.value;
-        });
-        return data;
-    },
 
-    formToJsonNoNUll: function (select) {
-        let arry = $(select).serializeArray()
-        let data = {};
-        arry.forEach(function (element, index) {
-            if (this.isNotBlank(element.value)) {
-                data[element.name] = element.value;
-            }
-        });
-        return data;
-    },
 
     /** 补0操作 */
     getzf: function (num) {
@@ -276,11 +124,6 @@ const CommonUtils = {
         if ((s + '').length === 1)
             s = '0' + s;
         return d + '天 ' + h + '时' + m + '分';
-    },
-
-    /** 设置浏览器UA标识 */
-    setUserAgent: function(userAgent) {
-        Object.defineProperty(navigator, "userAgent", { value: userAgent, writable: false, configurable: false, enumerable: true });
     },
 
 };

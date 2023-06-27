@@ -1,4 +1,4 @@
-
+/** @deprecated */
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
