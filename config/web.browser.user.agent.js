@@ -1,4 +1,4 @@
-/** 浏览器User-Agent标识串收集 */
+/** 浏览器User-Agent标识串收集 v2023-06-10 */
 const webBrowserUserAgent = {
 
     foreach: (obj) => {
