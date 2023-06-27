@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：创建新的文档元素
-// @version 0.0.5.1
+// @version 0.0.5.1-deprecated
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @grant unsafeWindow

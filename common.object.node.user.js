@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：节点对象
-// @version 0.0.1.11
+// @version 0.0.1.11-deprecated
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
 // @grant unsafeWindow

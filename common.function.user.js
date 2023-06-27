@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：函数方法
-// @version 0.0.4
+// @version 0.0.4-deprecated
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @grant unsafeWindow

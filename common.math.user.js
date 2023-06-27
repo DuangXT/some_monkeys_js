@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：数值/数学/计算
-// @version 0.0.3
+// @version 0.0.3-deprecated
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // ==/UserScript==
