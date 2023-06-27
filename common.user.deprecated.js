@@ -1,34 +1,48 @@
 // ==UserScript==
 // @name         个人常用js脚本方法、参数
 // @description  已弃用 / 请根据@require声明选择需要使用的脚本 / 如要继续使用旧版请指定版本号：0.0.8.3
-// @version      0.0.9-deprecated
+// @version      0.0.10-deprecated
 // @author       DuangXT
-
 // @homepageURL  https://github.com/DuangXT/some_monkeys_js/
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.deprecated.js
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.math.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.array.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.function.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.requst.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.agent.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.node.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.json.user.js
 
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.object.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.url.link.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/ArrayExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomCreateExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/NodeExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/ObjectExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/SelectorFunctions.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
 
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.create.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ArrayUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/CommonUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FileSuffixUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FromValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FunctionUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/JsonUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ObjectUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/RedirectUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/RequestUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ScriptTagUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/SelectorLinkJumpUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/SelectorUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StyleTagUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/UrlUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/UserAgentUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/VideoUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/WindowUtils.js
+
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.user.js
-
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.jump.link.user.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.forum.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.script.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.video.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.request.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.style.user.js
 
 // ==/UserScript==
 

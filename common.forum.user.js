@@ -3,14 +3,14 @@
 // @version 0.0.5
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.string.user.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.document.element.selector.user.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomExtend.js
 // ==/UserScript==
 // common level 1
 
 gmlog('公共库：论坛');
 
-let currentUrlIncludes = (...searchString) => window.location.href.contains(...searchString);
+let currentUrlIncludes = (...searchString) => location.href.contains(...searchString);
 
 function isForum(){
     return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");
