@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.9
+ * @version 0.0.10
  */
 const SelectorUtils = {
 
@@ -21,15 +21,17 @@ const SelectorUtils = {
   id: function(s){document.getElementById(this.__cleanCssSelectorHead__(s, "#"))},
   className: function(s){document.getElementsByClassName(this.__cleanCssSelectorHead__(s, "."))},
 
+  /** 获取标签对象的集合 */
   tagName: document.getElementsByTagName.bind(document),
-  tag: this.tagName,
   getTagElements: this.tagName,
+
   /**
-   * 指定标签对象
+   * 获取一个指定的标签对象
    * @param tagName      标签名
    * @param tagLocation  标签位置
    */
   getTagElement: function(tagName, tagLocation=0){return this.tagName(tagName)[tagLocation]},
+  tag: this.getTagElement,
 
   create: document.createElement.bind(document),
   createElement: this.create, addElement: this.create, addTag: this.create,
@@ -38,8 +40,11 @@ const SelectorUtils = {
   head: document.head || this.getTagElement('head'),
   html: document.html || this.getTagElement('html'),
 
-  tags: () => document.querySelectorAll('*'),
-  allTag: this.tags, allElements: this.tags,
+  /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
+  tags: function(tagName){
+    return this.tagName(tagName && this.__isString__(tagName) ? tagName : '*')
+  },
+  allTag: this.tags(false), allElements: this.allTag,
 
 
 
@@ -68,17 +73,17 @@ const SelectorUtils = {
 
   /** 移除每个指定的一个元素 */
   remove: (...selectors) => {
-    selectors.forEach( selector => {
+    selectors.forEach( _selector => {
       let ele;
-      if('string' === typeof selector) ele = this.qs(selector);
-      else ele = selector;
+      if(this.__isString__(_selector)) ele = this.qs(_selector);
+      else ele = _selector;
       if (ele) {
         try{
           ele.remove();
         } catch (e){
           console.error(e);
         }
-        console.log("移除元素：", selector);
+        console.log("移除元素：", _selector);
       }
     });
   },
@@ -87,7 +92,7 @@ const SelectorUtils = {
   /** 移除每个指定的所有元素 */
   removeAll: function (...selectors) {
     selectors.forEach( _selector => {
-      if('string' === typeof _selector)
+      if(!this.__isString__(_selector))
       for (let ele of this.qsa(_selector)) {
         ele.remove();
         console.log("移除元素：", _selector, 'id=' + ele.id, 'class=' + ele.className);
@@ -198,7 +203,7 @@ const SelectorUtils = {
 
   /** 选择器，存在时移除指定的class */
   removeClass: function (_selector, ...removeClasses) {
-    if('string' !== typeof _selector){
+    if(!this.__isString__(_selector)){
       throw new TypeError('_selector must be a string');
     }
     let selector = this.qs(_selector);
@@ -217,7 +222,7 @@ const SelectorUtils = {
 
   /** 添加新的link标签 */
   addLinkTag:function(linkHref, linkType='text/css', linkRel='stylesheet'){
-    if('string' !== typeof linkHref){
+    if(!this.__isString__(linkHref)){
       throw new TypeError('parameter "css" must be a string');
     }
     if (!this.head) return;
