@@ -1,13 +1,13 @@
 console.log("工具类：文件后缀");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.2
+ * @version 0.0.3
  */
 const FileSuffixUtils = {
 
   linkSuffixIs: function (array, link) {
-    if ('string' !== typeof link || ValidateUtils.isBlank(link)) {
+    if ('string' !== typeof link || StringUtils.isBlank(link)) {
       throw new TypeError('file link must be a string');
     }
     if(!Array.isArray(array)){

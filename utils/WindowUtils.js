@@ -2,7 +2,7 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.5
+ * @version 0.0.6
  */
 const WindowUtils={
 
@@ -31,7 +31,7 @@ const WindowUtils={
     /** 关闭当前窗口 */
     closewindow: (timeout=0, win=window)=>
             setTimeout(()=>this.closenow(win), timeout),
-    closeWindow: this.closewindow,
+    closeWindow: WindowUtils.closewindow,
 
     /** 打开一个定时关闭的迷你小窗口 */
     openMiniWindowWithTimingClose: (url, timeout=10000)=>{
@@ -40,7 +40,7 @@ const WindowUtils={
             'menubar=no,toolbar=no,status=no,titlebar=no,scrollbars=no';
         console.log('打开一个迷你小窗：', url);
         let miniPopup = window.open(url, '_blank', hideWindowFeatures);
-        this.closewindow(timeout, miniPopup);
+        WindowUtils.closewindow(timeout, miniPopup);
     },
 
 }

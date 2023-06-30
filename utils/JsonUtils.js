@@ -1,8 +1,8 @@
 console.log('工具类：JSON处理');
 
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /** 工具类：JSON处理
- * @version 0.0.2.1
+ * @version 0.0.2.2
  */
 class JsonUtils{
     toJson = obj => {
@@ -54,7 +54,7 @@ class JsonUtils{
         let arry = this.__serializeArray__(_selector);
         let data = {};
         for (const element of arry) {
-            if (ValidateUtils.isNotBlank(element.value))
+            if (StringUtils.isNotBlank(element.value))
                 data[element.name] = element.value;
         }
         return data;

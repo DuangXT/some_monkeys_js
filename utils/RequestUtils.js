@@ -5,7 +5,7 @@ const originalOpen = XMLHttpRequest.prototype.open;
 const originalFetch = window.fetch;
 
 /** 工具类：发起请求
- * @version 0.0.7
+ * @version 0.0.8
  */
 const RequestUtils = {
 
@@ -37,10 +37,10 @@ const RequestUtils = {
             return originalOpen.apply(this, [method, url, async, user, password]);
         };
     },
-    setQueryParams: this.setSearchParams,
+    setQueryParams: RequestUtils.setSearchParams,
 
     /** 添加一个查询参数 */ // setSearchParam
-    addSearchParam: function(paramName, paramValue){this.setSearchParams({paramName: paramValue})},
+    addSearchParam: (paramName, paramValue) => RequestUtils.setSearchParams({paramName: paramValue}),
 
     /** 添加请求头 */
     addHeaders: function (headerJson) {
@@ -57,7 +57,7 @@ const RequestUtils = {
     },
 
     /** 添加一个请求头 */
-    addHeader: function(headerName, headerValue){this.addHeaders({headerName: headerValue})},
+    addHeader: (headerName, headerValue) => RequestUtils.addHeaders({headerName: headerValue}),
 
     /** 允许设置referer */
     allowRefererJson: referer=>{
@@ -92,7 +92,7 @@ const RequestUtils = {
     },
 
     /** 请求(加载)一个新脚本 */
-    evalScript: function(jsurl){this.xmlHttpRequest(jsurl, eval, 'GET')},
+    evalScript: jsurl => RequestUtils.xmlHttpRequest(jsurl, eval, 'GET'),
 
     requestUrl: function(url, method='GET', referer){
         let s = '===============================================================';

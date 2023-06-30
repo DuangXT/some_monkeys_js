@@ -2,7 +2,7 @@ console.log("工具类：URL");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
 
 /** 工具类：URL
- * @version 0.0.6
+ * @version 0.0.7
  */
 const UrlUtils = {
 
@@ -29,7 +29,7 @@ const UrlUtils = {
         }
         return false;
     },
-    queryParamsContains: this.searchParamsContains,
+    queryParamsContains: UrlUtils.searchParamsContains,
 
 
     /** 获取当前页面链接上的url参数对象 */
@@ -59,7 +59,7 @@ const UrlUtils = {
         return params;
     },
 
-    getQueryParam: name => this.getQueryParams()[name],
+    getQueryParam: name => UrlUtils.getQueryParams()[name],
 
 
 };

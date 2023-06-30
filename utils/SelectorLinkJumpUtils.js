@@ -1,6 +1,6 @@
 console.log("工具类：DOM对象url跳转");
 /** 工具类：DOM对象url跳转
- * @version 0.0.3
+ * @version 0.0.4
  */
 const SelectorLinkJumpUtils = {
 
@@ -20,7 +20,7 @@ const SelectorLinkJumpUtils = {
         if(!url){
             console.log('未获取到标签或链接，%s毫秒后重试', timeout);
             setTimeout(function(){
-                this.alwaysRedirect(_selector, _property, timeout, flag); // 每n秒循环直到成功跳转
+                SelectorLinkJumpUtils.alwaysRedirect(_selector, _property, timeout, flag); // 每n秒循环直到成功跳转
             }, timeout);
             return;
         }
@@ -28,9 +28,9 @@ const SelectorLinkJumpUtils = {
         if(flag) location.href = url;
         else window.open(url);
     },
-    alwaysJump: this.alwaysRedirect,
+    alwaysJump: SelectorLinkJumpUtils.alwaysRedirect,
 
     alwaysOpenNewTab: (_selector, _property='href', timeout=3000) =>
-        this.selectorUrlAlwaysJump(_selector, _property, timeout, false),
-    alwaysOpen: alwaysOpenNewTab,
+        SelectorLinkJumpUtils.alwaysRedirect(_selector, _property, timeout, false),
+    alwaysOpen: SelectorLinkJumpUtils.alwaysOpenNewTab,
 }

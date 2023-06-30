@@ -1,9 +1,9 @@
 console.log("工具类：金钱货币");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
 /**
  * 工具类：金钱货币
- * @version 0.0.1
+ * @version 0.0.2
  */
 const CurrencyUtils = {
 
@@ -14,7 +14,7 @@ const CurrencyUtils = {
      * @returns {string}
      */
     format: function (amount, symbol = '¥') {
-        if (ValidateUtils.isBlank(amount)) {
+        if (StringUtils.isBlank(amount)) {
             return symbol + '0.00';
         }
         let str = MathUtils.parseDecimal(amount) + '';
@@ -23,9 +23,9 @@ const CurrencyUtils = {
         let ret = intSum + dot;
         return symbol + ret;
     },
-    formatCNY: amount => this.format(amount),
-    formatRMB: this.formatCNY,
-    formatDollar: amount => this.format(amount, "$"),
-    formatUSD: this.formatDollar,
+    formatCNY: amount => CurrencyUtils.format(amount),
+    formatRMB: CurrencyUtils.formatCNY,
+    formatDollar: amount => CurrencyUtils.format(amount, "$"),
+    formatUSD: CurrencyUtils.formatDollar,
 
 }

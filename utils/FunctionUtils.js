@@ -1,7 +1,7 @@
 console.log("工具类：函数");
 
 /** 工具类：函数
- * @version 0.0.7
+ * @version 0.0.8
  */
 const FunctionUtils={
 
@@ -37,6 +37,6 @@ const FunctionUtils={
         }
         setTimeout(func, 0);
     },
-    runAtLast: this.runLast, taskLast: this.runLast,
+    runAtLast: FunctionUtils.runLast, taskLast: FunctionUtils.runLast,
 
 }

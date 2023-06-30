@@ -1,11 +1,88 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.0.11
+ * @version 0.1.0
  */
 const StringUtils = {
 
     isString: (s)=> '[object String]' === Object.prototype.toString.call(s),
+    isNotString: s => !StringUtils.isString(s),
+    notString: StringUtils.isNotString,
+
+    /** 校验字符串是否为空 */
+    isBlank: function (object) {
+        if (null === object) {
+            console.log("object is null");
+            return true;
+        }
+        if (undefined === object || 'undefined' === typeof object) {
+            console.log("object is undefined");
+            return true;
+        }
+        if(this.notString(object)){
+            console.log("object is not a string");
+            return false;
+        }
+        if ("" === object.trim() || 0 === object.trim().length) {
+            console.log("object is empty string");
+            return true;
+        }
+        return false;
+    },
+
+    /** 校验字符串是否不为空 */
+    isNotBlank: function (object) {
+        return !(this.isBlank(object))
+    },
+    notBlank: StringUtils.isNotBlank,
+
+
+    /** 任意一个参数为空时返回 true */
+    isBlanks: function () {
+        for (let argument of arguments) {
+            if (this.isBlank(argument))
+                return true;
+        }
+        return false;
+    },
+
+    /** 任意一个参数不为空时返回 true */
+    isNotBlanks: function () {
+        for (let argument of arguments) {
+            if (this.isNotBlank(argument))
+                return true;
+        }
+        return false;
+    },
+    notBlanks: StringUtils.isNotBlanks,
+
+    /** 校验字符串是否为空或无效的字符串（null、undefined 和 NaN） */
+    isBlankOrInvalidString: function (object) {
+        if(this.isBlank(object)) {
+            return true;
+        }
+        let o = object.toString().trim();
+        if('NaN' === o || isNaN(o)){
+            console.log("object is [NaN] string");
+            return true;
+        }
+        o = o.toLowerCase();
+        if('undefined' === o){
+            console.log("object is [undefined] string");
+            return true;
+        }
+        if('null' === o){
+            console.log("object is [null] string");
+            return true;
+        }
+        return false;
+    },
+
+    /** 校验字符串是否不为空或无效的字符串（null、undefined 和 NaN） */
+    isNotBlankOrInvalidString: function (object) {
+        return !(this.isBlankOrInvalidString(object))
+    },
+    notBlankOrInvalidString: StringUtils.isNotBlankOrInvalidString,
 
     equals: (s1, s2, ignoreCase = false) =>
         ignoreCase && s1 && s2 ? s1.toUpperCase() === s2.toUpperCase() : s1 === s2,
@@ -45,21 +122,12 @@ const StringUtils = {
         return ret;
     },
 
-    /** 检查ip字符串是否内网ip地址 */
-    isLocalIp: ip=>{
-        function is172(ip){
-            let ip2 = 1 * ip.split('.')[1];
-            return ip2 > 15 && ip2 < 32;
-        }
-        return ip.startsWith('10.') || ip.startsWith('192.168.') || is172(ip);
-    },
-
     /** 反转义HTML转义符 */
     htmlDecode: function (text) {
         let temp = document.createElement("div");
         temp.style.display = "none!important";
         temp.style.visibility = "hidden!important";
-        temp.innerHTML = text;
+        temp.innerHTML = text && text.toString ? text.toString() : String.toString(text);
         return temp.innerText || temp.textContent;
     },
 
