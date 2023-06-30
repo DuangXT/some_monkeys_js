@@ -1,27 +1,36 @@
 console.log("工具类：DOM操作");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
 
 
 /** 工具类：DOM操作
- * @version 0.0.7
+ * @version 0.0.9
  */
 const SelectorUtils = {
 
-  // 全局元素
-  querySelector: document.querySelector.bind(document),
-  querySelectorAll: document.querySelectorAll.bind(document),
-  qs: this.querySelector, $qs: this.qs, $: this.qs,
-  qsa: this.querySelectorAll, $qsa: this.qsa, $all: this.qsa, $$: this.qsa,
-
+  __isString__: s => '[object String]' === Object.prototype.toString.call(s),
   __cleanCssSelectorHead__: (s, subStr) => {
     s = s.trim();
     if(s.startsWith(subStr)) s = s.substring(1);
     return s;
   },
+
+  querySelector: document.querySelector.bind(document),
+  querySelectorAll: document.querySelectorAll.bind(document),
+  qs: this.querySelector, $qs: this.qs, $: this.qs,
+  qsa: this.querySelectorAll, $qsa: this.qsa, $all: this.qsa, $$: this.qsa,
+
   id: function(s){document.getElementById(this.__cleanCssSelectorHead__(s, "#"))},
   className: function(s){document.getElementsByClassName(this.__cleanCssSelectorHead__(s, "."))},
+
   tagName: document.getElementsByTagName.bind(document),
+  tag: this.tagName,
+  getTagElements: this.tagName,
+  /**
+   * 指定标签对象
+   * @param tagName      标签名
+   * @param tagLocation  标签位置
+   */
+  getTagElement: function(tagName, tagLocation=0){return this.tagName(tagName)[tagLocation]},
+
   create: document.createElement.bind(document),
   createElement: this.create, addElement: this.create, addTag: this.create,
 
@@ -29,14 +38,11 @@ const SelectorUtils = {
   head: document.head || this.getTagElement('head'),
   html: document.html || this.getTagElement('html'),
 
+  tags: () => document.querySelectorAll('*'),
+  allTag: this.tags, allElements: this.tags,
 
-  getTagElements: tagName => document.getElementsByTagName(tagName),
-  /**
-   * 指定标签对象
-   * @param tagName      标签名
-   * @param tagLocation  标签位置
-   */
-  getTagElement: function(tagName, tagLocation=0){return this.getTagElements(tagName)[tagLocation]},
+
+
 
   /**
    * 指定标签设置属性
@@ -91,12 +97,15 @@ const SelectorUtils = {
   },
   deleteAll: this.removeAll,
 
-  removeIfTextContains: (obj, ...strs)=>{
+  removeIfTextContains: function(obj, ...strs){
     if('object' !== typeof obj){
       throw new TypeError('obj must be a object');
     }
+
+    let _isElementNode = node => node &&
+        (node instanceof HTMLElement || (node.nodeType && 'number' === typeof node.nodeType));
     function _remove(o){
-      if(NodeUtils.isElementNode(o)){
+      if(_isElementNode(o)){
         for (let s of strs) {
           if(s && o.textContent.includes(s.toString())){
             o.remove();
@@ -106,9 +115,9 @@ const SelectorUtils = {
       }
       console.log('无法操作非节点对象', o);
     }
-    if(Array.isArray(obj) || NodeUtils.isNodeList(obj)){
+    if(Array.isArray(obj) || obj instanceof NodeList){
       for (let o of obj) {
-        _remove(StringUtils.isString(o) ? $qs(o) :o);
+        _remove(this.__isString__(o) ? $qs(o) :o);
       }
       return obj;
     }
@@ -129,7 +138,7 @@ const SelectorUtils = {
 
   /** 隐藏单个指定的标签（返回被隐藏的标签对象） */
   hide: function (_selector) {
-    let ele = StringUtils.isString(_selector) ? this.qs(_selector) : _selector;
+    let ele = this.__isString__(_selector) ? this.qs(_selector) : _selector;
     if (ele && 'object' === typeof ele) {
       if (ele.style) console.log("元素 " + _selector +
           "隐藏前样式：" + JSON.stringify(ele.style).slice(0,100));
