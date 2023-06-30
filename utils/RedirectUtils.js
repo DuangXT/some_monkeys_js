@@ -2,7 +2,7 @@ console.log("工具类：重定向");
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
 /** 工具类：重定向
- * @version 0.0.2
+ * @version 0.0.3
  */
 const RedirectUtils = {
 
@@ -28,6 +28,6 @@ const RedirectUtils = {
         }
         else jump(wasHost);
     },
-    wantRedirect: RedirectUtils.askRedirect,
+    wantRedirect: function(...args){return this.askRedirect(...args)},
 
 }

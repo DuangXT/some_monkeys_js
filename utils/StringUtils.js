@@ -1,13 +1,13 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.1.0
+ * @version 0.1.1
  */
 const StringUtils = {
 
     isString: (s)=> '[object String]' === Object.prototype.toString.call(s),
-    isNotString: s => !StringUtils.isString(s),
-    notString: StringUtils.isNotString,
+    isNotString: function(s){return !StringUtils.isString(s)},
+    notString: function(s){return StringUtils.isNotString(s)},
 
     /** 校验字符串是否为空 */
     isBlank: function (object) {
@@ -31,10 +31,8 @@ const StringUtils = {
     },
 
     /** 校验字符串是否不为空 */
-    isNotBlank: function (object) {
-        return !(this.isBlank(object))
-    },
-    notBlank: StringUtils.isNotBlank,
+    isNotBlank: function (object) {return !this.isBlank(object)},
+    notBlank: function(s){return StringUtils.isNotBlank(s)},
 
 
     /** 任意一个参数为空时返回 true */
@@ -54,7 +52,7 @@ const StringUtils = {
         }
         return false;
     },
-    notBlanks: StringUtils.isNotBlanks,
+    notBlanks: function(...s){return this.isNotBlanks(...s)},
 
     /** 校验字符串是否为空或无效的字符串（null、undefined 和 NaN） */
     isBlankOrInvalidString: function (object) {
@@ -79,10 +77,8 @@ const StringUtils = {
     },
 
     /** 校验字符串是否不为空或无效的字符串（null、undefined 和 NaN） */
-    isNotBlankOrInvalidString: function (object) {
-        return !(this.isBlankOrInvalidString(object))
-    },
-    notBlankOrInvalidString: StringUtils.isNotBlankOrInvalidString,
+    isNotBlankOrInvalidString: function (object) {return !this.isBlankOrInvalidString(object)},
+    notBlankOrInvalidString:  function(...s){return this.isNotBlankOrInvalidString(...s)},
 
     equals: (s1, s2, ignoreCase = false) =>
         ignoreCase && s1 && s2 ? s1.toUpperCase() === s2.toUpperCase() : s1 === s2,
@@ -98,14 +94,14 @@ const StringUtils = {
         return false;
     },
     /** 检查目标字符串中不包含指定字符 */
-    notContain: !this.contains,
+    notContain: function(targetStr, ...substrs){return !this.contains(targetStr, ...substrs)},
 
     containsIgnoreCase: (str, ...substrs) => {
         let newSubStrs = [];
         substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
         return this.contains(str.toLowerCase(), ...newSubStrs);
     },
-    notContainsIgnoreCase: !this.containsIgnoreCase,
+    notContainsIgnoreCase: function(str, ...substrs){return !this.containsIgnoreCase(str, ...substrs)},
 
 
     /**

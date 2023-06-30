@@ -2,7 +2,7 @@ console.log("工具类：文件后缀");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.3
+ * @version 0.0.4
  */
 const FileSuffixUtils = {
 
@@ -30,8 +30,8 @@ const FileSuffixUtils = {
   isImageFile: function (fileLink) {
     return this.linkSuffixIs(this.imgFormats, fileLink);
   },
-  isPhotoFile: this.isImageFile,
-  isPictureFile: this.isImageFile,
+  isPhotoFile: function(fileLink){return this.isImageFile(fileLink)},
+  isPictureFile: function(fileLink){return this.isImageFile(fileLink)},
 
 
   /** 动态图像(视频)格式 */
@@ -44,9 +44,9 @@ const FileSuffixUtils = {
   isVideoFile: function (fileLink) {
     return this.linkSuffixIs(this.videoFormats, fileLink);
   },
-  isMovieFile: this.isVideoFile,
-  isFilmFile: this.isVideoFile,
-  isClipFile: this.isVideoFile,
+  isMovieFile: function(fileLink){return this.isVideoFile(fileLink)},
+  isFilmFile: function(fileLink){return this.isVideoFile(fileLink)},
+  isClipFile: function(fileLink){return this.isVideoFile(fileLink)},
 
   /** 音频格式 */
   audioFormats: ["mp3", "weba", "wma", "flac", "ape", "ogg", "aac", "wav", "m4a",
@@ -56,9 +56,9 @@ const FileSuffixUtils = {
   isAudioFile: function (fileLink) {
     return this.linkSuffixIs(this.audioFormats, fileLink);
   },
-  isVoiceFile: this.isAudioFile,
-  isSoundFile: this.isAudioFile,
-  isMusicFile: this.isAudioFile,
+  isVoiceFile: function(fileLink){return this.isAudioFile(fileLink)},
+  isSoundFile: function(fileLink){return this.isAudioFile(fileLink)},
+  isMusicFile: function(fileLink){return this.isAudioFile(fileLink)},
 
 
   /** 文本格式 */
@@ -73,7 +73,7 @@ const FileSuffixUtils = {
   isBookFile: function (fileLink) {
     return this.linkSuffixIs(this.bookFormats, fileLink);
   },
-  isEbookFile: this.isBookFile,
+  isEbookFile: function(fileLink){return this.isBookFile(fileLink)},
 
   /** office文档格式 */
   officeWordFormats: ['wps', 'ofd', 'pages', // Kingsoft wps / Suwell OFD / Apple office word... formats
@@ -92,8 +92,8 @@ const FileSuffixUtils = {
   isOfficeTableFile: function (fileLink) {
     return this.linkSuffixIs(this.officeTableFormats, fileLink);
   },
-  isOfficeExcelFile: this.isOfficeTableFile,
-  isOfficeTableExcelFile: this.isOfficeTableFile,
+  isOfficeExcelFile: function(fileLink){return this.isOfficeTableFile(fileLink)},
+  isOfficeTableExcelFile: function(fileLink){return this.isOfficeTableFile(fileLink)},
 
 
   /** office演示文档格式 */
@@ -102,7 +102,7 @@ const FileSuffixUtils = {
   isOfficePresentationFile: function (fileLink) {
     return this.linkSuffixIs(this.officePresentationFormats, fileLink);
   },
-  isOfficePPTFile: this.isOfficePresentationFile,
+  isOfficePPTFile: function(fileLink){return this.isOfficePresentationFile(fileLink)},
 
 
   /** 压缩文件格式 */

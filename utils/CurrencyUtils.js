@@ -3,7 +3,7 @@ console.log("工具类：金钱货币");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
 /**
  * 工具类：金钱货币
- * @version 0.0.2
+ * @version 0.0.3
  */
 const CurrencyUtils = {
 
@@ -23,9 +23,9 @@ const CurrencyUtils = {
         let ret = intSum + dot;
         return symbol + ret;
     },
-    formatCNY: amount => CurrencyUtils.format(amount),
-    formatRMB: CurrencyUtils.formatCNY,
-    formatDollar: amount => CurrencyUtils.format(amount, "$"),
-    formatUSD: CurrencyUtils.formatDollar,
+    formatCNY: function(amount){return this.format(amount)},
+    formatRMB: function(amount){return this.formatCNY(amount)},
+    formatDollar: function(amount){return this.format(amount, "$")},
+    formatUSD: function(amount){return this.formatDollar(amount)},
 
 }

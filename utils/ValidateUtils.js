@@ -1,7 +1,7 @@
 console.log("工具类：有效性校验");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /** 工具类：有效性校验
- * @version 0.1.1
+ * @version 0.1.2
  */
 const ValidateUtils = {
 
@@ -25,7 +25,7 @@ const ValidateUtils = {
     isBlankObject: obj => JSON.stringify(obj) === "{}" || Object.keys(obj).length === 0,
 
     /** 判断一个对象是否不为空 */
-    isNotBlankObject: obj => !ValidateUtils.isBlankObject(obj),
-    notBlankObject: ValidateUtils.isNotBlankObject,
+    isNotBlankObject: function(obj){return !this.isBlankObject(obj)},
+    notBlankObject: function(obj){return this.isNotBlankObject(obj)},
 
 }

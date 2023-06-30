@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.13
+ * @version 0.0.14
  */
 const SelectorUtils = {
 
@@ -13,36 +13,48 @@ const SelectorUtils = {
     return s;
   },
 
-  querySelector: document.querySelector.bind(document),
-  querySelectorAll: document.querySelectorAll.bind(document),
-  qs: SelectorUtils.querySelector, $qs: SelectorUtils.qs, $: SelectorUtils.qs,
-  qsa: SelectorUtils.querySelectorAll, $qsa: SelectorUtils.qsa, $all: SelectorUtils.qsa, $$: SelectorUtils.qsa,
+  qs: document.querySelector.bind(document),
+  querySelector: function(s){return this.qs(s)},
+  $qs: function(s){return this.qs(s)},
+  $: function(s){return this.qs(s)},
+
+  qsa: document.querySelectorAll.bind(document),
+  querySelectorAll: function(s){return this.qsa(s)},
+  $qsa: function(s){return this.qsa(s)},
+  $all: function(s){return this.qsa(s)},
+  $$: function(s){return this.qsa(s)},
 
   id: s => document.getElementById(SelectorUtils.__cleanCssSelectorHead__(s, "#")),
   className: s => document.getElementsByClassName(SelectorUtils.__cleanCssSelectorHead__(s, ".")),
 
   /** 获取标签对象的集合 */
   tagName: document.getElementsByTagName.bind(document),
-  getTagElements: SelectorUtils.tagName,
+  getTagElements: function(tagName){return this.tagName(tagName)},
 
   /**
    * 获取一个指定的标签对象
    * @param tagName      标签名
    * @param tagLocation  标签位置
    */
-  getTagElement: (tagName, tagLocation=0) => SelectorUtils.tagName(tagName)[tagLocation],
-  tag: SelectorUtils.getTagElement,
+  getTagElement: function(tagName, tagLocation=0){
+    return this.tagName(tagName)[tagLocation];
+  },
+  tag: function(tagName){return this.getTagElement(tagName)},
 
   create: document.createElement.bind(document),
-  createElement: SelectorUtils.create, addElement: SelectorUtils.create, addTag: SelectorUtils.create,
+  createElement: function(tagName){return this.create(tagName)},
+  addElement: function(tagName){return this.create(tagName)},
+  addTag: function(tagName){return this.create(tagName)},
 
-  body: document.body || SelectorUtils.getTagElement('body'),
-  head: document.head || SelectorUtils.getTagElement('head'),
-  html: document.html || SelectorUtils.getTagElement('html'),
+
+  body: document.body || document.getElementsByTagName('body'),
+  head: document.head || document.getElementsByTagName('head'),
+  html: document.html || document.getElementsByTagName('html'),
 
   /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
-  tags: tagName => SelectorUtils.tagName(tagName && SelectorUtils.__isString__(tagName) ? tagName : '*'),
-  allTag: SelectorUtils.tags(false), allElements: SelectorUtils.allTag,
+  tags: function(tagName){return this.tagName(tagName && this.__isString__(tagName) ? tagName : '*')},
+  allTag: function(){return this.tags(false)},
+  allElements: function(){return this.tags(false)},
 
 
   /**
@@ -52,8 +64,9 @@ const SelectorUtils = {
    * @param attrContent  属性内容
    * @param tagLocation  标签位置
    */
-  setTagAttr: (tagName, attrName, attrContent, tagLocation = 0) =>
-      SelectorUtils.getTagElement(tagName, tagLocation).setAttribute(attrName, attrContent),
+  setTagAttr: function(tagName, attrName, attrContent, tagLocation = 0){
+      return this.getTagElement(tagName, tagLocation).setAttribute(attrName, attrContent);
+  },
 
 
   /**
@@ -63,8 +76,9 @@ const SelectorUtils = {
    * @param styleValue   样式值
    * @param tagLocation  标签位置
    */
-  setStyle: (tagName, styleName, styleValue, tagLocation = 0) =>
-    SelectorUtils.getTagElements(tagName)[tagLocation].style[styleName] = styleValue,
+  setStyle: function(tagName, styleName, styleValue, tagLocation = 0) {
+    this.getTagElements(tagName)[tagLocation].style[styleName] = styleValue;
+  },
 
 
   /** 移除每个指定的一个元素 */
@@ -83,7 +97,7 @@ const SelectorUtils = {
       }
     });
   },
-  delete: SelectorUtils.remove,
+  delete: function(...selectors){this.remove(...selectors)},
 
   /** 移除每个指定的所有元素 */
   removeAll: function (...selectors) {
@@ -96,7 +110,7 @@ const SelectorUtils = {
       else console.warn('参数不是字符串', _selector);
     });
   },
-  deleteAll: SelectorUtils.removeAll,
+  deleteAll: function(...selectors){this.removeAll(...selectors)},
 
   removeIfTextContains: function(obj, ...strs){
     if('object' !== typeof obj){
@@ -125,7 +139,9 @@ const SelectorUtils = {
     _remove(obj);
     return obj;
   },
-  removeIfIncludesText: SelectorUtils.removeIfTextContains,
+  removeIfIncludesText: function(obj, ...strs){
+    return this.removeIfTextContains(obj, ...strs);
+  },
 
   /** 将对象的属性设置为隐藏 */
   setStyleHidden: obj => {
@@ -149,14 +165,14 @@ const SelectorUtils = {
     return ele;
   },
   /** 隐藏每个选择器的一个标签 */
-  hides: (...selectors) => selectors.forEach(SelectorUtils.hide),
+  hides: function(...selectors) {selectors.forEach(this.hide)},
 
 
   /** 隐藏每个选择器的所有标签 */
   hideAll: function (...selectors) {
     selectors.forEach((selector)=>{
       for (let ele of this.qsa(selector)) {
-        SelectorUtils.setStyleHidden(ele);
+        this.setStyleHidden(ele);
       }
     });
   },
@@ -184,7 +200,7 @@ const SelectorUtils = {
       console.log('执行了点击操作', _selector);
     });
   },
-  clicks: (...selectors) => selectors.forEach(selector => SelectorUtils.click(selector)),
+  clicks: function(...selectors) {selectors.forEach(selector => this.click(selector))},
 
   clickAll: function(...selectors) {
     selectors.forEach(_selector => {
