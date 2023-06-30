@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.10
+ * @version 0.0.11
  */
 const SelectorUtils = {
 
@@ -36,9 +36,9 @@ const SelectorUtils = {
   create: document.createElement.bind(document),
   createElement: this.create, addElement: this.create, addTag: this.create,
 
-  body: document.body || this.getTagElement('body'),
-  head: document.head || this.getTagElement('head'),
-  html: document.html || this.getTagElement('html'),
+  body: function(){return document.body || this.getTagElement('body')},
+  head: function(){return document.head || this.getTagElement('head')},
+  html: function(){return document.html || this.getTagElement('html')},
 
   /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
   tags: function(tagName){

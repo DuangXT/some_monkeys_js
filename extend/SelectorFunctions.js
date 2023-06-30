@@ -1,5 +1,8 @@
 console.log("扩展函数：标签选择器");
-// @version 0.0.4.7
+// @version 0.0.5
+
+const $qs = document.querySelector.bind(document); // s => document.querySelector(s);
+const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
