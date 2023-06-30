@@ -1,5 +1,5 @@
 console.log("扩展函数：URL");
-// @version 0.0.6
+// @version 0.0.7.0
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 const currentUrl = location.href.toString();
@@ -14,7 +14,7 @@ const refesh = (url=currentUrl, replace) => {
         location.replace(url);
         return;
     }
-    log('跳转链接：', url);
+    console.log('跳转链接：', url);
     location.href = url;
 }
 // 尝试禁用页面刷新

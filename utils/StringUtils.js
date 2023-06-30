@@ -1,7 +1,7 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.0.10
+ * @version 0.0.11
  */
 const StringUtils = {
 
@@ -52,6 +52,15 @@ const StringUtils = {
             return ip2 > 15 && ip2 < 32;
         }
         return ip.startsWith('10.') || ip.startsWith('192.168.') || is172(ip);
-    }
+    },
+
+    /** 反转义HTML转义符 */
+    htmlDecode: function (text) {
+        let temp = document.createElement("div");
+        temp.style.display = "none!important";
+        temp.style.visibility = "hidden!important";
+        temp.innerHTML = text;
+        return temp.innerText || temp.textContent;
+    },
 
 }

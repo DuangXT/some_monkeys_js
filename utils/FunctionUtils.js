@@ -1,11 +1,13 @@
 console.log("工具类：函数");
 
 /** 工具类：函数
- * @version 0.0.5
+ * @version 0.0.7
  */
 const FunctionUtils={
 
     isFunction: func => func && 'function' === typeof func,
+
+    sleep: (timeout = 1000) => new Promise(resolve => setTimeout(resolve, timeout)),
 
     /**
      * 执行方法并捕获异常

@@ -1,13 +1,13 @@
 console.log("工具类：文件后缀");
-
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.1
+ * @version 0.0.2
  */
 const FileSuffixUtils = {
 
   linkSuffixIs: function (array, link) {
-    if ('string' !== typeof link || CommonUtils.isBlank(link)) {
+    if ('string' !== typeof link || ValidateUtils.isBlank(link)) {
       throw new TypeError('file link must be a string');
     }
     if(!Array.isArray(array)){
@@ -143,7 +143,7 @@ const FileSuffixUtils = {
   macosPackageFormats: ['dmg', 'bundle'],
   iosPackageFormats: ['ipa'],
 
-  androidPackageFormats: ['apk', 'apk.1', 'xapk', 'apkm', 'dapk'],
+  androidPackageFormats: ['apk', 'apk.1', 'aab', 'xapk', 'apkm', 'dapk'],
   isAndroidPackageFile: function (fileLink) {
     return this.linkSuffixIs(this.androidPackageFormats, fileLink);
   },

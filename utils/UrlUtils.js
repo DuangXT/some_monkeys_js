@@ -1,7 +1,5 @@
 console.log("工具类：URL");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FunctionUtils.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 
 /** 工具类：URL
  * @version 0.0.6
@@ -14,8 +12,8 @@ const UrlUtils = {
             throw new TypeError('参数应至少传递两位，且最后一位为执行函数');
         }
         let callback = arguments[arguments.length-1];
-        if(!FunctionUtils.isFunction(callback)){
-            throw new TypeError('参数错误哦！最后一位参数应为执行函数');
+        if(!callback || 'function' !== typeof callback){
+            throw new TypeError('参数错误！最后一位参数应为执行函数');
         }
         let hosts = Array.prototype.slice.call(arguments);
         hosts.splice(hosts.length - 1, 1);

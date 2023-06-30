@@ -1,20 +1,27 @@
 
 console.log("工具类：脚本标签");
 /** 工具类：脚本标签
- * @version 0.0.3
+ * @version 0.0.4
  */
 class ScriptTagUtils {
 
+    __createScriptTagAndAppend__ = (targetNode, jslocation, jscode)=>{
+        let script = document.createElement('script');
+        script.type = "application/javascript"; // "text/javascript";
+
+        if(jscode) script.textContent = jscode; // script.innerText = jscode;
+        if(jslocation) script.src = jslocation;
+
+        targetNode.appendChild(script);
+        return script;
+    };
+
     /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
     addScriptTag = jslocation => {
-        if('string' !== typeof jslocation){
+        if('string' !== typeof jslocation || !jslocation.startsWith("http")){
             throw new TypeError('parameter "jslocation" must be a url string');
         }
-        let script = document.createElement('script');
-        // script.type = "text/javascript";
-        script.src = jslocation;
-        document.head.append(script);
-        return script;
+        return this.__createScriptTagAndAppend__(document.head, jslocation);
     }
 
     /** 以插入script标签的形式，向页面body内插入新的脚本代码 */
@@ -28,20 +35,17 @@ class ScriptTagUtils {
                     mainLocation = document.head;
                     break;
                 default:
-                    mainLocation = $qs(mainLocation);
+                    mainLocation = document.querySelector(mainLocation);
             }
         }
 
-        let script = $dom.create('script');
-        script.type = "application/javascript";
-        // script.innerText = jscode;
-        script.textContent = jscode;
-        mainLocation.appendChild(script);
-        return script;
+        return this.__createScriptTagAndAppend__(mainLocation, null, jscode);
     };
     addScript = this.addScriptByCode;
 
+    /** 向head插入js代码 */
     addHeadScriptByCode = jscode => this.addScriptByCode(jscode, document.head);
+    /** 向body插入js代码 */
     addBodyScriptByCode = jscode => this.addScriptByCode(jscode, document.body);
 
     /** 一次性加载脚本，脚本加载完即刻删除。适合只需要运行一次的脚本。 */

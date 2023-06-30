@@ -2,7 +2,7 @@ console.log('工具类：JSON处理');
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
 /** 工具类：JSON处理
- * @version 0.0.2.0
+ * @version 0.0.2.1
  */
 class JsonUtils{
     toJson = obj => {
@@ -23,8 +23,8 @@ class JsonUtils{
     };
 
     /** like jQuery.$(selector).serializeArray() */
-    serializeArray = selector => {
-        let form = document.querySelector(selector);
+    __serializeArray__ = _selector => {
+        let form = document.querySelector(_selector);
         let formData = [];
         let elements = form.elements;
 
@@ -40,7 +40,7 @@ class JsonUtils{
 
     /** 拿取form表单数据转成json格式返回 */
     formToJson = _selector => {
-        let arry = this.serializeArray(_selector);
+        let arry = this.__serializeArray__(_selector);
         let data = {};
         for (const element of arry) {
             if (data[element.name])
@@ -51,7 +51,7 @@ class JsonUtils{
     };
 
     formToJsonNoNull = _selector => {
-        let arry = this.serializeArray(_selector);
+        let arry = this.__serializeArray__(_selector);
         let data = {};
         for (const element of arry) {
             if (ValidateUtils.isNotBlank(element.value))

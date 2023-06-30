@@ -2,8 +2,9 @@ console.log("工具类：DOM操作");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
 
+
 /** 工具类：DOM操作
- * @version 0.0.5
+ * @version 0.0.7
  */
 const SelectorUtils = {
 
@@ -29,13 +30,13 @@ const SelectorUtils = {
   html: document.html || this.getTagElement('html'),
 
 
+  getTagElements: tagName => document.getElementsByTagName(tagName),
   /**
    * 指定标签对象
    * @param tagName      标签名
    * @param tagLocation  标签位置
    */
-  getTagElements: tagName => document.getElementsByTagName(tagName),
-  getTagElement: function(tagName, tagLocation=0){this.getTagElements(tagName)[tagLocation]},
+  getTagElement: function(tagName, tagLocation=0){return this.getTagElements(tagName)[tagLocation]},
 
   /**
    * 指定标签设置属性
@@ -90,7 +91,7 @@ const SelectorUtils = {
   },
   deleteAll: this.removeAll,
 
-  removeIfTextContrains: (obj, ...strs)=>{
+  removeIfTextContains: (obj, ...strs)=>{
     if('object' !== typeof obj){
       throw new TypeError('obj must be a object');
     }
@@ -103,7 +104,7 @@ const SelectorUtils = {
         }
         return;
       }
-      log('无法操作非节点对象', o);
+      console.log('无法操作非节点对象', o);
     }
     if(Array.isArray(obj) || NodeUtils.isNodeList(obj)){
       for (let o of obj) {
@@ -114,7 +115,7 @@ const SelectorUtils = {
     _remove(obj);
     return obj;
   },
-  removeIfIncludesText: this.removeIfTextContrains,
+  removeIfIncludesText: this.removeIfTextContains,
 
   /** 将对象的属性设置为隐藏 */
   setStyleHidden: obj => {
@@ -130,7 +131,8 @@ const SelectorUtils = {
   hide: function (_selector) {
     let ele = StringUtils.isString(_selector) ? this.qs(_selector) : _selector;
     if (ele && 'object' === typeof ele) {
-      if (ele.style) console.log("元素 " + _selector + "隐藏前样式：" + new JsonUtils.toJson(ele.style).slice(0,100));
+      if (ele.style) console.log("元素 " + _selector +
+          "隐藏前样式：" + JSON.stringify(ele.style).slice(0,100));
       this.setStyleHidden(ele);
     }
     else console.log('隐藏失败! 参数并非字符串或者可操作对象:', _selector);
@@ -160,18 +162,30 @@ const SelectorUtils = {
     return obj;
   },
 
+
   /** 选择对象存在时执行click() */
   click: function(_selector){
     if('string' !== typeof _selector){
       throw new TypeError('_selector must be a string');
     }
     let s;
-    return this.runIfExist( s = this.qs(_selector), function(){
+    return this.runIfExist( s = this.qs(_selector), ()=>{
       s.click();
       console.log('执行了点击操作', _selector);
     });
   },
   clicks: (...selectors) => selectors.forEach(selector => this.click(selector)),
+
+  clickAll: function(...selectors) {
+    selectors.forEach(_selector => {
+      for (const nodes of this.qsa(_selector)) {
+        nodes.forEach(node => {
+          node.click();
+          console.log('执行了点击操作', node);
+        });
+      }
+    });
+  },
 
   /** 选择器，存在时移除指定的class */
   removeClass: function (_selector, ...removeClasses) {

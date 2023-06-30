@@ -1,4 +1,4 @@
-
+console.log("工具类：有效性校验");
 /** 工具类：有效性校验
  * @version 0.1.0
  */
@@ -14,12 +14,8 @@ const ValidateUtils = {
             console.log("object is undefined");
             return true;
         }
-        if ("" === object.trim()) {
+        if ("" === object.trim() || 0 === object.trim().length) {
             console.log("object is empty");
-            return true;
-        }
-        if (0 === object.trim().length) {
-            console.log("object.length is 0");
             return true;
         }
         return false;
@@ -93,7 +89,7 @@ const ValidateUtils = {
     },
 
     /**判断一个对象是否为空 */
-    isBlankObject: obj=> JSON.stringify(obj) === "{}" || Object.keys(obj).length === 0,
+    isBlankObject: obj => JSON.stringify(obj) === "{}" || Object.keys(obj).length === 0,
 
     /** 判断一个对象是否不为空 */
     notBlankObject: function (obj) {

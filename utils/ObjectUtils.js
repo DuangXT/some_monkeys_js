@@ -1,10 +1,9 @@
 console.log("工具类：对象操作");
 
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/JsonUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
 /** 工具类：对象操作
- * @version 0.0.3
+ * @version 0.0.4
  */
 const ObjectUtils = {
     /** 随机获取对象内的一个值 */
