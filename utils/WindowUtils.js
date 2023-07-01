@@ -2,12 +2,12 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.11
+ * @version 0.0.12
  */
 const WindowUtils={
 
     /** 立即关闭当前窗口 */
-    closenow: (win=window)=>{
+    closenow: function(win=window){
         try{
             console.log("将要关闭当前窗口", win.location.href);
             // window.open(location, "_self").close();
