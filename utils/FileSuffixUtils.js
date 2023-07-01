@@ -2,7 +2,7 @@ console.log("工具类：文件后缀");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.4
+ * @version 0.0.5
  */
 const FileSuffixUtils = {
 
@@ -153,7 +153,7 @@ const FileSuffixUtils = {
     return this.linkSuffixIs(this.webViewFormats, fileLink);
   },
 
-  chromiumExtensionFormats: ['crx', 'cr2', 'kdc', 'nef', ],
+  chromiumExtensionFormats: ['crx', ],
   isChromiumExtensionFile: function (fileLink) {
     return this.linkSuffixIs(this.chromiumExtensionFormats, fileLink);
   },

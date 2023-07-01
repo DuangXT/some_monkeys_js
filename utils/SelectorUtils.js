@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.14
+ * @version 0.0.15
  */
 const SelectorUtils = {
 
@@ -24,8 +24,8 @@ const SelectorUtils = {
   $all: function(s){return this.qsa(s)},
   $$: function(s){return this.qsa(s)},
 
-  id: s => document.getElementById(SelectorUtils.__cleanCssSelectorHead__(s, "#")),
-  className: s => document.getElementsByClassName(SelectorUtils.__cleanCssSelectorHead__(s, ".")),
+  id: function(id){return document.getElementById(this.__cleanCssSelectorHead__(id, "#"))},
+  className: function(className){return document.getElementsByClassName(this.__cleanCssSelectorHead__(className, "."))},
 
   /** 获取标签对象的集合 */
   tagName: document.getElementsByTagName.bind(document),
@@ -82,7 +82,7 @@ const SelectorUtils = {
 
 
   /** 移除每个指定的一个元素 */
-  remove: (...selectors) => {
+  remove: function(...selectors){
     selectors.forEach( _selector => {
       let ele;
       if(this.__isString__(_selector)) ele = this.qs(_selector);
