@@ -48,7 +48,7 @@ const UrlUtils = {
      * 获取查询参数
      * //by http://stackoverflow.com/a/1099670
      */
-    getQueryParams: (qs = document.location.search) => {
+    getQueryParams: function(qs = document.location.search) {
         qs = qs.split('+').join(' ');
         let params = {},
             tokens,

@@ -3,6 +3,9 @@ console.log("扩展函数：标签选择器");
 
 const $qs = document.querySelector.bind(document); // s => document.querySelector(s);
 const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
+// const querySelector = $qs;
+// const querySelectorAll = $qsa;
+// const $ = querySelector; // 不建议，容易引起冲突
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**

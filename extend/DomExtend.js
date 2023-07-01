@@ -2,11 +2,9 @@
 console.log("属性扩展：DOM选择器");
 // @version 0.0.2
 
-const $qs = document.querySelector.bind(document); // s => document.querySelector(s);
-const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
-// const querySelector = $qs;
-// const querySelectorAll = $qsa;
-// const $ = querySelector; // 不建议，容易引起冲突
+const $qs = document.querySelector.bind(document);
+const $qsa = document.querySelectorAll.bind(document);
+
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
