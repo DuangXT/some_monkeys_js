@@ -2,7 +2,7 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.10
+ * @version 0.0.11
  */
 const WindowUtils={
 
@@ -30,7 +30,7 @@ const WindowUtils={
 
     /** 关闭当前窗口 */
     close: function(timeout=0, win=window){
-            setTimeout(function(){this.closenow(win)}, timeout)
+            setTimeout(()=>this.closenow(win), timeout);
     },
     closewindow: function(t, w){this.close(t, w)},
     closeWindow: function(t, w){this.close(t, w)},
