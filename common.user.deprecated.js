@@ -7,20 +7,19 @@
 // @downloadURL  https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.user.deprecated.js
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
-
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/ArrayExtend.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomCreateExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/DomCreateExtend.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/ArrayExtend.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/NodeExtend.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/ObjectExtend.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/SelectorFunctions.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ArrayUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/CommonUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FileSuffixUtils.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FromValidateUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringValidateUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/FunctionUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/JsonUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
@@ -30,6 +29,7 @@
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/RequestUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ScriptTagUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/SelectorLinkJumpUtils.js
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/SelectorUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StyleTagUtils.js
