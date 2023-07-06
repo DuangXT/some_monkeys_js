@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.15
+ * @version 0.0.16
  */
 const SelectorUtils = {
 
@@ -49,7 +49,7 @@ const SelectorUtils = {
 
   body: document.body || document.getElementsByTagName('body'),
   head: document.head || document.getElementsByTagName('head'),
-  html: document.html || document.getElementsByTagName('html'),
+  html: document.html || document.documentElement || document.getElementsByTagName('html'),
 
   /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
   tags: function(tagName){return this.tagName(tagName && this.__isString__(tagName) ? tagName : '*')},

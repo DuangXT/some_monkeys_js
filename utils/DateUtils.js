@@ -3,7 +3,7 @@ console.log("工具类：日期");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
 /**
  * 工具类：日期
- * @version 0.0.2
+ * @version 0.0.3
  */
 class DateUtils extends TimeUtils {
 
@@ -45,6 +45,14 @@ class DateUtils extends TimeUtils {
         date = date + Math.floor(num * 24 * 60 * 60 * 1000);
         date = new Date(date);
         return this.formatDate("yyyy-MM-dd hh:mm:ss", date);
+    };
+
+    diffToday = function(diffDate){
+        let today = new Date();
+        today = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+        let specifiedDate = new Date(diffDate).getTime();
+        let timeDiff = specifiedDate - today;
+        return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     };
 
 }

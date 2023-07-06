@@ -1,7 +1,7 @@
 console.log("工具类：节点");
 
 /** 工具类：节点
- * @version 0.0.1.11
+ * @version 0.0.1.12
  */
 const NodeUtils = {
 
@@ -11,7 +11,7 @@ const NodeUtils = {
     isNodeList: nodeList => nodeList instanceof NodeList,
 
     /** 判断是否最终节点 */
-    isLeafNode: element => {
+    isLeafNode: function(element) {
         if (!this.isElementNode(element)) {
             console.log('parameter not a element object', element);
             return false;
