@@ -2,13 +2,15 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.13
+ * @version 0.0.14
  */
 const WindowUtils={
 
     /** 立即关闭当前窗口 */
     closenow: function(win=window){
         try{
+            win.opener = win;
+
             console.log("将要关闭当前窗口", win.location.href);
             // window.open(location, "_self").close();
             if (navigator.userAgent.containsIgnoreCase('Firefox', 'Chrome')) {
@@ -17,7 +19,6 @@ const WindowUtils={
                 win.close();
             }
 
-            win.opener = null;
             win.open("", "_self").close();
             win.open("about:blank", "_top").close();
             win.close();
@@ -28,7 +29,7 @@ const WindowUtils={
         console.log('窗口关闭失败');
     },
 
-    /** 关闭当前窗口 */
+    /** 关闭指定窗口 */
     close: function(timeout=0, win=window){
             setTimeout(()=>this.closenow(win), timeout);
     },
