@@ -2,7 +2,7 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.14
+ * @version 0.0.15
  */
 const WindowUtils={
 
@@ -15,7 +15,7 @@ const WindowUtils={
             // window.open(location, "_self").close();
             if (navigator.userAgent.containsIgnoreCase('Firefox', 'Chrome')) {
                 // 重定向到空白页再关闭
-                location.href = 'about:blank'
+                win.location.href = 'about:blank'
                 win.close();
             }
 
