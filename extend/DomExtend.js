@@ -1,6 +1,6 @@
 
 console.log("属性扩展：DOM选择器");
-// @version 0.0.2
+// @version 0.0.3
 
 const $qs = document.querySelector.bind(document);
 const $qsa = document.querySelectorAll.bind(document);
@@ -37,6 +37,28 @@ Element.prototype.removeIfIncludesText = function(...strs){
         if(s && this.textContent.contains(s.toString())){
             this.remove();
         }
+    }
+}
+
+/** 在当前元素内的开头插入指定的内容 => jQuery.prepend() */
+Element.prototype.prepend = Element.prototype.prepend ? Element.prototype.prepend
+    : function(elementOrString){
+        return this.insertAdjacentHTML('afterbegin',
+            elementOrString instanceof HTMLElement ? elementOrString.innerHTML : elementOrString);
+    }
+
+/** 在当前元素的前面插入指定的内容 => jQuery.before() */
+Element.prototype.before = Element.prototype.before ? Element.prototype.before
+    : function(elementOrString){
+        return this.insertAdjacentHTML('beforebegin',
+            elementOrString instanceof HTMLElement ? elementOrString.innerHTML : elementOrString);
+    }
+
+/** 在全部元素的前面插入指定的内容 => jQuery.before() */
+NodeList.prototype.before = NodeList.prototype.before ? NodeList.prototype.before
+    : function(elementOrString) {
+    for(let item of this) {
+        item.before(elementOrString);
     }
 }
 
