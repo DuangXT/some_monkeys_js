@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.17
+ * @version 0.0.18
  */
 const SelectorUtils = {
 
@@ -83,7 +83,7 @@ const SelectorUtils = {
 
   /** 移除每个指定的一个元素 */
   remove: function(...selectors){
-    selectors.forEach( _selector => {
+    for (const _selector of selectors) {
       let ele;
       if(this.__isString__(_selector)) ele = this.qs(_selector);
       else ele = _selector;
@@ -95,20 +95,20 @@ const SelectorUtils = {
         }
         console.log("移除元素：", _selector);
       }
-    });
+    }
   },
   delete: function(...selectors){this.remove(...selectors)},
 
   /** 移除每个指定的所有元素 */
   removeAll: function (...selectors) {
-    selectors.forEach( _selector => {
+    for (const _selector of selectors) {
       if(!this.__isString__(_selector))
       for (let ele of this.qsa(_selector)) {
         ele.remove();
         console.log("移除元素：", _selector, 'id=' + ele.id, 'class=' + ele.className);
       }
       else console.warn('参数不是字符串', _selector);
-    });
+    }
   },
   deleteAll: function(...selectors){this.removeAll(...selectors)},
 
@@ -170,11 +170,11 @@ const SelectorUtils = {
 
   /** 隐藏每个选择器的所有标签 */
   hideAll: function (...selectors) {
-    selectors.forEach((selector)=>{
-      for (let ele of this.qsa(selector)) {
+    for (const _selector of selectors) {
+      for (let ele of this.qsa(_selector)) {
         this.setStyleHidden(ele);
       }
-    });
+    }
   },
 
   runIfExist: function (obj, func) {
@@ -203,14 +203,14 @@ const SelectorUtils = {
   clicks: function(...selectors) {selectors.forEach(selector => this.click(selector))},
 
   clickAll: function(...selectors) {
-    selectors.forEach(_selector => {
+    for (const _selector of selectors) {
       for (const nodes of this.qsa(_selector)) {
         nodes.forEach(node => {
           node.click();
           console.log('执行了点击操作', node);
         });
       }
-    });
+    }
   },
 
   /** 选择器，存在时移除指定的class */
@@ -248,3 +248,5 @@ const SelectorUtils = {
 
 };
 var $dom = $dom ? $dom : SelectorUtils;
+
+
