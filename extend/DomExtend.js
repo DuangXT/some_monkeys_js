@@ -1,10 +1,10 @@
 
 console.log("属性扩展：DOM选择器");
-// @version 0.0.3
+// @version 0.0.4
 
-const $qs = document.querySelector.bind(document);
-const $qsa = document.querySelectorAll.bind(document);
-
+var $qs = $qs ? $qs : document.querySelector.bind(document);
+var $qsa = $qsa ? $qsa :document.querySelectorAll.bind(document);
+var create = create ? create : document.createElement.bind(document);
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
