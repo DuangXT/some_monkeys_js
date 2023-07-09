@@ -2,7 +2,7 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.15
+ * @version 0.0.16
  */
 const WindowUtils={
 
@@ -22,11 +22,10 @@ const WindowUtils={
             win.open("", "_self").close();
             win.open("about:blank", "_top").close();
             win.close();
-            top.close();
+            win.top.close();
         }catch (e){
             console.error("关闭当前窗口出错", e);
         }
-        console.log('窗口关闭失败');
     },
 
     /** 关闭指定窗口 */
