@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.18
+ * @version 0.0.19
  */
 const SelectorUtils = {
 
@@ -13,6 +13,8 @@ const SelectorUtils = {
     return s;
   },
 
+
+  // ================ DOM选择器 ================
   qs: document.querySelector.bind(document),
   querySelector: function(s){return this.qs(s)},
   $qs: function(s){return this.qs(s)},
@@ -41,6 +43,13 @@ const SelectorUtils = {
   },
   tag: function(tagName){return this.getTagElement(tagName)},
 
+  /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
+  tags: function(tagName){return this.tagName(tagName && this.__isString__(tagName) ? tagName : '*')},
+  allTag: function(){return this.tags(false)},
+  allElements: function(){return this.tags(false)},
+  // ================ DOM选择器 ================ End
+
+
   create: document.createElement.bind(document),
   createElement: function(tagName){return this.create(tagName)},
   addElement: function(tagName){return this.create(tagName)},
@@ -51,10 +60,7 @@ const SelectorUtils = {
   head: document.head || document.getElementsByTagName('head')[0],
   html: document.html || document.documentElement || document.getElementsByTagName('html')[0],
 
-  /** 获取指定的全部标签对象，为空获取页面全部标签对象 */
-  tags: function(tagName){return this.tagName(tagName && this.__isString__(tagName) ? tagName : '*')},
-  allTag: function(){return this.tags(false)},
-  allElements: function(){return this.tags(false)},
+
 
 
   /**
@@ -84,9 +90,7 @@ const SelectorUtils = {
   /** 移除每个指定的一个元素 */
   remove: function(...selectors){
     for (const _selector of selectors) {
-      let ele;
-      if(this.__isString__(_selector)) ele = this.qs(_selector);
-      else ele = _selector;
+      let ele = this.__isString__(_selector) ? this.qs(_selector) : _selector;
       if (ele) {
         try{
           ele.remove();
