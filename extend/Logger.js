@@ -1,5 +1,5 @@
 
-const log = (...s)=>console.log.bind(console)(...s); // GM_log(...s); GM.log(...s);
+const log = (...s)=>console.log.bind(console)(...s);
 log("函数扩展：控制台打印");
 const logerror = (...s)=>console.error.bind(console)(...s);
 const logwarn = (...s)=>console.warn.bind(console)(...s);

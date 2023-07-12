@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.19
+ * @version 0.0.20
  */
 const SelectorUtils = {
 
@@ -60,7 +60,9 @@ const SelectorUtils = {
   head: document.head || document.getElementsByTagName('head')[0],
   html: document.html || document.documentElement || document.getElementsByTagName('html')[0],
 
-
+  bodyText: function(){return this.body.textContent;},
+  htmlText: function(){return this.html.textContent;},
+  headText: function(){return this.head.textContent;},
 
 
   /**
