@@ -3,15 +3,19 @@ console.log("工具类：对象操作");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
 /** 工具类：对象操作
- * @version 0.0.4
+ * @version 0.0.5
  */
 const ObjectUtils = {
+
+    isObject: obj => 'object' === typeof obj,
+    notObject: function(obj){return !this.isObject(obj)},
+
     /** 随机获取对象内的一个值 */
-    getRandomValue: obj=>{
+    getRandomValue: function(obj){
         if(Array.isArray(obj) || NodeUtils.isNodeList(obj)){
             return obj[MathUtils.getRandomInt(obj.length)];
         } // 非数组类型的作为对象处理
-        if('object' !== typeof obj){
+        if(this.notObject(obj)){
             throw new TypeError('not a object');
         }
         let keys = Object.keys(obj);

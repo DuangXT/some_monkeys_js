@@ -2,7 +2,7 @@ console.log('工具类：JSON处理');
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /** 工具类：JSON处理
- * @version 0.0.2.2
+ * @version 0.0.2.3
  */
 class JsonUtils{
     toJson = obj => {
@@ -16,7 +16,7 @@ class JsonUtils{
     };
     parse = this.toJson;
 
-    jsonToCsv = obj => {
+    toCsv = obj => {
         if('object' === typeof obj) throw new TypeError('Invalid json object');
         return Object.keys(obj[0]).join(',') + '\n' // hedaer头，获取全部属性名单独列为一行
         + obj.map(item => Object.values(item).join(',')).join('\n');

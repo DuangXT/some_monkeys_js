@@ -2,7 +2,7 @@ console.log("工具类：重定向");
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
 /** 工具类：重定向
- * @version 0.0.3
+ * @version 0.0.4
  */
 const RedirectUtils = {
 
@@ -22,9 +22,7 @@ const RedirectUtils = {
             else console.log('askRedirect(wasHost): 域名对象不是字符串', host);
         }
         if(Array.isArray(wasHost)){
-            wasHost.forEach(host => {
-                jump(host);
-            });
+            wasHost.forEach(host => jump(host));
         }
         else jump(wasHost);
     },
