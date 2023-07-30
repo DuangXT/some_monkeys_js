@@ -1,6 +1,6 @@
 console.log("工具类：特殊字符串校验");
 /** 工具类：特殊字符串校验
- * @version 0.0.3
+ * @version 0.0.4
  * @return true || false,  "错误信息"
  */
 class StringValidateUtils {
@@ -30,8 +30,17 @@ class StringValidateUtils {
             .test(address) ? [true] : [false, '字符串内容不是IPv4格式！'];
     ipv4 = this.isIpv4Address;
 
-    isPrivateIpv4Address =  address =>
-        /^(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.\d{1,3}\.\d{1,3}$/
+    /**
+     * 10.0.0.0 - 10.255.255.255
+     * 172.16.0.0 - 172.31.255.255
+     * 192.168.0.0 - 192.168.255.255
+     * 100.64.0.0 - 100.127.255.255
+     * @param address
+     * @returns {boolean[]|(boolean|string)[]}
+     */
+    isPrivateIpv4Address = address =>
+        // /^(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.\d{1,3}\.\d{1,3}$/
+        /^(10\.)|(172\.(1[6-9]|2[0-9]|3[0-1])\.)|(192\.168\.)|(100\.(6[4-9]|7[0-9]|12[0-7])\.)/
             .test(address) ? [true] : [false, '字符串内容不是内网IPv4格式！'];
 
     /** 判断这个imei是否是正确的 正确返回ture 错误返回false */
