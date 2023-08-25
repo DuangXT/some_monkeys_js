@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.20
+ * @version 0.0.21
  */
 const SelectorUtils = {
 
@@ -201,7 +201,7 @@ const SelectorUtils = {
       throw new TypeError('_selector must be a string');
     }
     let s;
-    return this.runIfExist( s = this.qs(_selector), ()=>{
+    return this.runIfExist( s = document.querySelector(_selector), ()=>{
       s.click();
       console.log('执行了点击操作', _selector);
     });
@@ -210,7 +210,7 @@ const SelectorUtils = {
 
   clickAll: function(...selectors) {
     for (const _selector of selectors) {
-      for (const nodes of this.qsa(_selector)) {
+      for (const nodes of document.querySelectorAll(_selector)) {
         nodes.forEach(node => {
           node.click();
           console.log('执行了点击操作', node);
