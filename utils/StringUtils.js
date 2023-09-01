@@ -1,11 +1,11 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.1.1
+ * @version 0.1.2
  */
 const StringUtils = {
 
-    isString: (s)=> '[object String]' === Object.prototype.toString.call(s),
+    isString: s=> '[object String]' === Object.prototype.toString.call(s),
     isNotString: function(s){return !StringUtils.isString(s)},
     notString: function(s){return StringUtils.isNotString(s)},
 

@@ -1,15 +1,15 @@
 console.log("工具类：特殊字符串校验");
 /** 工具类：特殊字符串校验
- * @version 0.0.4
- * @return true || false,  "错误信息"
+ * @version 0.0.5
+ * @return [true|false, "错误信息"]
  */
 class StringValidateUtils {
 
     /** 校验手机号码 */
     mobile = value => /^(?:1\d\d)-?\d{5}(\d{3}|\*{3})$/.test(value) ? [true] : [false, "手机号码不正确"];
 
-    email= value => /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/.test(value)
-        ? [true] : [false, "邮箱格式不正确"];
+    email= value => /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
+        .test(value) ? [true] : [false, "邮箱格式不正确"];
 
     length = (value, minLimit, maxLimit) => {
         let message = "长度必须在在" + minLimit + "与" + maxLimit + "之间";
@@ -25,9 +25,9 @@ class StringValidateUtils {
     zip = this.ZIP;
 
 
-    isIpv4Address = address =>
+    isIpv4Address = ipAddress =>
         /^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
-            .test(address) ? [true] : [false, '字符串内容不是IPv4格式！'];
+            .test(ipAddress) ? [true] : [false, '字符串内容不是IPv4格式！'];
     ipv4 = this.isIpv4Address;
 
     /**
@@ -35,13 +35,13 @@ class StringValidateUtils {
      * 172.16.0.0 - 172.31.255.255
      * 192.168.0.0 - 192.168.255.255
      * 100.64.0.0 - 100.127.255.255
-     * @param address
-     * @returns {boolean[]|(boolean|string)[]}
+     * @param ipAddress
+     * @returns [boolean, string]
      */
-    isPrivateIpv4Address = address =>
+    isPrivateIpv4Address = ipAddress =>
         // /^(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.\d{1,3}\.\d{1,3}$/
         /^(10\.)|(172\.(1[6-9]|2[0-9]|3[0-1])\.)|(192\.168\.)|(100\.(6[4-9]|7[0-9]|12[0-7])\.)/
-            .test(address) ? [true] : [false, '字符串内容不是内网IPv4格式！'];
+            .test(ipAddress) ? [true] : [false, '字符串内容不是内网IPv4格式！'];
 
     /** 判断这个imei是否是正确的 正确返回ture 错误返回false */
     isImei = imeiString => {

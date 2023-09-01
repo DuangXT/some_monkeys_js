@@ -2,7 +2,7 @@ console.log("工具类：时间");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
 /**
  * 工具类：时间
- * @version 0.0.2
+ * @version 0.0.3
  */
 class TimeUtils {
 
@@ -22,8 +22,8 @@ class TimeUtils {
         if (timeSizeValue.month !== 0)
             s += timeSizeValue.month + "个月 ";
 
-        if (timeSizeValue.month !== 0)
-            s += timeSizeValue.month + "个星期 ";
+        if (timeSizeValue.week !== 0)
+            s += timeSizeValue.week + "个星期 ";
 
         if (timeSizeValue.day !== 0) {
             if((timeSizeValue.day + '').length === 1)

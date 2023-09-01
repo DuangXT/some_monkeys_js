@@ -1,12 +1,12 @@
 console.log("扩展函数：URL");
-// @version 0.0.7.0
+// @version 0.0.7.1
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 const currentUrl = location.href.toString();
 const hostname = location.hostname.toString();
 
-/** 刷新页面至指定链接 */
-const refesh = (url=currentUrl, replace) => {
+/** 页面重定向至指定链接 */
+const redirect = (url=currentUrl, replace) => {
     if(!url) url = currentUrl;
     if(!url.startsWith("http")) url = 'https://' + url;
     if(replace && currentUrl !== url){
@@ -17,6 +17,8 @@ const refesh = (url=currentUrl, replace) => {
     console.log('跳转链接：', url);
     location.href = url;
 }
+/** 单纯刷新页面 */
+const refesh = ()=> redirect(currentUrl);
 // 尝试禁用页面刷新
 window.location.reload = ()=>console.log('页面刷新已被禁用');
 
