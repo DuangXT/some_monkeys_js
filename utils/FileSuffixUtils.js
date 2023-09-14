@@ -2,7 +2,7 @@ console.log("工具类：文件后缀");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.5
+ * @version 0.0.6
  */
 const FileSuffixUtils = {
 
@@ -22,7 +22,7 @@ const FileSuffixUtils = {
 
   /** 图片格式 */
   imgFormats: ["webp", "png", "jpg", "jpeg", "bmp", "jpe", "jfif",
-    "heif", "hif", "svg", "dib", "tif", "tiff",
+    "heif", "hif", "svg", "dib", "tif", "tiff", "apng",
     "raw", "crw", "cr2", "kdc", "nef", "arw", "rw2", "psd",
     'picture', 'photo',
     // "image", 和镜像文件冲突
@@ -69,15 +69,17 @@ const FileSuffixUtils = {
   /** 书籍格式 */
   bookFormats: ['pdf', 'mobi', 'epub', 'ebk3', 'chm',
     'fb2', 'cbz', 'cbr', 'cbt', 'cth', 'caj',
-    'azw3', 'azw', 'kfx', 'book'],
+    'azw3', 'azw', 'kfx',
+    'book'],
   isBookFile: function (fileLink) {
     return this.linkSuffixIs(this.bookFormats, fileLink);
   },
   isEbookFile: function(fileLink){return this.isBookFile(fileLink)},
 
-  /** office文档格式 */
+  /** 办公文档、出版格式 */
   officeWordFormats: ['wps', 'ofd', 'pages', // Kingsoft wps / Suwell OFD / Apple office word... formats
     'doc', 'docx', 'xps', 'rtf', 'wri', 'dot', 'dotx', // Microsoft office word formats
+    "PUB", // Microsoft Publisher
     'md', 'markdown', 'odt', // Markdown formats
     'word'],
   isOfficeWordFile: function (fileLink) {
@@ -85,8 +87,9 @@ const FileSuffixUtils = {
   },
 
 
-  /** office表格格式 */
-  officeTableFormats: ['csv', 'xls', 'xlsx', 'et', 'numbers','ods', 'ods2', 'excel', 'xlsm', 'xlsb', 'xlsxb', 'xlsm', 'xlsxm', 'xltx', 'xltm', ],
+  /** 电子表格格式 */
+  officeTableFormats: ['csv', 'xls', 'xlsx', 'et', 'numbers','ods', 'ods2',
+    'excel', 'xlsm', 'xlsb', 'xlsxb', 'xlsm', 'xlsxm', 'xltx', 'xltm', 'WKS'],
   officeExcelFormats: this.officeTableFormats,
   officeTableExcelFormats: this.officeTableFormats,
   isOfficeTableFile: function (fileLink) {
@@ -106,7 +109,9 @@ const FileSuffixUtils = {
 
 
   /** 压缩文件格式 */
-  compressFormats: ['zip', 'zipx', '7z', 'rar', 'tar', 'z', 'gz', 'gzip', 'bz', 'bz2', 'tgz', 'cab', 'ace', 'sea', 'lzh', 'ARJ', "SIT", "SITX"],
+  compressFormats: ['zip', 'zipx', '7z', 'rar', 'tar', 'z', 'gz', 'gzip',
+    'bz', 'bz2', 'tgz', 'cab', 'ace', 'sea', 'lzh', 'ARJ', "SIT", "SITX",
+    'arc', "LZMA", "LZ", 'rar5', "LHA", 'TBZ', 'TBZ2', 'ZPAQ', 'ZSTD', 'ALZ'],
   isCompressFile: function (fileLink) {
     return this.linkSuffixIs(this.compressFormats, fileLink);
   },
@@ -148,7 +153,7 @@ const FileSuffixUtils = {
     return this.linkSuffixIs(this.androidPackageFormats, fileLink);
   },
 
-  webViewFormats: ['html', 'htm', 'xhtml', 'xht', 'xml', 'css'],
+  webViewFormats: ['html', 'htm', 'xhtml', 'xht', 'xml', 'css', 'BR'],
   isWebViewFile: function (fileLink) {
     return this.linkSuffixIs(this.webViewFormats, fileLink);
   },
@@ -164,27 +169,17 @@ const FileSuffixUtils = {
   },
 
   pythonFormats: ["py", "pyc", "pyd", "pyo", "egg", "whln", "pyw", "ipynb", "pkl", "pickle"],
+  databaseFormats: ["sql", 'db', "MDB", 'accdb', 'idf', 'mdf', 'bson', 'rdb'],
   otherDevloperSourcesFormats: ['go', 'js', 'asp', 'cpp', 'c', 'h', 's'],
   devloperConfigurationFormats: ['json', 'yaml', 'yml', 'properties', 'ini', 'properties',],
   gitFormats: ['git', 'gitignore', 'git-annex', 'git-config', 'git-diff'],
   projectIdeConfigurationFormats: ['classpath', 'project', 'iml', ],
 
-//  AI  ALZ  ARC  BH  BR
-//      DIF     EGG EPS  MUI   PST PUB
-//     KEXT LHA LZ  LZMA   MDB
-// SLDM SLDX  TBZ TBZ2    TLZ    VSD VSDM
-// VSDX VSS VSSM VST VSTM VSTX   WBK  WKS  WMD WMS
-//  WMZ WP5 WPD       ZPAQ ZSTD
 
-// .plg，PowerLog J file
-// 是一种用于存储测量数据的二进制文件格式。
-// 它用于记录在Schlumberger PowerLog软件中进行的采集、处理和分析工程地球物理测量数据，
-// 包括电阻率、声波、密度等不同类型的数据。
-// PLJ文件包含了具体测量数据的数值、采样点、时间戳以及其他相关信息，
-// 这些信息可以被用于数据处理和分析。
-// 可以通过PowerLog软件对PLJ文件进行打开、编辑、分析和导出等操作。
-// 需要注意的是，PLJ文件是二进制格式，不能直接用文本编辑器进行打开和编辑。
-
+// 下面是一些不适合判断或者暂时不判断的文件类型
+//  AI  BH    DIF  EPS  MUI    KEXT    SLDM SLDX
+// VSDM  VSDX VSS VSSM VST VSTM VSTX
+// WBK    WMD WMS  WMZ WP5 WPD   plg
 
 
 
