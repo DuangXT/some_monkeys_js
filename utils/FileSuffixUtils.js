@@ -2,7 +2,7 @@ console.log("工具类：文件后缀");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.6
+ * @version 0.0.7
  */
 const FileSuffixUtils = {
 
@@ -11,10 +11,13 @@ const FileSuffixUtils = {
       throw new TypeError('file link must be a string');
     }
     if(!Array.isArray(array)){
-      throw new TypeError('array link must be a Array');
+      throw new TypeError('parameter "array" must be a Array');
     }
     array.forEach(s => {
-      if (link.split('.').pop().toUpperCase() === s.toUpperCase()) return true;
+      let suffix = link.split('.').pop();
+      if(suffix.includes('?')) suffix = suffix.split('?')[0];
+      if(suffix.includes('&')) suffix = suffix.split('&')[0];
+      if (suffix.toUpperCase() === s.toUpperCase()) return true;
       // if(link.toUpperCase().endsWith("." + s.toUpperCase())) return true;
     });
     return false;
