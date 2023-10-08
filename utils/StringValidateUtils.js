@@ -1,6 +1,6 @@
 console.log("工具类：特殊字符串校验");
 /** 工具类：特殊字符串校验
- * @version 0.0.5
+ * @version 0.0.6
  * @return [true|false, "错误信息"]
  */
 class StringValidateUtils {
@@ -45,6 +45,12 @@ class StringValidateUtils {
 
     /** 判断这个imei是否是正确的 正确返回ture 错误返回false */
     isImei = imeiString => {
+        if('number' === typeof imeiString){
+            imeiString = imeiString.toLocaleString('fullwide', { useGrouping: false });
+        }
+
+        if('' !== imeiString.replaceAll(/\d/g, ''))
+            return false; // imei值必须是纯数字
         let i = 0;
         let vl_Sum1 = 0, vl_Sum2 = 0, vl_Total = 0;
         let vl_Temp = 0;

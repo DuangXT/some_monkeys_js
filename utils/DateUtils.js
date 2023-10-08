@@ -3,7 +3,7 @@ console.log("工具类：日期");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
 /**
  * 工具类：日期
- * @version 0.0.3
+ * @version 0.0.4
  */
 class DateUtils extends TimeUtils {
 
@@ -54,5 +54,21 @@ class DateUtils extends TimeUtils {
         let timeDiff = specifiedDate - today;
         return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     };
+
+    today = ()=>this.today_yyyy_MM_dd();
+
+    today_yyyy_MM_dd = () => this.formatDate("yyyy-MM-dd");
+    today_yyyy_MM_dd_hh_mm_ss = ()=>this.today_yyyy_MM_dd_hh_mm_ss_first;
+    today_yyyy_MM_dd_hh_mm_ss_first = ()=> this.today_yyyy_MM_dd() + " 00:00:00";
+    today_yyyy_MM_dd_hh_mm_ss_last = ()=> this.today_yyyy_MM_dd() + " 23:59:59";
+
+    yesterday = ()=>this.yesterDay_yyyy_MM_dd();
+    yesterDay_yyyy_MM_dd = () => this.formatDate("yyyy-MM-dd",
+        new Date(new Date().getTime() - (24 * 60 * 60 * 1000)));
+    yesterDay_yyyy_MM_dd_hh_mm_ss = ()=>this.yesterDay_yyyy_MM_dd_hh_mm_ss_first();
+    yesterDay_yyyy_MM_dd_hh_mm_ss_first = ()=> this.yesterDay_yyyy_MM_dd() + " 00:00:00";
+    yesterDay_yyyy_MM_dd_hh_mm_ss_last = ()=> this.yesterDay_yyyy_MM_dd() + " 23:59:59";
+
+
 
 }

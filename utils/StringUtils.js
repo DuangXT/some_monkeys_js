@@ -1,13 +1,33 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.1.2
+ * @version 0.1.3
  */
 const StringUtils = {
 
     isString: s=> '[object String]' === Object.prototype.toString.call(s),
     isNotString: function(s){return !StringUtils.isString(s)},
     notString: function(s){return StringUtils.isNotString(s)},
+    /** 安全地将对象转换成string */
+    toString: object => {
+        switch (typeof object){
+            case 'function':
+            case 'boolean':
+                return object.toString();
+            case 'number':
+                object = Number.isInteger(object) ?
+                    object.toLocaleString('fullwide', { useGrouping: false })
+                    : object.toFixed(20);
+                break;
+            case 'object':
+                object = null !== object ? JSON.stringify(object) : '';
+                break;
+            case 'undefined':
+                object = '';
+                break;
+        }
+        return object;
+    },
 
     /** 校验字符串是否为空 */
     isBlank: function (object) {

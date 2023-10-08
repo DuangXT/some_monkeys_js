@@ -2,7 +2,7 @@ console.log("工具类：文件后缀");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.7
+ * @version 0.0.8
  */
 const FileSuffixUtils = {
 
@@ -24,10 +24,10 @@ const FileSuffixUtils = {
   },
 
   /** 图片格式 */
-  imgFormats: ["webp", "png", "jpg", "jpeg", "bmp", "jpe", "jfif",
-    "heif", "hif", "svg", "dib", "tif", "tiff", "apng",
-    "raw", "crw", "cr2", "kdc", "nef", "arw", "rw2", "psd",
-    'picture', 'photo',
+  imgFormats: ["webp", "png", "jpg", "jpeg", "bmp", "jpe", "jfif", 'heic',
+    "heif", "hif", "svg", "dib", "tif", "tiff", "apng", 'avif', 'avifs', 
+    "raw", "crw", "cr2", "kdc", "nef", "arw", "rw2", "psd", 'pbm', 
+    'jxl', 'pgm', 'ppm', 'xpm', 'xbm', 'picture', 'photo',
     // "image", 和镜像文件冲突
   ],
   isImageFile: function (fileLink) {

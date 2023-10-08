@@ -2,16 +2,16 @@ console.log('工具类：JSON处理');
 
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /** 工具类：JSON处理
- * @version 0.0.2.3
+ * @version 0.0.2.4
  */
 class JsonUtils{
     toJson = obj => {
         if('object' === typeof obj)
-        return JSON.stringify(obj);
-        if('string' === typeof obj)
-        return JSON.parse(obj); // eval('('+ obj +')'); 旧版本方法
+            obj = JSON.stringify(obj);
         if('function' === typeof obj && JSON.stringifyWithFunctions)
-        return JSON.stringifyWithFunctions(obj);
+            obj = JSON.stringifyWithFunctions(obj);
+        if('string' === typeof obj)
+            return JSON.parse(obj); // eval('('+ obj +')'); 旧版本方法
         throw new TypeError('Not a type that can be converted to JSON');
     };
     parse = this.toJson;
@@ -59,4 +59,6 @@ class JsonUtils{
         }
         return data;
     };
+
+
 }

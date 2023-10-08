@@ -1,6 +1,6 @@
 
 console.log("属性扩展：DOM选择器");
-// @version 0.0.4
+// @version 0.0.5
 
 var $qs = $qs ? $qs : document.querySelector.bind(document);
 var $qsa = $qsa ? $qsa :document.querySelectorAll.bind(document);
@@ -61,4 +61,19 @@ NodeList.prototype.before = NodeList.prototype.before ? NodeList.prototype.befor
         item.before(elementOrString);
     }
 }
+
+
+/** like a jQuery.closest() */
+Document.prototype.closest = Element.prototype.closest ? Element.prototype.closest : function(selector) {
+    let parentNode = this.parentNode;
+    while (parentNode && parentNode !== document) {
+        if (parentNode.matches(selector)) {
+            return parentNode;
+        }
+        parentNode = parentNode.parentNode;
+    }
+    return null;
+}
+
+
 

@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.21
+ * @version 0.0.22
  */
 const SelectorUtils = {
 
@@ -86,6 +86,36 @@ const SelectorUtils = {
    */
   setStyle: function(tagName, styleName, styleValue, tagLocation = 0) {
     this.getTagElements(tagName)[tagLocation].style[styleName] = styleValue;
+  },
+
+  /** 设置文本自由复制 */
+  setFreeText: function(css){
+    let htmlObject;
+    if(css instanceof HTMLElement) htmlObject = css;
+    else if('string' === typeof css){
+      htmlObject = document.querySelector(css);
+      switch (css.toUpperCase()) {
+        case 'HTML':
+        case 'HEAD':
+        case 'BODY':
+          htmlObject = document.getElementsByTagName(css)[0];
+          break;
+      }
+    }
+    else throw new TypeError('parameter "css" must be a string or HTMLElement');
+
+    if(htmlObject){
+      let textImportant = "text!important";
+      htmlObject.style.userSelect = textImportant;
+      htmlObject.style['-webkit-user-select'] = textImportant;
+      htmlObject.style['-moz-user-select'] = textImportant;
+      htmlObject.style['-o-user-select'] = textImportant;
+      htmlObject.style['-ms-user-select'] = textImportant;
+      htmlObject.style['-khtml-user-select'] = textImportant;
+      htmlObject.style['-webkit-touch-callout'] = 'default!important';
+      return htmlObject;
+    }
+
   },
 
 

@@ -2,9 +2,16 @@ console.log("工具类：网页窗口");
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 /** 工具类：网页窗口
- * @version 0.0.16
+ * @version 0.0.17
  */
 const WindowUtils={
+
+    width: function(win=window) {
+        return win.innerWidth || win.document.documentElement.clientWidth;
+    },
+    height: function(win=window){
+        return win.innerHeight || win.document.documentElement.clientHeight;
+    },
 
     /** 立即关闭当前窗口 */
     closenow: function(win=window){
