@@ -1,8 +1,7 @@
 console.log("工具类：URL");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
-
 /** 工具类：URL
- * @version 0.0.8
+ * @version 0.0.9
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const UrlUtils = {
 

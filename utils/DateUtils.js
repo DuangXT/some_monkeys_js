@@ -1,9 +1,9 @@
 console.log("工具类：日期");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
 /**
  * 工具类：日期
- * @version 0.0.4
+ * @version 0.0.5
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
  */
 class DateUtils extends TimeUtils {
 

@@ -1,8 +1,8 @@
 console.log("工具类：文件后缀");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /**
  * 工具类：文件后缀
- * @version 0.0.8
+ * @version 0.0.9
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const FileSuffixUtils = {
 

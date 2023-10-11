@@ -1,9 +1,9 @@
 console.log("工具类：金钱货币");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
 /**
  * 工具类：金钱货币
- * @version 0.0.3
+ * @version 0.0.4
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
  */
 const CurrencyUtils = {
 

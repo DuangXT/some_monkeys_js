@@ -1,8 +1,8 @@
 console.log('工具类：JSON处理');
 
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
 /** 工具类：JSON处理
  * @version 0.0.2.4
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 class JsonUtils{
     toJson = obj => {
