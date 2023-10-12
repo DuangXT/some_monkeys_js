@@ -1,6 +1,6 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.2
+ * @version 0.0.3
  */
 class SimulateUtils {
 
@@ -17,7 +17,7 @@ class SimulateUtils {
     }
 
     /** 随机生成鼠标点击 */
-    simulateMouseClick(element) {
+    simulateMouseClick(element=document.body) {
         const event = new MouseEvent('click', {
             view: window,
             bubbles: true,
@@ -27,10 +27,9 @@ class SimulateUtils {
     }
 
     /** 随机生成键盘按下事件 */
-    simulateKeyPress() {
-        let event = new KeyboardEvent('keydown', {
-            key: String.fromCharCode(Math.floor(Math.random() * 26) + 97)
-        });
+    simulateKeyPress(key) {
+        if(!key) key = String.fromCharCode(Math.floor(Math.random() * 26) + 97)
+        let event = new KeyboardEvent('keydown', {key: key});
         document.dispatchEvent(event);
     }
 
