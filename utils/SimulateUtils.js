@@ -1,29 +1,27 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.6
+ * @version 0.0.7
  */
 class SimulateUtils {
 
     /** 随机生成鼠标移动事件 */
     simulateMouseMove(element = document) {
-        const event = new MouseEvent('mousemove', {
+        element.dispatchEvent(new MouseEvent('mousemove', {
             view: window,
             bubbles: true,
             cancelable: true,
             clientX: Math.random() * window.innerWidth,
             clientY: Math.random() * window.innerHeight
-        });
-        element.dispatchEvent(event);
+        }));
+        console.log('模拟了鼠标移动');
     }
 
     /** 随机生成鼠标点击 */
     simulateMouseClick(element=document.body) {
-        const event = new MouseEvent('click', {
-            view: window,
-            bubbles: true,
-            cancelable: true
-        });
-        element.dispatchEvent(event);
+        element.dispatchEvent(new MouseEvent('click', {
+            view: window, bubbles: true, cancelable: true
+        }));
+        console.log('模拟了鼠标点击');
     }
 
     /** 随机生成键盘按下事件 */
@@ -54,6 +52,7 @@ class SimulateUtils {
     /** 随机生成滚动事件 */
     simulateScroll(element = document) {
         element.dispatchEvent(new Event('scroll'));
+        console.log('模拟了页面滚动');
     }
 
     /** 每隔一段时间模拟移动一下鼠标或者按下一个无意义的按键以达到欺骗页面仍然有人在活动的效果 */
