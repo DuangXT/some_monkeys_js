@@ -1,15 +1,13 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.7
+ * @version 0.0.8
  */
 class SimulateUtils {
 
     /** 随机生成鼠标移动事件 */
     simulateMouseMove(element = document) {
         element.dispatchEvent(new MouseEvent('mousemove', {
-            view: window,
-            bubbles: true,
-            cancelable: true,
+            bubbles: true, cancelable: true, // view: window,
             clientX: Math.random() * window.innerWidth,
             clientY: Math.random() * window.innerHeight
         }));
@@ -19,7 +17,7 @@ class SimulateUtils {
     /** 随机生成鼠标点击 */
     simulateMouseClick(element=document.body) {
         element.dispatchEvent(new MouseEvent('click', {
-            view: window, bubbles: true, cancelable: true
+            bubbles: true, cancelable: true, // view: window,
         }));
         console.log('模拟了鼠标点击');
     }
@@ -36,13 +34,13 @@ class SimulateUtils {
 
         for (let i = 0; i < text.length; i++) {
             element.dispatchEvent(new KeyboardEvent('keydown', {
-                view: window, key: text[i],
-                // bubbles: true, cancelable: true,
+                key: text[i],
+                // bubbles: true, cancelable: true, view: window,
                 // code: `Key${text[i].toUpperCase()}`
             }));
             element.dispatchEvent(new KeyboardEvent('keyup', {
-                view: window, key: text[i],
-                // bubbles: true, cancelable: true,
+                key: text[i],
+                // bubbles: true, cancelable: true, view: window,
                 // code: `Key${text[i].toUpperCase()}`
             }));
         }
