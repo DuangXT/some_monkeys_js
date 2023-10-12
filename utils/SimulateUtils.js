@@ -1,6 +1,6 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.4
+ * @version 0.0.5
  */
 class SimulateUtils {
 
@@ -33,8 +33,7 @@ class SimulateUtils {
     }
 
     /** 随机生成键盘输入 */
-    simulateKeyboardInput(element) {
-        const text = 'asdzxcasdfg';
+    simulateKeyboardInput(element, text='asdzxcasdfg') {
         element.focus();
 
         for (let i = 0; i < text.length; i++) {
