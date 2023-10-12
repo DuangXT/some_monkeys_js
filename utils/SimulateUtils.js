@@ -1,6 +1,6 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.1
+ * @version 0.0.2
  */
 class SimulateUtils {
 
@@ -35,7 +35,7 @@ class SimulateUtils {
     }
 
     /** 随机生成键盘输入 */
-    simulateKeyboardInput(element) {
+    /*simulateKeyboardInput(element) {
         const text = generateRandomText(10); // 生成随机文本
         element.focus();
 
@@ -59,7 +59,7 @@ class SimulateUtils {
             });
             element.dispatchEvent(event2);
         }
-    }
+    }*/
 
     /** 随机生成滚动事件 */
     simulateScroll() {

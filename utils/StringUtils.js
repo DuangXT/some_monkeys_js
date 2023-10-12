@@ -1,7 +1,7 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.1.3
+ * @version 0.1.4
  */
 const StringUtils = {
 
@@ -130,13 +130,17 @@ const StringUtils = {
      * @param len 得到随机字符的长度
      * @returns {string}
      */
-    getRandStr: (str, len)=>{
-        let ret = '';
+    getRandStr: (str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', len)=>{
+        let randomText = '';
         while (len--) {
-            ret += str[parseInt(Math.random() * str.length + '')];
+            randomText += str.charAt(Math.floor(Math.random() * str.length));
+            // str[parseInt(Math.random() * str.length + '')];
         }
-        return ret;
+        return randomText;
     },
+    generateRandomText:function(str,len){return this.getRandStr(str,len);},
+
+
 
     /** 反转义HTML转义符 */
     htmlDecode: function (text) {
