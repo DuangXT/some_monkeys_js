@@ -1,6 +1,6 @@
 console.log("工具类：模拟动作");
 /** 工具类：模拟动作
- * @version 0.0.5
+ * @version 0.0.6
  */
 class SimulateUtils {
 
@@ -37,25 +37,18 @@ class SimulateUtils {
         element.focus();
 
         for (let i = 0; i < text.length; i++) {
-            // const keyCode = text.charCodeAt(i);
-            const event = new KeyboardEvent('keydown', {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-                key: text[i],
-                code: `Key${text[i].toUpperCase()}`
-            });
-            element.dispatchEvent(event);
-
-            const event2 = new KeyboardEvent('keyup', {
-                view: window,
-                bubbles: true,
-                cancelable: true,
-                key: text[i],
-                code: `Key${text[i].toUpperCase()}`
-            });
-            element.dispatchEvent(event2);
+            element.dispatchEvent(new KeyboardEvent('keydown', {
+                view: window, key: text[i],
+                // bubbles: true, cancelable: true,
+                // code: `Key${text[i].toUpperCase()}`
+            }));
+            element.dispatchEvent(new KeyboardEvent('keyup', {
+                view: window, key: text[i],
+                // bubbles: true, cancelable: true,
+                // code: `Key${text[i].toUpperCase()}`
+            }));
         }
+        console.log('模拟了键盘输入');
     }
 
     /** 随机生成滚动事件 */
