@@ -151,4 +151,7 @@ const StringUtils = {
         return temp.innerText || temp.textContent;
     },
 
+    /** 使用正则表式去掉全部 HTML/XML 标签 */
+    removeTags: text => text.replaceAll(/<[^>]+>/g, ''),
+
 }

@@ -483,7 +483,8 @@
     "id": 2028810631,
     "defaultPicSize": [
       243189,
-      134439
+      134439,
+      132988
     ],
     "defaultPic": [
       {
@@ -509,6 +510,18 @@
           "SHA256": "ea59ecc98459f7cf7e2a2150bd93c801070277bdff7a2b61a6ed9e86ed8fef8b"
         },
         "url": "https://wx4.sinaimg.cn/large/002diGk7ly8hjnc43zs8gj60rs0rsadf02.jpg"
+      },
+      {
+        "text": "快讯",
+        "size": 132988,
+        "hash": {
+          "CRC32": "C248A3D9",
+          "CRC64": "C6DC6824A665DE2B",
+          "SHA256": "c707a0d4258831fae99cd6c2fa61270234f03bd636b220db18fe7819f5b66db2",
+          "SHA1": "76df5c669b16f747a7e1db11b4c7e888745c1d6d",
+          "MD5": "8091666e4f46916cbbb761d67ee0695a"
+        },
+        "url": "https://wx2.sinaimg.cn/large/002diGk7ly8hjybs12429j60rs0rstc102.jpg"
       }
     ]
   },
@@ -646,7 +659,24 @@
   },
   "2606218210": {
     "name": "中国妇女报",
-    "id": 2606218210
+    "id": 2606218210,
+    "defaultPicSize": [
+      42740
+    ],
+    "defaultPic": [
+      {
+        "size": 42740,
+        "text": "快讯",
+        "hash": {
+          "CRC32": "8ADE1BCF",
+          "CRC64": "234CD2F120FD30B0",
+          "SHA256": "734b93fe41b7667509d3b7eba3c9858b38814eab43646cd871c2932ceeab9cce",
+          "SHA1": "ba37d8833f4a32d4e14fe795839ebc25548bbe29",
+          "MD5": "2821ce4c0af81d618e666f8b7d86dfff"
+        },
+        "url": "https://wx4.sinaimg.cn/large/9b57bbe2ly1hjyd89oxksj20gj0gjq3t.jpg"
+      }
+    ]
   },
   "2656274875": {
     "name": "央视新闻",
@@ -892,7 +922,8 @@
     "id": 3604378011,
     "defaultPicSize": [
       184581,
-      135181
+      135181,
+      184861
     ],
     "defaultPic": [
       {
@@ -918,6 +949,18 @@
           "MD5": "49ef3fe60f9c6a2fd396baf945eae2db"
         },
         "url": "https://wx1.sinaimg.cn/large/d6d6719bly1hjweak6ptpj20j60j60w4.jpg"
+      },
+      {
+        "size": 184861,
+        "text": "最新消息",
+        "hash": {
+          "CRC32": "7E6703B1",
+          "CRC64": "4ADB2F6B661572BD",
+          "SHA256": "56ae84ecb560cd3af9cc561dd5fe48c4eb13b23650f0d7bfd497de1aa66c9124",
+          "SHA1": "1162de145ddefaed5e238541c53db9136f2391fc",
+          "MD5": "57bd90401759eeb7902f631473af1f24"
+        },
+        "url": "https://wx2.sinaimg.cn/large/d6d6719bly1hjyqyrghzej20p00p0gqc.jpg"
       }
     ]
   },
@@ -926,7 +969,8 @@
     "id": 3840768703,
     "defaultPicSize": [
       116521,
-      61145
+      61145,
+      28945
     ],
     "defaultPic": [
       {
@@ -952,6 +996,18 @@
           "MD5": "8c4d8aeba01a75e8a4fc4d462d2005a2"
         },
         "url": "https://wx4.sinaimg.cn/large/004bVtojly1hjwus59ob8j60oi0frmyj02.jpg"
+      },
+      {
+        "size": 28945,
+        "text": "关注",
+        "hash": {
+          "CRC32": "F4BA0CEC",
+          "CRC64": "5E24BCAEDCA8607B",
+          "SHA256": "0218bc8596573ad79626df975a071ffdd14a5549310efacbcb972b43211fa580",
+          "SHA1": "8ced96d56c20e77974c589f429263ba4f3c06f67",
+          "MD5": "66600fb3db2be02148c11efae1517c6b"
+        },
+        "url": "https://wx1.sinaimg.cn/large/004bVtojly1hjybn4dg2gj60p00go74s02.jpg"
       }
     ]
   },
@@ -959,7 +1015,8 @@
     "name": "新华日报",
     "id": 3881380517,
     "defaultPicSize": [
-      62195
+      62195,
+      43716
     ],
     "defaultPic": [
       {
@@ -973,6 +1030,18 @@
           "MD5": "0cde3fed8010c5abf1c943b37b0102f3"
         },
         "url": "https://wx2.sinaimg.cn/large/004eFSnzgy1hjx57jp0fjj60k00b9q4c02.jpg"
+      },
+      {
+        "size": 43716,
+        "text": "最新消息",
+        "hash": {
+          "CRC32": "6B2148FD",
+          "CRC64": "D644229552A6CE69",
+          "SHA256": "7f96d43cb2888b161c2ada8ad940f5ca85c89ce0ec3f5799f5123db5f4171c28",
+          "SHA1": "e3d40685670d1dae2420c786021e05ffdc77dc39",
+          "MD5": "278dc9523be927fd50d29ea6dee2faa6"
+        },
+        "url": "https://wx1.sinaimg.cn/large/004eFSnzly1hjyc6e8o2mj60k00b9my202.jpg"
       }
     ]
   },

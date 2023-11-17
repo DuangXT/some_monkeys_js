@@ -1,20 +1,33 @@
 console.log("工具类：重定向");
 
 /** 工具类：重定向
- * @version 0.0.6
+ * @version 0.0.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = {
 
+    redirect: (url=location.href, replace=false) => {
+        if(!url) url = location.href;
+        if(!url.startsWith("http")) url = 'https://' + url;
+        if(replace && currentUrl !== url){
+            console.log('替换链接为：', url);
+            location.replace(url);
+            return;
+        }
+        console.log('跳转链接：', url);
+        location.href = url;
+    },
+
+
     /** 当域名匹配时，询问是否跳转到目标地址 */
-    askRedirect: (host, targetUrl, targetInfo) => {
+    askRedirect: function(host, targetUrl, targetInfo){
         function jump(_host){
             if(_host && 'string' === typeof _host){
                 if(hostnameHas(_host)){
                     let confText = "您是否想访问【 " + targetUrl +" 】？";
                     if(targetInfo) confText += "\n\n    " + targetInfo;
                     if(confirm(confText)){
-                        redirect(targetUrl, true);
+                        this.redirect(targetUrl, true);
                         return;
                     }
                 }

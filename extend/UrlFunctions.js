@@ -1,12 +1,12 @@
 console.log("扩展函数：URL");
-// @version 0.0.7.1
+// @version 0.0.7.2
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 const currentUrl = location.href.toString();
 const hostname = location.hostname.toString();
 
 /** 页面重定向至指定链接 */
-const redirect = (url=currentUrl, replace) => {
+const redirect = (url=currentUrl, replace=false) => {
     if(!url) url = currentUrl;
     if(!url.startsWith("http")) url = 'https://' + url;
     if(replace && currentUrl !== url){
