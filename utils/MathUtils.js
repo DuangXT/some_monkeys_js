@@ -1,7 +1,6 @@
 console.log("工具类：数学");
-
 /** 工具类：数学
- * @version 0.0.2
+ * @version 0.0.3
  */
 const MathUtils = {
 
@@ -9,6 +8,8 @@ const MathUtils = {
     getRandomInt: (max, min=0) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     },
+    /** 获取随机数字（字符串） */
+    getRandom: (length) => (''+Math.random()).replace('0.','').substring(0, length),
 
     /** 转换成小数 */
     parseDecimal: function (x) {

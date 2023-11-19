@@ -1,5 +1,5 @@
 console.log("属性扩展：字符串");
-// @version: 0.0.10
+// @version: 0.0.11
 String.prototype.equals = function(...string){
     for (const s of string) {
         if (this === s) return true;
@@ -27,7 +27,7 @@ String.prototype.contains = function (...strings) {
 String.prototype.notContains=(...s)=>!String.prototype.contains(...s);
 String.prototype.containsIgnoreCase = function (...substrs){
     let newSubStrs = [];
-    substrs.forEach(s=> newSubStrs.push(s.toUpperCase()));
+    substrs.forEach(s=> newSubStrs.push(s.toString().toUpperCase()));
     return this.toUpperCase().contains(...newSubStrs);
 }
 String.prototype.notContainsIgnoreCase=(...s)=>!String.prototype.containsIgnoreCase(...s);

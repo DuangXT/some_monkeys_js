@@ -1,7 +1,7 @@
 console.log("工具类：字符串");
 
 /** 工具类：DOM操作
- * @version 0.1.4
+ * @version 0.1.5
  */
 const StringUtils = {
 
@@ -118,8 +118,8 @@ const StringUtils = {
 
     containsIgnoreCase: (str, ...substrs) => {
         let newSubStrs = [];
-        substrs.forEach(s=> newSubStrs.push(s.toLowerCase()));
-        return this.contains(str.toLowerCase(), ...newSubStrs);
+        substrs.forEach(s=> newSubStrs.push(s.toString().toUpperCase()));
+        return this.contains(str.toUpperCase(), ...newSubStrs);
     },
     notContainsIgnoreCase: function(str, ...substrs){return !this.containsIgnoreCase(str, ...substrs)},
 

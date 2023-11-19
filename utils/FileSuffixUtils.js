@@ -1,7 +1,7 @@
 console.log("工具类：文件后缀");
 /**
  * 工具类：文件后缀
- * @version 0.0.9
+ * @version 0.0.10
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const FileSuffixUtils = {
@@ -17,8 +17,8 @@ const FileSuffixUtils = {
       let suffix = link.split('.').pop();
       if(suffix.includes('?')) suffix = suffix.split('?')[0];
       if(suffix.includes('&')) suffix = suffix.split('&')[0];
-      if (suffix.toUpperCase() === s.toUpperCase()) return true;
-      // if(link.toUpperCase().endsWith("." + s.toUpperCase())) return true;
+      if (suffix.toUpperCase() === s.toString().toUpperCase()) return true;
+      // if(link.toUpperCase().endsWith("." + s.toString().toUpperCase())) return true;
     });
     return false;
   },
