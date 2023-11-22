@@ -2,7 +2,7 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.23
+ * @version 0.0.24
  */
 const SelectorUtils = {
 
@@ -186,7 +186,9 @@ const SelectorUtils = {
     }
     obj.style.display = "none!important";
     obj.style.visibility = "hidden!important";
-    obj.style.cssText = "display:none!important;visibility:hidden!important;" + obj.style.cssText;
+    obj.style.opacity = "0!important";
+    obj.hidden = true;
+    obj.style.cssText += "display:none!important;visibility:hidden!important;opacity:0!important;";
     return obj;
   },
 
