@@ -41,7 +41,8 @@
       63855,
       141817,
       90106,
-      97188
+      97188,
+      97364
     ],
     "defaultPic": [
       {
@@ -103,6 +104,18 @@
           "MD5": "1ab5b5aad40af59a774b6a7eeb368a65"
         },
         "url": "https://wx3.sinaimg.cn/large/001Lvb9uly8hjwo1ogsr0j60ku0kuwgu02.jpg"
+      },
+      {
+        "text": "头条快讯",
+        "size": 97364,
+        "hash": {
+          "CRC32": "071423C8",
+          "CRC64": "204516E6544C4E21",
+          "SHA256": "6dcf8e409fac597508b6d2dbac5821fb5022299fc868f26e3805568e697c6b51",
+          "SHA1": "2a6e62aa07a679b250697b65856275b066d89a09",
+          "MD5": "8b7d654aafcb3dc39bf08b279ef06ee3"
+        },
+        "url": "https://wx2.sinaimg.cn/large/001Lvb9uly8hkawmnurnfj60ku0ku0v302.jpg"
       }
     ]
   },
