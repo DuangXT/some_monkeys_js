@@ -367,7 +367,8 @@
     "id": 1887344341,
     "defaultPicSize": [
       30348,
-      10759
+      10759,
+      14153
     ],
     "defaultPic": [
       {
@@ -393,6 +394,18 @@
           "MD5": "9ddc018e5fc2166c7e601c4ac22a9295"
         },
         "url": "https://wx4.sinaimg.cn/large/707e96d5ly1hjwllwoi5mj20a5077glm.jpg"
+      },
+      {
+        "size": 14153,
+        "text": "快讯",
+        "hash": {
+          "CRC32": "82FE2F55",
+          "CRC64": "42B265770CB4731D",
+          "SHA256": "d39479347f037c706bbc3ec03cb7c9fb68483f2c4ea469394873b67d24e64dd7",
+          "SHA1": "d298f1667dc2fd092cb0b5d8c728ad7bd47d9d20",
+          "MD5": "dd7d55fb3a53a4598f6bddb4cd13a7ab"
+        },
+        "url": "https://wx2.sinaimg.cn/large/707e96d5gy1hkc3o9t0f2j20a5077t8t.jpg"
       }
     ]
   },
@@ -408,6 +421,7 @@
     "name": "环球时报",
     "id": 1974576991,
     "defaultPicSize": [
+      289239,
       217572,
       59199,
       886039,
@@ -418,6 +432,18 @@
       119731
     ],
     "defaultPic": [
+      {
+        "size": 289239,
+        "text": "最新消息",
+        "hash": {
+          "CRC32": "F1B7C453",
+          "CRC64": "EAC1DD6D095A1CA9",
+          "SHA256": "7a09ba154c555f168cbbcf49c51b97874bd550a7f2b4bec2ed265de14065147c",
+          "SHA1": "76002d1ba0505c1b505b1e1ea04441f5f7b4eb77",
+          "MD5": "062abc3f27064e7434bea2754f158557"
+        },
+        "url": "https://wx1.sinaimg.cn/large/0029D7FZgy1hkd6tyexf5j60gh0gigt602.jpg"
+      },
       {
         "size": 217572,
         "text": "最新消息",
@@ -520,11 +546,24 @@
     "name": "新浪新闻",
     "id": 2028810631,
     "defaultPicSize": [
+      221962,
       243189,
       134439,
       132988
     ],
     "defaultPic": [
+      {
+        "size": 221962,
+        "text": "最新消息",
+        "hash": {
+          "CRC32": "8B2CB17B",
+          "CRC64": "C029592BDC627C42",
+          "MD5": "ede266f4d26850aed774cbfc5f5e884d",
+          "SHA1": "6229d2e30de6e6c4127c09617ad5c44bd0861453",
+          "SHA256": "5c6c2c5f6878b9656ad66f2811e477959cb1b16c98c9f3995c2586b003a959f6"
+        },
+        "url": "https://wx3.sinaimg.cn/large/002diGk7ly1hkc6ae9ql8j60rs0rsq8o02.jpg"
+      },
       {
         "size": 243189,
         "text": "最新消息",
@@ -810,7 +849,7 @@
     "name": "人民日报",
     "id": 2803301701,
     "defaultPicSize": [
-      218610, 81424
+      218610, 81424, 221962
     ],
     "defaultPic": [
       {
@@ -836,6 +875,18 @@
           "MD5": "9af9df49122d71c326a6a92e159c99cd"
         },
         "url": "https://wx1.sinaimg.cn/large/0033ImPzly1hkaxrloalzj60j60j6gnj02.jpg"
+      },
+      {
+        "text": "最新消息",
+        "size": 221962,
+        "hash": {
+          "CRC32": "8B2CB17B",
+          "CRC64": "C029592BDC627C42",
+          "SHA256": "5c6c2c5f6878b9656ad66f2811e477959cb1b16c98c9f3995c2586b003a959f6",
+          "SHA1": "6229d2e30de6e6c4127c09617ad5c44bd0861453",
+          "MD5": "ede266f4d26850aed774cbfc5f5e884d"
+        },
+        "url": "https://wx1.sinaimg.cn/large/002diGk7ly1hkd6qsjkykj60rs0rsq8o02.jpg"
       }
     ]
   },
@@ -1347,5 +1398,55 @@
   "5541011958": {
     "name": "人民日报全国党媒平台",
     "id": 5541011958
+  },
+  "6189120710": {
+    "name": "央视军事",
+    "id": 6189120710,
+    "defaultPicSize": [
+    ],
+    "defaultPic": [
+    ]
+  },
+  "3266943013": {
+    "name": "央视网",
+    "id": 3266943013,
+    "defaultPicSize": [
+    ],
+    "defaultPic": [
+    ]
+  },
+  "1663072851": {
+    "name": "中国日报",
+    "id": 1663072851,
+    "defaultPicSize": [
+      80121,
+      43652
+    ],
+    "defaultPic": [
+      {
+        "text": "最新消息",
+        "size": 80121,
+        "hash": {
+          "CRC32": "155094CC",
+          "CRC64": "42CECB9692A4E4BB",
+          "SHA256": "96546c98318047e21e62634d5953f710b27ceec9881c0765248bf0e08dccaf6f",
+          "SHA1": "fadb014c04cb78a7cf0fddf3d10bab8ba3044f84",
+          "MD5": "689bc7aa7282dd21d71ba992694611ab"
+        },
+        "url": "https://wx3.sinaimg.cn/large/001Oy5dFly1hkb21t8njrj60d90d976602.jpg"
+      },
+      {
+        "text": "最新消息",
+        "size": 43652,
+        "hash": {
+          "CRC32": "1BA108B5",
+          "CRC64": "85A6BAA032F0FF44",
+          "SHA256": "dad45f3e9def915a1c96f1c86fb9ef105c55d4a11e3ebd81b761449845245c0c",
+          "SHA1": "88646d6a50b4c9bc5d800d97beaef4b78b2d3939",
+          "MD5": "a9069991ff7390fb315953eb47160f4f"
+        },
+        "url": "https://wx1.sinaimg.cn/large/001Oy5dFly1hkas8thspvj60d90d9jsa02.jpg"
+      }
+    ]
   }
 }
