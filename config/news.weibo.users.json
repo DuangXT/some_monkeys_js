@@ -2,10 +2,6 @@
   "1402977920": {
     "name": "光明日报",
     "id": 1402977920,
-    "defaultPicSize": [
-      278730,
-      98191
-    ],
     "defaultPic": [
       {
         "size": 278730,
@@ -36,14 +32,6 @@
   "1618051664": {
     "name": "头条新闻",
     "id": 1618051664,
-    "defaultPicSize": [
-      139124,
-      63855,
-      141817,
-      90106,
-      97188,
-      97364
-    ],
     "defaultPic": [
       {
         "text": "最新消息",
@@ -122,10 +110,6 @@
   "1699432410": {
     "name": "新华社",
     "id": 1699432410,
-    "defaultPicSize": [
-      606895,
-      610180
-    ],
     "defaultPic": [
       {
         "size": 606895,
@@ -365,11 +349,6 @@
   "1887344341": {
     "name": "观察者网",
     "id": 1887344341,
-    "defaultPicSize": [
-      30348,
-      10759,
-      14153
-    ],
     "defaultPic": [
       {
         "size": 30348,
@@ -707,7 +686,6 @@
           "SHA256": "8492fb9cba24ad0e7adb45f3234a4ae826f63150b02672a78d5a84ffdcf83385",
           "SHA1": "6aae9426a9938e4ff597b1bb33de447226c3d844",
           "MD5": "6d9c7de157a37351925944719817d9e6"
-
         },
         "url": "https://wx4.sinaimg.cn/large/002uLDeXly1hkarvjna46j60ku0kut9y02.jpg"
       },
@@ -765,7 +743,8 @@
     "name": "中国妇女报",
     "id": 2606218210,
     "defaultPicSize": [
-      42740, 42789
+      42740,
+      42789
     ],
     "defaultPic": [
       {
@@ -849,7 +828,9 @@
     "name": "人民日报",
     "id": 2803301701,
     "defaultPicSize": [
-      218610, 81424, 221962
+      218610,
+      81424,
+      221962
     ],
     "defaultPic": [
       {
@@ -1172,7 +1153,6 @@
           "SHA256": "216eee7741c33d46851ed64008499838e2463fd3495c7b4e985a74c4f7346cc2",
           "SHA1": "a5c9884e2f522b9f3748d65323dc101e23e78ad1",
           "MD5": "31b23ed484a98a7e3af09268b87dfd79"
-
         },
         "url": "https://wx1.sinaimg.cn/large/004bVtojly1hkasuha2utj60zk0k0myl02.jpg"
       },
@@ -1227,12 +1207,6 @@
   "5000609535": {
     "name": "中国政府网",
     "id": 5000609535,
-    "defaultPicSize": [
-      230480,
-      39773,
-      253110,
-      6055
-    ],
     "defaultPic": [
       {
         "text": "要闻",
@@ -1271,6 +1245,30 @@
         "url": "https://wx1.sinaimg.cn/large/005sq2Yvly1hkauwuv2e2j60n50n545302.jpg"
       },
       {
+        "text": "部委信息",
+        "size": 253110,
+        "hash": {
+          "CRC32": "3368F15B",
+          "CRC64": "85CCFF303E88F82C",
+          "SHA256": "7b4a607864e89479c8d9c3746ad171f7e90612f97f8a2395f1ddf14f1c0ef28f",
+          "SHA1": "01d07f04202abccbb5d10d1fa8d738a2ab352f3f",
+          "MD5": "8b74c8cebbf5f88db99cb1c507560850"
+        },
+        "url": "https://wx1.sinaimg.cn/large/005sq2Yvly1hkauwuv2e2j60n50n545302.jpg"
+      },
+      {
+        "text": "部委信息",
+        "size": 28275,
+        "hash": {
+          "CRC32": "56545B1D",
+          "CRC64": "C230587ACFE78980",
+          "SHA256": "56ebb227ff8d343cb82f3fc23dead97d04f927fe591fd9756297bc88b6856d0e",
+          "SHA1": "f4a855283e05c81db506eb2755113bf5a52bb474",
+          "MD5": "49654d073e6e2125725d5a07f9fe88a2"
+        },
+        "url": "https://wx3.sinaimg.cn/large/005sq2Yvly1hkd7dsp2uij60u00csjrv02.jpg"
+      },
+      {
         "text": "答记者问",
         "size": 6055,
         "hash": {
@@ -1282,7 +1280,6 @@
         },
         "url": "https://wx2.sinaimg.cn/large/006bggIUly1hk9rcfpttoj305k05kwed.jpg"
       }
-
     ]
   },
   "6439298407": {
@@ -1300,14 +1297,6 @@
   "5663214224": {
     "name": "国家发展改革委",
     "id": 5663214224,
-    "defaultPicSize": [
-      18740,
-      17728,
-      6945,
-      37328,
-      12407,
-      66383
-    ],
     "defaultPic": [
       {
         "text": "关注",
