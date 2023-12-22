@@ -26,6 +26,18 @@
           "MD5": "764d435cef70ea36b5565cdb93863123"
         },
         "url": "https://wx2.sinaimg.cn/large/001wWKE8ly1hjx791cz5vj60ip0dytb302.jpg"
+      },{
+        "size": 101480,
+        "text": "快讯",
+        "hash": {
+          "CRC32": "5C2CAE63",
+          "CRC64": "A41BA598FDAC6F77",
+          "SHA256": "43fe6e8bf784e6e72075cae2c2aeb35421530af8beb2b96bdb343c97faaf56c7",
+          "SHA1": "d96b7150c50f9211ae6abc0c8e674092ddca3a53",
+          "MD5": "4d57796f07ef14b3f328a0a0ebf53fca"
+
+        },
+        "url": "https://wx4.sinaimg.cn/large/001wWKE8ly1hl2vvgvzlvj60ip0dy40z02.jpg"
       }
     ]
   },
@@ -399,17 +411,6 @@
   "1974576991": {
     "name": "环球时报",
     "id": 1974576991,
-    "defaultPicSize": [
-      289239,
-      217572,
-      59199,
-      886039,
-      543937,
-      68936,
-      267429,
-      852111,
-      119731
-    ],
     "defaultPic": [
       {
         "size": 289239,
@@ -496,6 +497,19 @@
         "url": "https://wx4.sinaimg.cn/large/0029D7FZly1hjppu88c9rj61lw1lx45h02.jpg"
       },
       {
+        "size": 47469,
+        "text": "最新消息",
+        "hash": {
+          "CRC32": "530508AE",
+          "CRC64": "E48796382FB395BC",
+          "SHA256": "1b142bf18b2c916d670512e611325c32bce1868d4677ab8a423bfd16420d16c8",
+          "SHA1": "8d2addd8803093dd260f242097e06e16e9d3408e",
+          "MD5": "020318bf47ea1cd2ca4556db02033719"
+
+        },
+        "url": "https://wx1.sinaimg.cn/large/0029D7FZly1hl2ti7h8mlj60dw0dwab202.jpg"
+      },
+      {
         "size": 852111,
         "text": "社评",
         "hash": {
@@ -516,6 +530,19 @@
           "SHA256": "9896c6748485186fcc015891c8430fbcb3e4d367abbcf6c6f26404ea1f385d6e",
           "SHA1": "9d1d1b5e98a8497e7aee670c51e6a277b00142eb",
           "MD5": "351cbd5f6b195d0429dfc5162f1a9327"
+        },
+        "url": "https://wx3.sinaimg.cn/large/0029D7FZly1hjw85eiqdvj60j60j6whg02.jpg"
+      },
+      {
+        "size": 67472,
+        "text": "社评",
+        "hash": {
+          "CRC32": "B0652EA2",
+          "CRC64": "DDFB7A5B1B7FF4BA",
+          "SHA256": "0109cbd11e8968091f5e3153418042520873072cffbdd7ff79bba7915d7dc92a",
+          "SHA1": "34716d4df971b621b75d6f42a68b13a15620f9b9",
+          "MD5": "f171378a5255463357af2509f64a1fbb"
+
         },
         "url": "https://wx3.sinaimg.cn/large/0029D7FZly1hjw85eiqdvj60j60j6whg02.jpg"
       }
@@ -670,12 +697,6 @@
   "2286908003": {
     "name": "人民网",
     "id": 2286908003,
-    "defaultPicSize": [
-      56199,
-      152069,
-      174551,
-      149408
-    ],
     "defaultPic": [
       {
         "text": "最新消息",
@@ -688,6 +709,18 @@
           "MD5": "6d9c7de157a37351925944719817d9e6"
         },
         "url": "https://wx4.sinaimg.cn/large/002uLDeXly1hkarvjna46j60ku0kut9y02.jpg"
+      },{
+        "text": "最新消息",
+        "size": 153992,
+        "hash": {
+          "CRC32": "31720DC7",
+          "CRC64": "00D490AA12892CB1",
+          "SHA256": "e1ae89b41fe36851d244a2316ed2ede3c6a96f59f78979deb2f3b1e903a005b8",
+          "SHA1": "4d7d5e1e52fb851ee0eb38ff2f0e988bb6ba79b7",
+          "MD5": "b861cb49b17847765dcc2a4572c066fc"
+
+        },
+        "url": "https://wx4.sinaimg.cn/large/002uLDeXly1hl2vd96mf6j60ku0kudjq02.jpg"
       },
       {
         "text": "最新消息",
@@ -1087,14 +1120,6 @@
   "3840768703": {
     "name": "工人日报",
     "id": 3840768703,
-    "defaultPicSize": [
-      402395,
-      116521,
-      61145,
-      28945,
-      63151,
-      612740
-    ],
     "defaultPic": [
       {
         "text": "快讯",
@@ -1167,7 +1192,22 @@
           "MD5": "fe1bd5d2f223c62d7539625e6db5360c"
         },
         "url": "https://wx4.sinaimg.cn/large/004bVtojly1hkauwym7xij61hc0u0dw602.jpg"
+      },
+      {
+        "text": "聚焦",
+        "size": 35608,
+        "hash": {
+          "CRC32": "D5F1C3B3",
+          "CRC64": "1F53DFECE6FCDBDB",
+          "SHA256": "0cd1170d38801311412968843d52318b3baf768e8281fec33d06388605f821c7",
+          "SHA1": "50f5e1f5cf939c9f1136465892abcc55d827e1a8",
+          "MD5": "571841d680e19a0ea3ab06f69c276c5f"
+
+        },
+        "url": "https://wx4.sinaimg.cn/large/004bVtojly1hl2wl4gszuj60p00goq3m02.jpg"
       }
+
+
     ]
   },
   "3881380517": {
