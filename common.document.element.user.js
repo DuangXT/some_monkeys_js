@@ -11,7 +11,8 @@
 
 gmlog('公共库：文档元素');
 
-var html = html ? html : document.html || $dom.getTagElement('html');
+var html = html ? html : document.html
+    || document.documentElement || document.getElementsByTagName('html');
 var body = body ? body : document.body || $dom.getTagElement('body');
 var head = head ? head : document.head || $dom.getTagElement('head');
 var cookie = cookie ? cookie : document.cookie;

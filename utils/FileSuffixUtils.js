@@ -1,7 +1,7 @@
 console.log("工具类：文件后缀");
 /**
  * 工具类：文件后缀
- * @version 0.0.10
+ * @version 0.0.11
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const FileSuffixUtils = {
@@ -112,9 +112,9 @@ const FileSuffixUtils = {
 
 
   /** 压缩文件格式 */
-  compressFormats: ['zip', 'zipx', '7z', 'rar', 'tar', 'z', 'gz', 'gzip',
-    'bz', 'bz2', 'tgz', 'cab', 'ace', 'sea', 'lzh', 'ARJ', "SIT", "SITX",
-    'arc', "LZMA", "LZ", 'rar5', "LHA", 'TBZ', 'TBZ2', 'ZPAQ', 'ZSTD', 'ALZ'],
+  compressFormats: ['zip', 'zipx', '7z', 'rar', 'tar', 'z', 'gz', 'gzip', "zst", "Asar",
+    'bz', 'bz2', 'tgz', 'cab', 'ace', 'sea', 'lzh', 'ARJ', "SIT", "SITX", "Zstd", "xz",
+    'arc', "LZMA", "LZ", 'rar5', "LHA", 'TBZ', 'TBZ2', 'ZPAQ', 'ZSTD', 'ALZ', "lzip"],
   isCompressFile: function (fileLink) {
     return this.linkSuffixIs(this.compressFormats, fileLink);
   },

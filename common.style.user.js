@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：样式
-// @version 0.0.3
+// @version 0.0.4
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StyleTagUtils.js
@@ -18,7 +18,7 @@ const style_fullcolor = "filter:progid:DXImageTransform.Microsoft.BasicImage(gra
 /** 自由滚动 */
 const style_overflow = "overflow:auto!important;";
 /** 文本选择 */
-const style_freetext = "user-select:text!important;-webkit-user-select:text!important;-moz-user-select:text!important;-o-user-select:text!important;-ms-user-select:text!important;";
+const style_freetext = "user-select:auto!important;-webkit-user-select:auto!important;-moz-user-select:auto!important;-o-user-select:auto!important;-ms-user-select:auto!important;-khtml-user-select:auto!important;-webkit-touch-callout:default!important;";
 
 
 /** 以插入style标签的形式，向head内添加样式
@@ -32,3 +32,4 @@ function addStyleTagByCSS(css) {
     if(GM.addStyle) return GM.addStyle(css);
     return StyleTagUtils.addStyleTagByCSS(css);
 }
+
