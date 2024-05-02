@@ -1,7 +1,7 @@
 console.log("工具类：重定向");
 
 /** 工具类：重定向
- * @version 0.0.7
+ * @version 0.0.8
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = {
@@ -21,13 +21,14 @@ const RedirectUtils = {
 
     /** 当域名匹配时，询问是否跳转到目标地址 */
     askRedirect: function(host, targetUrl, targetInfo){
+        const redirect = this.redirect;
         function jump(_host){
             if(_host && 'string' === typeof _host){
                 if(hostnameHas(_host)){
                     let confText = "您是否想访问【 " + targetUrl +" 】？";
                     if(targetInfo) confText += "\n\n    " + targetInfo;
                     if(confirm(confText)){
-                        this.redirect(targetUrl, true);
+                        redirect(targetUrl, true);
                         return;
                     }
                 }
