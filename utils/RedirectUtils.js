@@ -1,7 +1,7 @@
 console.log("工具类：重定向");
 
 /** 工具类：重定向
- * @version 0.0.8
+ * @version 0.0.8-debug
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = {
@@ -28,7 +28,7 @@ const RedirectUtils = {
                     let confText = "您是否想访问【 " + targetUrl +" 】？";
                     if(targetInfo) confText += "\n\n    " + targetInfo;
                     if(confirm(confText)){
-                        redirect(targetUrl, true);
+                        this.redirect(targetUrl, true);
                         return;
                     }
                 }
