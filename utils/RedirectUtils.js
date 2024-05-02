@@ -1,7 +1,7 @@
 console.log("工具类：重定向");
 
 /** 工具类：重定向
- * @version 0.0.9.1
+ * @version 0.0.9.2
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = {
