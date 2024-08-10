@@ -1,0 +1,6 @@
+[
+  "webp", "png", "jpg", "jpeg", "bmp", "jpe", "jfif", "heic",
+  "heif", "hif", "svg", "dib", "tif", "tiff", "apng", "avif", "avifs",
+  "raw", "crw", "cr2", "kdc", "nef", "arw", "rw2", "psd", "pbm",
+  "jxl", "pgm", "ppm", "xpm", "xbm", "picture", "photo"
+]

@@ -5,7 +5,7 @@ const originalOpen = XMLHttpRequest.prototype.open;
 const originalFetch = window.fetch;
 
 /** 工具类：发起请求
- * @version 0.0.9
+ * @version 0.0.10
  */
 const RequestUtils = {
 
@@ -68,7 +68,7 @@ const RequestUtils = {
             'Cross-Origin-Resource-Policy':'cross-origin',}
         if(referer) {
             j["referer"] = referer;
-            j["referrer"] = referer;
+            j["origin"] = referer;
         }
         return j;
     },

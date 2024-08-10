@@ -1,0 +1,5 @@
+[
+  "zip", "zipx", "7z", "rar", "tar", "z", "gz", "gzip", "zst", "Zstd", "xz",
+  "bz", "bz2", "tgz", "cab", "ace", "sea", "lzh", "ARJ", "SIT", "SITX", "Asar",
+  "arc", "LZMA", "LZ", "lzip", "rar5", "LHA", "TBZ", "TBZ2", "ZPAQ", "ZSTD", "ALZ"
+]
