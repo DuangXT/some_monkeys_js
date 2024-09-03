@@ -2,11 +2,14 @@ console.log("工具类：DOM操作");
 
 
 /** 工具类：DOM操作
- * @version 0.0.24
+ * @version 0.0.25
  */
 const SelectorUtils = {
 
-  __isString__: s => '[object String]' === Object.prototype.toString.call(s),
+  // __isString__: s => '[object String]' === Object.prototype.toString.call(s),
+  __isString__: function(s){
+    return '[object String]' === Object.prototype.toString.call(s)
+  },
   __cleanCssSelectorHead__: (s, subStr) => {
     s = s.trim();
     if(s.startsWith(subStr)) s = s.substring(1);
