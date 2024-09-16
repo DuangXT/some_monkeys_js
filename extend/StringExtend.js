@@ -1,5 +1,5 @@
-console.log("属性扩展：字符串");
-// @version: 0.0.11
+
+
 String.prototype.equals = function(...string){
     for (const s of string) {
         if (this === s) return true;
@@ -33,4 +33,11 @@ String.prototype.containsIgnoreCase = function (...substrs){
 String.prototype.notContainsIgnoreCase=(...s)=>!String.prototype.containsIgnoreCase(...s);
 
 // Object.prototype.isString = function(){return '[object String]' === Object.prototype.toString.call(this)}
+
+
+
+
+// @version: 0.0.11
+const StringExtend = true;
+console.log("属性扩展：字符串 StringExtend");
 

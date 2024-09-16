@@ -1,5 +1,3 @@
-console.log("工具类：剪贴板操作");
-
 /** 工具类：剪贴板操作
  * @version 0.0.1
  */
@@ -40,5 +38,5 @@ class ClipboardUtils {
         }
     }
 
-
 }
+console.log("工具类：剪贴板操作 ClipboardUtils");

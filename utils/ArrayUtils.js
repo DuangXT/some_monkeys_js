@@ -1,7 +1,6 @@
-console.log("工具类：数组");
 /**
  * 工具类：数组
- * @version 0.0.4
+ * @version 0.0.5
  */
 const ArrayUtils = {
 
@@ -40,3 +39,4 @@ const ArrayUtils = {
         return uniqueArray;
     }
 }
+console.log("工具类：数组 ArrayUtils");

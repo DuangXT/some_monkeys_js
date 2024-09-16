@@ -1,5 +1,3 @@
-console.log("属性扩展：对象操作");
-// @version 0.0.2
 
 Object.prototype.containsKey = Object.prototype.containsKey ? Object.prototype.containsKey
     : function(...keys){
@@ -28,4 +26,12 @@ Object.prototype.contains = Object.prototype.contains ? Object.prototype.contain
     };
 // Object.prototype.toJson = function(){return JSON.stringify(this);}
 // Object.prototype.isNode = function(){return this instanceof Node;}
+
+
+
+// @version 0.0.3
+const ObjectExtend = true;
+console.log("属性扩展：对象操作 ObjectExtend");
+
+
 

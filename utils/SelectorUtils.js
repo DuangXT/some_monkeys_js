@@ -1,9 +1,5 @@
-console.log("工具类：DOM操作");
-
-
-
 /** 工具类：DOM操作
- * @version 0.1.0
+ * @version 0.1.2
  */
 const SelectorUtils = (function() {
 
@@ -317,7 +313,6 @@ const SelectorUtils = (function() {
 
     runIfExist,
 
-
     /** 选择对象存在时执行click() */
     click,
     clicks: function (...selectors) {
@@ -370,5 +365,4 @@ const SelectorUtils = (function() {
 })();
 
 var $dom = $dom ? $dom : SelectorUtils;
-
-
+console.log("工具类：DOM操作 SelectorUtils");

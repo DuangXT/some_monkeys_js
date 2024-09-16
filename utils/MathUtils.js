@@ -1,6 +1,5 @@
-console.log("工具类：数学");
 /** 工具类：数学
- * @version 0.0.3
+ * @version 0.0.4
  */
 const MathUtils = {
 
@@ -37,4 +36,4 @@ const MathUtils = {
     },
 
 };
-
+console.log("工具类：数学 MathUtils");

@@ -1,5 +1,3 @@
-console.log("工具类：UserAgent");
-
 /** 工具类：UserAgent
  * @version 0.0.4
  */
@@ -12,3 +10,4 @@ const UserAgentUtils = {
     setUserAgent: userAgent => Object.defineProperty(navigator,
         "userAgent",{value:userAgent,writable:false,configurable:false,enumerable:true}),
 }
+console.log("工具类：UserAgentUtils");

@@ -1,4 +1,3 @@
-console.log("工具类：模拟动作");
 /** 工具类：模拟动作
  * @version 0.0.8
  */
@@ -62,3 +61,4 @@ class SimulateUtils {
     }
 
 }
+console.log("工具类：模拟动作 SimulateUtils");

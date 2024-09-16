@@ -1,6 +1,4 @@
 
-console.log("属性扩展：DOM选择器");
-// @version 0.0.5
 
 var $qs = $qs ? $qs : document.querySelector.bind(document);
 var $qsa = $qsa ? $qsa :document.querySelectorAll.bind(document);
@@ -75,5 +73,12 @@ Document.prototype.closest = Element.prototype.closest ? Element.prototype.close
     return null;
 }
 
+
+
+
+
+// @version 0.0.6
+const DomExtend = true;
+console.log("属性扩展：DOM选择器 DomExtend");
 
 

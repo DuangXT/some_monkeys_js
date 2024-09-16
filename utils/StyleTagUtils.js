@@ -1,7 +1,5 @@
-console.log("工具类：样式标签");
-
 /** 工具类：样式标签
- * @version 0.0.1
+ * @version 0.0.2
  */
 const StyleTagUtils = {
 
@@ -18,5 +16,18 @@ const StyleTagUtils = {
         return style;
     },
 
+    addStyleLink: url => {
+        if('string' !== typeof url){
+            throw new TypeError('parameter "url" must be a string');
+        }
+        if (!document.head) return false;
+        let link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = url;
+        document.head.appendChild(link);
+        return link;
+    }
 
 }
+console.log("工具类：样式标签 StyleTagUtils");
+

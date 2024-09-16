@@ -1,6 +1,3 @@
-console.log("扩展函数：URL");
-// @version 0.0.7.2
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 
 const currentUrl = location.href.toString();
 const hostname = location.hostname.toString();
@@ -30,3 +27,12 @@ const currentUrlContain = currentUrlContains = currentUrlIncludes;
 const hostnameContains = (...matchs) => hostname.containsIgnoreCase(...matchs);
 const hostnameHas = hostnameContains;
 const hostnameIs = (...hostnames) => hostname.equalsIgnoreCase(...hostnames);
+
+
+
+// @version 0.0.7.3
+// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
+const UrlFunctions = true;
+console.log("扩展函数：UrlFunctions");
+
+

@@ -1,4 +1,3 @@
-console.log("工具类：特殊字符串校验");
 /** 工具类：特殊字符串校验
  * @version 0.0.6
  * @return [true|false, "错误信息"]
@@ -85,3 +84,4 @@ class StringValidateUtils {
     }
 
 }
+console.log("工具类：特殊字符串校验 StringValidateUtils");
