@@ -1,13 +1,17 @@
-console.log("工具类：日期");
 /**
  * 工具类：日期
- * @version 0.0.5
+ * @version 0.0.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
  */
-class DateUtils extends TimeUtils {
+const DateUtils =(function() {
 
-    __invalidDateToNormalValue__ = date => {
+    if(!StringUtils || !TimeUtils){
+        console.error("缺少依赖！！！", "工具类：日期 DateUtils", "StringUtils", "TimeUtils");
+        return {};
+    }
+
+    const __invalidDateToNormalValue__ = date => {
         if(StringUtils.isBlank(date)) {
             date = new Date();
         }
@@ -17,9 +21,8 @@ class DateUtils extends TimeUtils {
         return date instanceof Date ? date : new Date();
     };
 
-    /** 格式化日期    格式(yyyy-MM-dd hh:mm:ss) */
-    formatDate = (fmt, date) => {
-        date = this.__invalidDateToNormalValue__(date);
+    const formatDate = (fmt, date) => {
+        date = __invalidDateToNormalValue__(date);
         let o = {
             "M+": date.getMonth() + 1,                      // 月份
             "d+": date.getDate(),                           // 日
@@ -38,37 +41,47 @@ class DateUtils extends TimeUtils {
         return fmt;
     };
 
-    /** 获取距离 date 日期时间 ±num天的时间（正数：之后num天；负数：之前num天） */
-    dateCalculate = function (date, num) {
-        date = this.__invalidDateToNormalValue__(date);
-        date = date.valueOf();
-        date = date + Math.floor(num * 24 * 60 * 60 * 1000);
-        date = new Date(date);
-        return this.formatDate("yyyy-MM-dd hh:mm:ss", date);
-    };
 
-    diffToday = function(diffDate){
-        let today = new Date();
-        today = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
-        let specifiedDate = new Date(diffDate).getTime();
-        let timeDiff = specifiedDate - today;
-        return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    };
+    const today_yyyy_MM_dd = () => formatDate("yyyy-MM-dd");
+    const today_yyyy_MM_dd_hh_mm_ss_first = () => today_yyyy_MM_dd() + " 00:00:00";
 
-    today = ()=>this.today_yyyy_MM_dd();
-
-    today_yyyy_MM_dd = () => this.formatDate("yyyy-MM-dd");
-    today_yyyy_MM_dd_hh_mm_ss = ()=>this.today_yyyy_MM_dd_hh_mm_ss_first;
-    today_yyyy_MM_dd_hh_mm_ss_first = ()=> this.today_yyyy_MM_dd() + " 00:00:00";
-    today_yyyy_MM_dd_hh_mm_ss_last = ()=> this.today_yyyy_MM_dd() + " 23:59:59";
-
-    yesterday = ()=>this.yesterDay_yyyy_MM_dd();
-    yesterDay_yyyy_MM_dd = () => this.formatDate("yyyy-MM-dd",
+    const yesterDay_yyyy_MM_dd = () => formatDate("yyyy-MM-dd",
         new Date(new Date().getTime() - (24 * 60 * 60 * 1000)));
-    yesterDay_yyyy_MM_dd_hh_mm_ss = ()=>this.yesterDay_yyyy_MM_dd_hh_mm_ss_first();
-    yesterDay_yyyy_MM_dd_hh_mm_ss_first = ()=> this.yesterDay_yyyy_MM_dd() + " 00:00:00";
-    yesterDay_yyyy_MM_dd_hh_mm_ss_last = ()=> this.yesterDay_yyyy_MM_dd() + " 23:59:59";
+    const yesterDay_yyyy_MM_dd_hh_mm_ss_first = () => yesterDay_yyyy_MM_dd() + " 00:00:00";
 
+    return {
+        /** 格式化日期    格式(yyyy-MM-dd hh:mm:ss) */
+        formatDate,
 
+        /** 获取距离 date 日期时间 ±num天的时间（正数：之后num天；负数：之前num天） */
+        dateCalculate: function (date, num) {
+            date = __invalidDateToNormalValue__(date);
+            date = date.valueOf();
+            date = date + Math.floor(num * 24 * 60 * 60 * 1000);
+            date = new Date(date);
+            return formatDate("yyyy-MM-dd hh:mm:ss", date);
+        },
 
-}
+        diffToday: function (diffDate) {
+            let today = new Date();
+            today = new Date(today.getFullYear(), today.getMonth(), today.getDate()).getTime();
+            let specifiedDate = new Date(diffDate).getTime();
+            let timeDiff = specifiedDate - today;
+            return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        },
+
+        today_yyyy_MM_dd,
+        today: today_yyyy_MM_dd,
+        today_yyyy_MM_dd_hh_mm_ss_first,
+        today_yyyy_MM_dd_hh_mm_ss_last: () => today_yyyy_MM_dd() + " 23:59:59",
+        today_yyyy_MM_dd_hh_mm_ss: today_yyyy_MM_dd_hh_mm_ss_first,
+
+        yesterday: yesterDay_yyyy_MM_dd,
+        yesterDay_yyyy_MM_dd,
+        yesterDay_yyyy_MM_dd_hh_mm_ss_first,
+        yesterDay_yyyy_MM_dd_hh_mm_ss_last: () => yesterDay_yyyy_MM_dd() + " 23:59:59",
+        yesterDay_yyyy_MM_dd_hh_mm_ss: yesterDay_yyyy_MM_dd_hh_mm_ss_first,
+
+    }
+});
+console.log("工具类：日期 DateUtils");

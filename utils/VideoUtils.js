@@ -1,22 +1,28 @@
-console.log("工具类：视频媒体");
-
 /** 工具类：视频媒体
- * @version 0.0.5
+ * @version 0.0.6.0
  */
-const VideoUtils = {
+const VideoUtils = (function () {
 
     /** 暂停全部视频 */
-    pauseVideos: ()=>{
+    const pauseVideos = ()=>{
         let videos = document.querySelectorAll("video");
         // videos.forEach(video => video.pause());
         for (const video of videos) {
             video.pause();
         }
-    },
+    }
 
     /** 页面不处于前台(焦点)时暂停全部视频 */
-    pauseVideosIfPageIsBackground:()=>{
+    const pauseVideosIfPageIsBackground = ()=>{
         // thinking of....
-    },
+    }
 
-}
+    return {
+        pauseVideos,
+
+
+    }
+
+});
+console.log("工具类：视频媒体 VideoUtils");
+

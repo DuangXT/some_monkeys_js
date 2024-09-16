@@ -1,19 +1,20 @@
-console.log("工具类：时间");
-// @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
 /**
  * 工具类：时间
- * @version 0.0.3
+ * @version 0.0.4
+ * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
  */
-class TimeUtils {
-
-    /** 时间大小对象 */
-    static timeSizeValue = {
-        "year": 0, "month":0, "week":0, "day":0,
-        "hours":0, "minute":0, "second":0, "millisecond":0
+const TimeUtils = (function() {
+    if(!ValidateUtils){
+        console.error("缺少依赖！！！", "工具类：时间 TimeUtils", "ValidateUtils");
+        return {};
     }
 
-    /** 将时间大小对象输出为中文内容 */
-    timeSizeValueToChineseString = timeSizeValue => {
+    const timeSizeValue = {
+        "year": 0, "month":0, "week":0, "day":0,
+        "hours":0, "minute":0, "second":0, "millisecond":0
+    };
+
+    const timeSizeValueToChineseString = timeSizeValue => {
         let s ='';
 
         if (timeSizeValue.year !== 0)
@@ -50,37 +51,47 @@ class TimeUtils {
 
     }
 
-    /**
-     * 计算date与当前时间的时间差
-     * @param dateTimeString {String} yyyy-MM-dd HH:mm:ss
-     * @returns {String}
-     */
-    differenceCurrentTime = dateTimeString => {
-        // 兼容微信浏览器,主动格式化时间字符串
-        let arr1 = dateTimeString.split(" ");
-        let sdate = arr1[0].split('-');
-        let sTime = arr1[1].split(':');
-        let date1 = new Date(sdate[0], sdate[1] - 1, sdate[2], sTime[0], sTime[1], sTime[2]);
-        let setTime = new Date(date1).getTime();
-        // let timer = null;
-        let nowTime = new Date().getTime(),
-            leftTime = 0,
-            d = 0, h = 0, m = 0, s = 0;
-        leftTime = Math.ceil((nowTime - setTime) / 1000);
+    return {
+        /** 时间大小对象 */
+        timeSizeValue,
 
-        if (nowTime >= setTime) {
-            d = ~~(leftTime / 86400);
-            h = ~~(leftTime % 86400 / 3600);
-            m = ~~(leftTime % 86400 % 3600 / 60);
-            s = ~~(leftTime % 86400 % 3600 % 60);
+        /** 将时间大小对象输出为中文内容 */
+        timeSizeValueToChineseString,
+
+        /**
+         * 计算date与当前时间的时间差
+         * @param dateTimeString {String} yyyy-MM-dd HH:mm:ss
+         * @returns {String}
+         */
+        differenceCurrentTime: dateTimeString => {
+            // 兼容微信浏览器,主动格式化时间字符串
+            let arr1 = dateTimeString.split(" ");
+            let sdate = arr1[0].split('-');
+            let sTime = arr1[1].split(':');
+            let date1 = new Date(sdate[0], sdate[1] - 1, sdate[2], sTime[0], sTime[1], sTime[2]);
+            let setTime = new Date(date1).getTime();
+            // let timer = null;
+            let nowTime = new Date().getTime(),
+                leftTime = 0,
+                d = 0, h = 0, m = 0, s = 0;
+            leftTime = Math.ceil((nowTime - setTime) / 1000);
+
+            if (nowTime >= setTime) {
+                d = ~~(leftTime / 86400);
+                h = ~~(leftTime % 86400 / 3600);
+                m = ~~(leftTime % 86400 % 3600 / 60);
+                s = ~~(leftTime % 86400 % 3600 % 60);
+            }
+
+            let timeSizeValue = this.timeSizeValue;
+            timeSizeValue.day = d;
+            timeSizeValue.hours = h;
+            timeSizeValue.minute = m;
+            timeSizeValue.second = s;
+
+            return this.timeSizeValueToChineseString(timeSizeValue);
         }
+    }
 
-        let timeSizeValue = this.timeSizeValue;
-        timeSizeValue.day = d;
-        timeSizeValue.hours = h;
-        timeSizeValue.minute = m;
-        timeSizeValue.second = s;
-
-        return this.timeSizeValueToChineseString(timeSizeValue);
-    };
-}
+});
+console.log("工具类：时间 TimeUtils");
