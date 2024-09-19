@@ -1,5 +1,5 @@
 /** 工具类：重定向
- * @version 0.0.9.6
+ * @version 0.0.9.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = (function () {
@@ -22,7 +22,7 @@ const RedirectUtils = (function () {
     };
 
     /** 当域名匹配时，询问是否跳转到目标地址 */
-    askRedirect: function (host, targetUrl, targetInfo) {
+    const askRedirect = function (host, targetUrl, targetInfo) {
 
         function jump(_host) {
             if (_host && 'string' === typeof _host) {
@@ -40,7 +40,7 @@ const RedirectUtils = (function () {
         if (Array.isArray(host)) {
             host.forEach(_host => jump(_host));
         } else jump(host);
-    },
+    };
 
     return {
         redirect,
