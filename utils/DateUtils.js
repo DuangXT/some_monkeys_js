@@ -1,6 +1,6 @@
 /**
  * 工具类：日期
- * @version 0.0.7
+ * @version 0.0.8
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
  */
@@ -83,5 +83,5 @@ const DateUtils =(function() {
         yesterDay_yyyy_MM_dd_hh_mm_ss: yesterDay_yyyy_MM_dd_hh_mm_ss_first,
 
     }
-});
+})();
 console.log("工具类：日期 DateUtils");

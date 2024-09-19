@@ -1,5 +1,5 @@
 /** 工具类：视频媒体
- * @version 0.0.6.0
+ * @version 0.0.6.1
  */
 const VideoUtils = (function () {
 
@@ -23,6 +23,6 @@ const VideoUtils = (function () {
 
     }
 
-});
+})();
 console.log("工具类：视频媒体 VideoUtils");
 

@@ -1,6 +1,6 @@
 /**
  * 工具类：时间
- * @version 0.0.4
+ * @version 0.0.5
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
  */
 const TimeUtils = (function() {
@@ -93,5 +93,5 @@ const TimeUtils = (function() {
         }
     }
 
-});
+})();
 console.log("工具类：时间 TimeUtils");

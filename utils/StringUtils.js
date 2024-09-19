@@ -1,5 +1,5 @@
 /** 工具类：DOM操作
- * @version 0.1.6
+ * @version 0.1.7
  */
 const StringUtils = (function () {
 
@@ -190,5 +190,5 @@ const StringUtils = (function () {
 
     }
 
-});
+})();
 console.log("工具类：字符串 StringUtils");

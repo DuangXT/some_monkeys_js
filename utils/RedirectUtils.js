@@ -1,5 +1,5 @@
 /** 工具类：重定向
- * @version 0.0.9.4
+ * @version 0.0.9.5
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = (function () {
@@ -46,5 +46,5 @@ const RedirectUtils = (function () {
         },
         wantRedirect: askRedirect,
     }
-});
+})();
 console.log("工具类：重定向");

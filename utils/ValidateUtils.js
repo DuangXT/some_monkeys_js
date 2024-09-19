@@ -1,5 +1,5 @@
 /** 工具类：有效性校验
- * @version 0.1.3
+ * @version 0.1.4
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const ValidateUtils = (function () {
@@ -36,5 +36,5 @@ const ValidateUtils = (function () {
         isNotBlankObject,
         notBlankObject: isNotBlankObject,
     }
-});
+})();
 console.log("工具类：有效性校验 ValidateUtils");

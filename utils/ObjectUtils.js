@@ -1,5 +1,5 @@
 /** 工具类：对象操作
- * @version 0.0.6
+ * @version 0.0.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
  */
@@ -39,5 +39,5 @@ const ObjectUtils = (function() {
         },
 
     }
-});
+})();
 console.log("工具类：对象操作 ObjectUtils");

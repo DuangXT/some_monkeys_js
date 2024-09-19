@@ -1,5 +1,5 @@
 /** 工具类：JSON处理
- * @version 0.0.2.6
+ * @version 0.0.2.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const JsonUtils = (function(){
@@ -68,5 +68,5 @@ const JsonUtils = (function(){
             return data;
         },
     }
-});
+})();
 console.log('工具类：JSON处理 JsonUtils');

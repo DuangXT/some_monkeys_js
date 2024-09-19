@@ -1,5 +1,5 @@
 /** 工具类：DOM对象url跳转
- * @version 0.0.6
+ * @version 0.0.8
  */
 const SelectorLinkJumpUtils = (function() {
 
@@ -41,5 +41,5 @@ const SelectorLinkJumpUtils = (function() {
         alwaysOpenNewTab,
         alwaysOpen: alwaysOpenNewTab,
     }
-});
+})();
 console.log("工具类：DOM对象url跳转 SelectorLinkJumpUtils");

@@ -1,5 +1,5 @@
 /** 工具类：节点
- * @version 0.0.1.13
+ * @version 0.0.1.14
  */
 const NodeUtils = (function() {
 
@@ -45,6 +45,6 @@ const NodeUtils = (function() {
             return maxLen + 1;
         }
     }
-});
+})();
 
 console.log("工具类：节点 NodeUtils");

@@ -1,5 +1,5 @@
 /** 工具类：脚本标签
- * @version 0.0.5
+ * @version 0.0.6
  */
 const ScriptTagUtils = (function () {
 
@@ -59,5 +59,5 @@ const ScriptTagUtils = (function () {
         }
     }
 
-});
+})();
 console.log("工具类：脚本标签 ScriptTagUtils");

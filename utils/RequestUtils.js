@@ -1,5 +1,5 @@
 /** 工具类：发起请求
- * @version 0.1.0
+ * @version 0.1.1
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const RequestUtils = (function () {
@@ -122,5 +122,5 @@ const RequestUtils = (function () {
             console.log(s);
         },
     }
-});
+})();
 console.log("工具类：发起请求 RequestUtils");

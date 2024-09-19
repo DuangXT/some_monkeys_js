@@ -1,6 +1,6 @@
 /**
  * 工具类：文件后缀
- * @version 0.0.13
+ * @version 0.0.14
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const FileSuffixUtils  = (function () {
@@ -253,5 +253,5 @@ const FileSuffixUtils  = (function () {
 // VSDM  VSDX VSS VSSM VST VSTM VSTX
 // WBK    WMD WMS  WMZ WP5 WPD   plg
 
-});
+})();
 console.log("工具类：文件后缀 FileSuffixUtils");

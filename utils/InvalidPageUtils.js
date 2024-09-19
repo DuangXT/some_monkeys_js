@@ -1,5 +1,5 @@
 /** 工具类：无效页面判断
- * @version 0.0.1
+ * @version 0.0.2
  */
 const InvalidPageUtils = (function () {
 
@@ -28,5 +28,5 @@ const InvalidPageUtils = (function () {
         }
 
     }
-});
+})();
 console.log("工具类：无效页面判断 InvalidPageUtils");

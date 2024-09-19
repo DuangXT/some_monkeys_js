@@ -1,5 +1,5 @@
 /** 工具类：网页窗口
- * @version 0.0.18
+ * @version 0.0.19
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
  */
 const WindowUtils= (function(){
@@ -64,5 +64,5 @@ const WindowUtils= (function(){
         openMiniWindowWithTimingClose,
     }
 
-});
+})();
 console.log("工具类：网页窗口 WindowUtils");

@@ -1,5 +1,5 @@
 /** 工具类：函数
- * @version 0.0.12
+ * @version 0.0.13
  */
 const FunctionUtils= (function (){
 
@@ -47,5 +47,5 @@ const FunctionUtils= (function (){
         taskLast: runLast,
 
     }
-});
+})();
 console.log("工具类：函数 FunctionUtils");

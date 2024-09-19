@@ -1,5 +1,5 @@
 /** 工具类：URL
- * @version 0.0.10
+ * @version 0.0.11
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const UrlUtils = (function () {
@@ -71,6 +71,6 @@ const UrlUtils = (function () {
         },
     }
 
-});
+})();
 console.log("工具类：UrlUtils");
 
