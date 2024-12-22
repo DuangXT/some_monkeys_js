@@ -45,11 +45,9 @@ const hostnameHas = function (...matchs){
     let strs = [];
     if(typeof matchs === 'string') return hostmatch(matchs.toLowerCase());
 
-
-    matchs.forEach(s=> {
-        console.log(typeof s, s);
-        strs.push(s.toString().trim().toLowerCase())
-    });
+    for (const s of matchs) {
+        s && strs.push(s.toString().trim().toLowerCase())
+    }
 
     for (let match of strs) {
         const r = hostmatch(match)
@@ -58,7 +56,7 @@ const hostnameHas = function (...matchs){
     return false;
 }
 
-// @version 0.0.7.8
+// @version 0.0.7.9
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 const UrlFunctions = true;
 console.log("扩展函数：UrlFunctions");
