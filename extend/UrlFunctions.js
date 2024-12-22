@@ -25,12 +25,26 @@ const currentUrlContain = currentUrlContains = currentUrlIncludes;
 
 /** 判断域名内是否包含匹配字符串 */
 const hostnameContains = (...matchs) => hostname.containsIgnoreCase(...matchs);
-const hostnameHas = hostnameContains;
+/** 完整域名匹配 */
 const hostnameIs = (...hostnames) => hostname.equalsIgnoreCase(...hostnames);
+/** 主域名匹配<br/>
+ * 传入的匹配值必须符合域名规则，可以以.开头
+ * 成功: 主域名（真值）<br/>
+ * 失败: false */
+const hostnameHas = function (...matchs){
+    let strs = [];
+    matchs.forEach(s=> strs.push(s.toString().toLowerCase()));
+    const _host = hostname.toLowerCase();
+    for (let match of strs) {
+        if(_host === match
+            || (match.startsWith('.') && _host.endsWith(match))
+            || _host.endsWith("." + match)
+        ) return match;
+    }
+    return false;
+}
 
-
-
-// @version 0.0.7.3
+// @version 0.0.7.4
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 const UrlFunctions = true;
 console.log("扩展函数：UrlFunctions");
