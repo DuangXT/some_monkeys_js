@@ -44,7 +44,12 @@ const hostnameHas = function (...matchs){
 
     let strs = [];
     if(typeof matchs === 'string') return hostmatch(matchs.toLowerCase());
-    matchs.forEach(s=> strs.push(s.toString().trim().toLowerCase()));
+
+
+    matchs.forEach(s=> {
+        console.log(typeof s, s);
+        strs.push(s.toString().trim().toLowerCase())
+    });
 
     for (let match of strs) {
         const r = hostmatch(match)
