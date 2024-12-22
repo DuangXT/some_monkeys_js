@@ -32,6 +32,7 @@ const hostnameIs = (...hostnames) => hostname.equalsIgnoreCase(...hostnames);
  * 成功: 主域名（真值）<br/>
  * 失败: false */
 const hostnameHas = function (...matchs){
+    if(!matchs) return false;
     const _host = hostname.toLowerCase()+'';
     function hostmatch(match){
         if(_host === match
@@ -43,9 +44,6 @@ const hostnameHas = function (...matchs){
 
     let strs = [];
     if(typeof matchs === 'string') return hostmatch(matchs.toLowerCase());
-    /*for (const match of matchs) {
-        strs.push((match+'').trim().toLowerCase());
-    }*/
     matchs.forEach(s=> strs.push(s.toString().trim().toLowerCase()));
 
     for (let match of strs) {
@@ -55,7 +53,7 @@ const hostnameHas = function (...matchs){
     return false;
 }
 
-// @version 0.0.7.6
+// @version 0.0.7.7
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
 const UrlFunctions = true;
 console.log("扩展函数：UrlFunctions");
