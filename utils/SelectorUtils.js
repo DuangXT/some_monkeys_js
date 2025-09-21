@@ -1,5 +1,5 @@
 /** 工具类：DOM操作
- * @version 0.1.2
+ * @version 0.1.3
  */
 const SelectorUtils = (function() {
 
@@ -36,7 +36,7 @@ const SelectorUtils = (function() {
 
   const remove = function (...selectors) {
     for (const _selector of selectors) {
-      let ele = __isString__(_selector) ? this.qs(_selector) : _selector;
+      let ele = __isString__(_selector) ? qs(_selector) : _selector;
       if (ele) {
         try {
           ele.remove();
@@ -298,14 +298,14 @@ const SelectorUtils = (function() {
     },
     /** 隐藏每个选择器的一个标签 */
     hides: function (...selectors) {
-      selectors.forEach(this.hide)
+      selectors.forEach(hide)
     },
 
 
     /** 隐藏每个选择器的所有标签 */
     hideAll: function (...selectors) {
       for (const _selector of selectors) {
-        for (let ele of this.qsa(_selector)) {
+        for (let ele of qsa(_selector)) {
           setStyleHidden(ele);
         }
       }
@@ -335,7 +335,7 @@ const SelectorUtils = (function() {
       if (!__isString__(_selector)) {
         throw new TypeError('_selector must be a string');
       }
-      let selector = this.qs(_selector);
+      let selector = qs(_selector);
       if (selector) {
         // removeClasses.forEach(_class => {
         for (let _class of removeClasses) {
@@ -353,12 +353,12 @@ const SelectorUtils = (function() {
       if (!__isString__(linkHref)) {
         throw new TypeError('parameter "css" must be a string');
       }
-      if (!this.head) return;
+      if (!head) return;
       let link = createElement('link');
       link.type = linkType;
       link.rel = linkRel;
       link.href = linkHref;
-      this.head.add(link);
+      head.add(link);
       return link;
     },
   }
