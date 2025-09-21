@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：文档元素
-// @version 0.0.6
+// @version 0.0.7
 // @author DuangXT
 // @grant unsafeWindow
 
@@ -35,7 +35,7 @@ var click = click ? click : obj=>{
 
 /** 视频站选择清晰度专用 */
 const clickIfNoLogin = (liSelector, liNoLoginSpan, spanText)=>{
-    let length = $dom.qsa(liSelector).length;
+    let length = $dom.$qsa(liSelector).length;
     for(let i=0; i<length; i++){
         let loginSpan = $dom.qs(liSelector + ":nth-child(" + i + ") > " + liNoLoginSpan);
         if(loginSpan || loginSpan.textContent.containsIgnoreCase(spanText)){ // 存在说明未登录跳过下一个

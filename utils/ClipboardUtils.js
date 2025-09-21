@@ -1,8 +1,12 @@
 /** 工具类：剪贴板操作
- * @version 0.0.1
+ * @version 0.0.2
  */
 class ClipboardUtils {
     copyTextToClipboard(text) {
+        if(GM_setClipboard) {
+            GM_setClipboard(text);
+            return;
+        }
         navigator.clipboard.writeText(text).then(function () {
             console.log('复制成功！', text);
         }, function (err) {

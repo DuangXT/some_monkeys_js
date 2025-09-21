@@ -43,7 +43,7 @@ const FileSuffixUtils  = (function () {
   const videoFormats = ['ts', 'mp4', "webm", "flv", "mov", "3gp", 'm4s',
     "mkv", 'avi', "wmv", "rm", "rmvb", "mpeg", "mpg", 'M4V', 'ogv', 'qt', 'm2ts',
     "vob", "asf", "mpe", "dat", "mpa", "asx", "avs", 'dv', 'ifo', "avx", 'swf',
-    "gif", 'avif', // 动态图像(无音频)
+    "gif", 'avif', "mng", // 动态图像(无音频)
     'm3u8', // 流媒体地址
     'video', 'movie', 'film', 'clip'];
   const isVideoFile = function (fileLink) {
@@ -116,7 +116,7 @@ const FileSuffixUtils  = (function () {
     'package'];
 
 
-  const androidPackageFormats = ['apk', 'apk.1', 'aab', 'xapk', 'apkm', 'dapk'];
+  const androidPackageFormats = ['apk', 'apk.1', 'aab', 'xapk', 'apkm', 'dapk', "AndroidPackage"];
 
 
   const webViewFormats = ['html', 'htm', 'xhtml', 'xht', 'xml', 'css', 'BR'];

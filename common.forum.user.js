@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：论坛
-// @version 0.0.6
+// @version 0.0.8
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
@@ -12,7 +12,7 @@
 
 gmlog('公共库：论坛');
 
-let currentUrlIncludes = (...searchString) => location.href.contains(...searchString);
+let currentUrlIncludes = (...searchString) => (location.href+'').contains(...searchString);
 
 function isForum(){
     return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");
@@ -57,4 +57,14 @@ const forumModIs = (forumMod, fid=false) => {
     let flag = currentUrlIncludes('/forum.php?') && urlparams['mod'] && (urlparams['mod'] === forumMod);
     if(flag && fid) flag = urlparams['fid'] && (urlparams['fid'] === ''+fid);
     return flag;
+}
+
+/** 恢复图片链接 */
+const restoreImg = () => {
+    for (let img of document.querySelectorAll("img")) {
+        if (img.src.endsWith("none.gif") || img.src.endsWith("undefined")) {
+            // console.log(img.src, img.zoomfile, img.file);
+            img.src = img.getAttribute("zoomfile") || img.getAttribute("file");
+        }
+    }
 }

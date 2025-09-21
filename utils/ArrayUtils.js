@@ -1,8 +1,14 @@
 /**
  * 工具类：数组
- * @version 0.0.5
+ * @version 0.0.6
  */
 const ArrayUtils = {
+
+    /** 查找一个数据在数组中存在的数量（无类型判断） */
+    counts: (array, value) => array.filter(item => item === value).length,
+
+    /** 随机取得其中一个值 */
+    random: array => array ? array[Math.floor(Math.random() * array.length)] : undefined,
 
     deduplicationBySet: array => Array.from(new Set(array)),
 
