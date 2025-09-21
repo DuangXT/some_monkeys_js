@@ -32,12 +32,21 @@ String.prototype.containsIgnoreCase = function (...substrs){
 }
 String.prototype.notContainsIgnoreCase=(...s)=>!String.prototype.containsIgnoreCase(...s);
 
+/** 当字符串包含指定的数组中的全部字符时返回true */
+String.prototype.containsAll = function(...ss) {return ss.every(s => this.includes(s))};
+String.prototype.containsAllIgnoreCase = function(...ss) {
+    const str = this.toLowerCase();
+    return ss.every(s => str.includes(s.toLowerCase()));
+};
+
+
+
 // Object.prototype.isString = function(){return '[object String]' === Object.prototype.toString.call(this)}
 
 
 
 
-// @version: 0.0.11
+// @version: 0.0.12
 const StringExtend = true;
 console.log("属性扩展：字符串 StringExtend");
 

@@ -1,5 +1,5 @@
 /** 工具类：DOM操作
- * @version 0.1.3
+ * @version 0.1.4
  */
 const SelectorUtils = (function() {
 
@@ -82,6 +82,7 @@ const SelectorUtils = (function() {
   };
 
   const removeIfTextContains = function (obj, ...strs) {
+    if (!obj) return;
     if ('object' !== typeof obj) {
       throw new TypeError('obj must be a object');
     }
@@ -90,6 +91,7 @@ const SelectorUtils = (function() {
         (node instanceof HTMLElement || (node.nodeType && 'number' === typeof node.nodeType));
 
     function _remove(o) {
+      if(!o) return;
       if (_isElementNode(o)) {
         for (let s of strs) {
           if (s && o.textContent.includes(s.toString())) {
