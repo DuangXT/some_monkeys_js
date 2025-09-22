@@ -1,5 +1,5 @@
 /** 工具类：DOM操作
- * @version 0.1.4
+ * @version 0.1.5
  */
 const SelectorUtils = (function() {
 
@@ -82,7 +82,10 @@ const SelectorUtils = (function() {
   };
 
   const removeIfTextContains = function (obj, ...strs) {
-    if (!obj) return;
+    if (!obj) {
+      console.log('空值传递', obj, ...strs);
+      return;
+    }
     if ('object' !== typeof obj) {
       throw new TypeError('obj must be a object');
     }
