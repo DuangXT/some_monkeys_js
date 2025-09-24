@@ -1,5 +1,5 @@
 /** 工具类：样式标签
- * @version 0.0.2
+ * @version 0.0.3
  */
 const StyleTagUtils = {
 
@@ -11,7 +11,7 @@ const StyleTagUtils = {
         }
         if (!document.head) return false;
         let style = document.createElement('style');
-        style.innerHTML = css;
+        style.textContent = css;
         document.head.appendChild(style);
         return style;
     },
