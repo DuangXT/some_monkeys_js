@@ -1,9 +1,9 @@
 /** 工具类：URL
- * @version 0.0.11
+ * @version 0.0.12
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const UrlUtils = (function () {
-    if(!UrlFunctions){
+    if('undefined' === typeof UrlFunctions){
         console.error("缺少依赖！！！", "工具类：UrlUtils", "UrlFunctions");
         return {};
     }

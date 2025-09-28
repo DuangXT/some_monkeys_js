@@ -1,12 +1,12 @@
 /**
  * 工具类：金钱货币
- * @version 0.0.6
+ * @version 0.0.7
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
  */
 const CurrencyUtils = (function (){
 
-    if(!StringUtils || !MathUtils){
+    if('undefined' === typeof StringUtils || 'undefined' === typeof MathUtils){
         console.error("缺少依赖！！！", "工具类：金钱货币 DateUtils", "StringUtils", "MathUtils");
         return {};
     }

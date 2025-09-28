@@ -1,10 +1,10 @@
 /** 工具类：JSON处理
- * @version 0.0.2.7
+ * @version 0.0.2.8
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const JsonUtils = (function(){
 
-    if(!StringUtils){
+    if('undefined' === typeof StringUtils){
         console.error("缺少依赖！！！", "工具类：JSON处理", "StringUtils");
         return {};
     }

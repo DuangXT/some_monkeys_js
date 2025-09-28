@@ -1,9 +1,9 @@
 /** 工具类：网页窗口
- * @version 0.0.19
+ * @version 0.0.20
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
  */
 const WindowUtils= (function(){
-    if(!StringExtend){
+    if('undefined' === typeof StringExtend){
         console.error("缺少依赖！！！", "工具类：网页窗口 WindowUtils", "StringExtend");
         return {};
     }

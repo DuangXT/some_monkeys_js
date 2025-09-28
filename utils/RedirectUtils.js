@@ -1,10 +1,10 @@
 /** 工具类：重定向
- * @version 0.0.9.7
+ * @version 0.0.9.8
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const RedirectUtils = (function () {
 
-    if (!UrlFunctions) {
+    if ('undefined' === typeof UrlFunctions) {
         console.error("缺少依赖！！！", "工具类：重定向", "UrlFunctions");
         return {};
     }

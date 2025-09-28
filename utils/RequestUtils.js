@@ -1,10 +1,10 @@
 /** 工具类：发起请求
- * @version 0.1.1
+ * @version 0.1.2
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const RequestUtils = (function () {
 
-    if (!StringUtils) {
+    if ('undefined' === typeof StringUtils) {
         console.error("缺少依赖！！！", "工具类：发起请求 RequestUtils", "StringUtils");
         return {};
     }

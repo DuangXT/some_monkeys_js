@@ -1,10 +1,10 @@
 /**
  * 工具类：时间
- * @version 0.0.5
+ * @version 0.0.6
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/ValidateUtils.js
  */
 const TimeUtils = (function() {
-    if(!ValidateUtils){
+    if('undefined' === typeof ValidateUtils){
         console.error("缺少依赖！！！", "工具类：时间 TimeUtils", "ValidateUtils");
         return {};
     }

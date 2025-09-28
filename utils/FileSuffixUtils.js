@@ -1,11 +1,11 @@
 /**
  * 工具类：文件后缀
- * @version 0.0.14
+ * @version 0.0.15
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const FileSuffixUtils  = (function () {
 
-  if(!StringUtils){
+  if('undefined' === typeof StringUtils){
     console.error("缺少依赖！！！", "工具类：文件后缀 FileSuffixUtils", "StringUtils");
     return {};
   }
@@ -101,6 +101,7 @@ const FileSuffixUtils  = (function () {
     'gho', // General Hardware Oriented System Transfer
     'wim', // Windows Imaging Format
     "esd", // Electronic Software Delivery
+    "qcow2", // file format for disk image files used by QEMU
     'ccd', 'cue', 'bwt', 'cdi', 'nrg', 'pdi', 'b5t', 'tao', 'dao', 'cif', 'UDF',
     'bin', // 二进制文件
   ];

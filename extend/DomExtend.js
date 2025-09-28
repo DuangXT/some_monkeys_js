@@ -1,8 +1,8 @@
 
 
-var $qs = $qs ? $qs : document.querySelector.bind(document);
-var $qsa = $qsa ? $qsa :document.querySelectorAll.bind(document);
-var create = create ? create : document.createElement.bind(document);
+var $qs = 'undefined' !== typeof $qs ? $qs : document.querySelector.bind(document);
+var $qsa = 'undefined' !== typeof $qsa ? $qsa :document.querySelectorAll.bind(document);
+var create = 'undefined' !== typeof create ? create : document.createElement.bind(document);
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
@@ -77,7 +77,7 @@ Document.prototype.closest = Element.prototype.closest ? Element.prototype.close
 
 
 
-// @version 0.0.6
+// @version 0.0.7
 const DomExtend = true;
 console.log("属性扩展：DOM选择器 DomExtend");
 

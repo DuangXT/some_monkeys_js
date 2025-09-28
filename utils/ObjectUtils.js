@@ -1,10 +1,10 @@
 /** 工具类：对象操作
- * @version 0.0.7
+ * @version 0.0.8
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/MathUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/NodeUtils.js
  */
 const ObjectUtils = (function() {
-    if(!NodeUtils || !MathUtils){
+    if('undefined' === typeof NodeUtils || 'undefined' === typeof MathUtils){
         console.error("缺少依赖！！！", "工具类：对象操作 ObjectUtils", "NodeUtils", "MathUtils");
         return {};
     }

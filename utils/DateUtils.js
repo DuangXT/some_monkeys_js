@@ -1,12 +1,12 @@
 /**
  * 工具类：日期
- * @version 0.0.8
+ * @version 0.0.9
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/TimeUtils.js
  */
 const DateUtils =(function() {
 
-    if(!StringUtils || !TimeUtils){
+    if('undefined' === typeof StringUtils || 'undefined' === typeof TimeUtils){
         console.error("缺少依赖！！！", "工具类：日期 DateUtils", "StringUtils", "TimeUtils");
         return {};
     }

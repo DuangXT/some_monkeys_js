@@ -1,9 +1,10 @@
 
-const $qs = document.querySelector.bind(document); // s => document.querySelector(s);
-const $qsa = $all = $$ = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
+var $qs = document.querySelector.bind(document); // s => document.querySelector(s);
+var $qsa = $all = document.querySelectorAll.bind(document); // s => [...document.querySelectorAll(s)];
 // const querySelector = $qs;
 // const querySelectorAll = $qsa;
 // const $ = querySelector; // 不建议，容易引起冲突
+// const $$ = $qsa;
 
 const getTagElements = (tagName) => document.getElementsByTagName(tagName);
 /**
@@ -16,6 +17,6 @@ const getTagElement = (tagName, tagLocation=0) => getTagElements(tagName)[tagLoc
 const tags = allTag = allElements = () => document.querySelectorAll('*');
 
 
-// @version 0.0.6
+// @version 0.0.7
 const SelectorFunctions = true;
 console.log("扩展函数：标签选择器 SelectorFunctions");

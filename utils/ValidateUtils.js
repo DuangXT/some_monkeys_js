@@ -1,9 +1,9 @@
 /** 工具类：有效性校验
- * @version 0.1.4
+ * @version 0.1.5
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/utils/StringUtils.js
  */
 const ValidateUtils = (function () {
-    if(!StringUtils){
+    if('undefined' === typeof StringUtils){
         console.error("缺少依赖！！！", "工具类：有效性校验 ValidateUtils", "StringUtils");
         return {};
     }

@@ -1,5 +1,5 @@
 /** 工具类：脚本标签
- * @version 0.0.6
+ * @version 0.0.8
  */
 const ScriptTagUtils = (function () {
 
@@ -33,9 +33,9 @@ const ScriptTagUtils = (function () {
     };
 
     /** 向head插入js代码 */
-    const addHeadScriptByCode = jscode => this.addScriptByCode(jscode, document.head);
+    const addHeadScriptByCode = jscode => addScriptByCode(jscode, document.head);
     /** 向body插入js代码 */
-    const addBodyScriptByCode = jscode => this.addScriptByCode(jscode, document.body);
+    const addBodyScriptByCode = jscode => addScriptByCode(jscode, document.body);
 
 
     /** 删除页面上已有的重定向代码，用来阻止部分潜在的恶意重定向 */
@@ -49,6 +49,16 @@ const ScriptTagUtils = (function () {
         }
     }
 
+    const fetchScript = (url) => {
+        if('undefined' !== typeof GM_xmlhttpRequest){
+            GM_xmlhttpRequest({method: "GET", url: url,
+                onload: function(r) {
+                    addHeadScriptByCode(r.responseText);
+            }});
+        }
+        // 现代浏览器安全政策无法发起请求
+        else fetch(url).then(r => addHeadScriptByCode(r.text()));
+    };
 
     return {
         /** 以插入script标签的形式，向页面body内插入新的脚本引用 */
@@ -64,6 +74,8 @@ const ScriptTagUtils = (function () {
 
         addHeadScriptByCode,
         addBodyScriptByCode,
+
+        fetchScript,
 
         /** 一次性加载脚本，脚本加载完即刻删除。适合只需要运行一次的脚本。 */
         burnAfterscripting: (jscode, timeout = 1000) => {

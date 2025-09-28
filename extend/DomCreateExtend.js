@@ -1,8 +1,8 @@
 
 
 const createElement = addTag = addElement = document.createElement.bind(document);
-var create = create ? create : createElement;
-var add = add ? add : create;
+var create = 'undefined' !== typeof create ? create : createElement;
+var add = 'undefined' !== typeof add ? add : create;
 Document.prototype.create = Document.prototype.create ? Document.prototype.create
     : function(tagName){
     let newEle = document.createElement(tagName);
@@ -19,6 +19,6 @@ Element.prototype.create = Element.prototype.create ? Element.prototype.create
 
 
 
-// @version 0.0.5.4
+// @version 0.0.5.5
 const DomCreateExtend = true;
 console.log("扩展：创建新的文档元素 DomCreateExtend");
