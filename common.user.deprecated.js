@@ -54,6 +54,7 @@
 // 事件监听函数；作用域=整个页面；所有资源加载完成后执行；后续加载的 window.onload 会覆盖之前加载的。
 // window.onload = function () { }
 // window.onload = ()=>{ }
+// document.addEventListener('DOMContentLoaded', function() {   })
 
 // (()=>{window.onload = ()=>{
 // }})();

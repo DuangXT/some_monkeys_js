@@ -1,5 +1,6 @@
 [
-  "zip", "zipx", "7z", "rar", "tar", "z", "gz", "gzip", "zst", "Zstd", "xz",
-  "bz", "bz2", "tgz", "cab", "ace", "sea", "lzh", "ARJ", "SIT", "SITX", "Asar",
-  "arc", "LZMA", "LZ", "lzip", "rar5", "LHA", "TBZ", "TBZ2", "ZPAQ", "ZSTD", "ALZ"
+  "zip", "zipx", "7z", "rar", "tar", "z", "gz", "gzip", "zst", "Zstd", "xz", "tar.xz",
+  "bz", "bz2", "bzip2", "tgz", "cab", "ace", "sea", "lzh", "arj", "sit", "sitx", "asar", "tar.bz2",
+  "arc", "lzma", "lz", "lzip", "rar5", "lha", "tbz", "tbz2", "zpaq", "zstd", "alz",
+  "apfs", "cpio"
 ]

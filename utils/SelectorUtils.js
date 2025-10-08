@@ -1,5 +1,5 @@
 /** 工具类：DOM操作
- * @version 0.1.5
+ * @version 0.1.6
  */
 const SelectorUtils = (function() {
 
@@ -86,9 +86,7 @@ const SelectorUtils = (function() {
       console.log('空值传递', obj, ...strs);
       return;
     }
-    if ('object' !== typeof obj) {
-      throw new TypeError('obj must be a object');
-    }
+    if( 'object' !== typeof obj) throw new TypeError('obj must be a object');
 
     let _isElementNode = node => node &&
         (node instanceof HTMLElement || (node.nodeType && 'number' === typeof node.nodeType));
@@ -117,8 +115,8 @@ const SelectorUtils = (function() {
   };
 
   const setStyleHidden = obj => {
-    if (!obj || 'object' !== typeof obj) {
-      throw new TypeError('obj must be a object');
+    if (!obj || !(obj instanceof HTMLElement)) {
+      throw new TypeError('obj must be a HTML Element Object');
     }
     obj.style.display = "none!important";
     obj.style.visibility = "hidden!important";
@@ -128,9 +126,18 @@ const SelectorUtils = (function() {
     return obj;
   };
 
-
-
-
+  const setStyleShow = obj => {
+    if (!obj || !(obj instanceof HTMLElement)) {
+      throw new TypeError('obj must be a HTML Element Object');
+    }
+    obj.style.removeProperty('display');
+    obj.style.display = '0!important';
+    obj.style.visibility = 'visible';
+    obj.style.opacity = '1';
+    obj.style.transform = 'scale(1)';
+    obj.style.transition = 'opacity 0.3s ease-in-out'; // 淡入
+    obj.removeAttribute('hidden');
+  }
 
 
 
@@ -254,7 +261,7 @@ const SelectorUtils = (function() {
             htmlObject = document.getElementsByTagName(css)[0];
             break;
         }
-      } else throw new TypeError('parameter "css" must be a string or HTMLElement');
+      } else throw new TypeError('parameter "css" must be a string or HTML Element');
 
       if (htmlObject) {
         let textImportant = "text!important";
@@ -302,9 +309,18 @@ const SelectorUtils = (function() {
       return ele;
     },
     /** 隐藏每个选择器的一个标签 */
-    hides: function (...selectors) {
-      selectors.forEach(hide)
+    hides: function (...selectors) { selectors.forEach(hide) },
+
+    show: function (_selector) {
+      let ele = __isString__(_selector) ? qs(_selector) : _selector;
+      if (ele && 'object' === typeof ele) {
+        if (ele.style) console.log("元素 " + _selector +
+            "显示前样式：" + JSON.stringify(ele.style).slice(0, 100));
+        setStyleShow(ele);
+      } else console.log('显示失败! 参数并非字符串或者可操作对象:', _selector);
+      return ele;
     },
+    shows: function (...selectors) { selectors.forEach(show) },
 
 
     /** 隐藏每个选择器的所有标签 */

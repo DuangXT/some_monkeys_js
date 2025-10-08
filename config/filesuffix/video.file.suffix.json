@@ -2,7 +2,7 @@
   "ts", "mp4", "webm", "flv", "mov", "3gp", "m4s",
   "mkv", "avi", "wmv", "rm", "rmvb", "mpeg", "mpg", "M4V", "ogv", "qt", "m2ts",
   "vob", "asf", "mpe", "dat", "mpa", "asx", "avs", "dv", "ifo", "avx", "swf",
-  "gif", "avif",
+  "gif", "avif", "mng",
   "m3u8",
   "video", "movie", "film", "clip"
 ]

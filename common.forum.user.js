@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name 常用油猴脚本方法：论坛
-// @version 0.0.8
+// @version 0.0.9
 // @author DuangXT
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/common.log.user.js
 // @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/StringExtend.js
@@ -11,8 +11,6 @@
 // common level 1
 
 gmlog('公共库：论坛');
-
-let currentUrlIncludes = (...searchString) => (location.href+'').contains(...searchString);
 
 function isForum(){
     return currentUrlIncludes("/forum") || currentUrlIncludes("/bbs");
