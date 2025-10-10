@@ -1,5 +1,5 @@
 /** 工具类：数学
- * @version 0.0.4
+ * @version 0.0.5
  */
 const MathUtils = {
 
@@ -34,6 +34,21 @@ const MathUtils = {
             num = '0' + num;
         return num;
     },
+
+    /** 返回随机概率，默认50% */
+    randomOdds: function (rate=0.5, seed){
+        if(seed){
+            const x = Math.sin(seed) * 10000;
+            return (x - Math.floor(x)) < rate;
+        }
+        return Math.random() < rate;
+    }
+
+
+
+
+
+
 
 };
 console.log("工具类：数学 MathUtils");
