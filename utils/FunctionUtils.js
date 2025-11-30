@@ -1,10 +1,11 @@
 /** 工具类：函数
- * @version 0.0.13
+ * @version 0.0.14
  */
 const FunctionUtils= (function (){
 
     const isFunction = func => func && 'function' === typeof func;
-    const sleep = (ms = 1000) => new Promise(() => setTimeout(()=>{}, ms));
+    const sleep = async (ms = 1000) => await new Promise(resolve => setTimeout(resolve, ms));
+
 
     const runLast = function (func) {
         if (!isFunction(func)) {

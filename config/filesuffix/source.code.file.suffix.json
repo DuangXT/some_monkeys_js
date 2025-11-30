@@ -1,0 +1,9 @@
+[
+  "java", "kt", "go", "py", "rt",
+  "js", "jsx", "ts", "tsx",
+  "jsp", "php", "asp", "aspx",
+  "cs", "cpp", "c", "h",
+  "html", "htm", "htmls", "xhtml",
+  "css",
+  "bat", "cmd", "com", "ps1", "vbs", "lua"
+]

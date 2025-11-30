@@ -1,5 +1,5 @@
 /** 工具类：URL
- * @version 0.0.12
+ * @version 0.0.13
  * @require https://raw.githubusercontent.com/DuangXT/some_monkeys_js/main/extend/UrlFunctions.js
  */
 const UrlUtils = (function () {
@@ -9,7 +9,7 @@ const UrlUtils = (function () {
     }
 
     /**
-     * 获取查询参数
+     * 获取查询参数（通过正则表达式的方式）
      * //by http://stackoverflow.com/a/1099670
      */
     const getQueryParams = function (qs = document.location.search) {
@@ -22,6 +22,29 @@ const UrlUtils = (function () {
         }
         return params;
     };
+
+    /**
+     * 获取查询参数（使用URL对象）
+     * //by http://stackoverflow.com/a/1099670
+     */
+    const getUrlParams = function (qs = document.location.search) {
+        const urlParams = new URLSearchParams(qs);
+        const params = {};
+        for (const [key, value] of urlParams.entries()) {
+            params[key] = decodeURIComponent(value);
+        }
+        return params;
+    };
+
+    /**
+     * 获取当前链接的单个查询参数（使用URL对象）
+     * //by http://stackoverflow.com/a/1099670
+     */
+    const getUrlParam = function (key) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const value = urlParams.get(key);
+        return value ? decodeURIComponent(value) : null;
+    }
 
     const searchParamsContains = function (...paramNames) {
         let params = getQueryParams();

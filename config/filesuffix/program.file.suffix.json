@@ -1,0 +1,13 @@
+[
+  "exe", "dll", "msi", "msix", "msu", "msp",
+
+  "jar", "jad", "war",
+
+  "apk", "apk.1", "aab", "xapk", "apkm", "dapk", "AndroidPackage",
+
+  "hap", "HarmonyAbilityPackage",
+
+  "app",
+
+  "ipa", "iPhoneApplication", "iPadApplication"
+]

@@ -1,0 +1,58 @@
+[
+  "# 二级域名根",
+
+
+  "# 中国",
+  "com.cn",
+  "gov.cn",
+  "edu.cn",
+  "org.cn",
+  "net.cn",
+  "cn.com",
+  "# 香港",
+  "gov.hk",
+  "com.hk",
+  "hk.com",
+  "# 澳门",
+  "mo.com",
+  "com.mo",
+  "# 台湾",
+  "com.tw",
+  "tw.com",
+
+
+  "# 英国",
+  "co.uk", "net.uk", "com.uk", "org.uk",
+
+  "com.kr", "co.kr",  "# 韩国",
+  "com.jp", "co.jp",  "# 日本",
+  "com.nz", "co.nz",  "# 新西兰",
+  "com.vn", "co.vn",  "# 越南",
+  "com.au", "co.au",  "# 澳大利亚",
+
+  "org.cy",  "# 塞浦路斯",
+  "com.tr",  "# 土耳其",
+  "com.pk",  "# 巴基斯坦",
+  "gov.ph",  "# 菲律宾",
+  "co.id",   "# 印度",
+  "co.il",   "# 以色列",
+  "gov.sa",  "# 沙特阿拉伯",
+  "gov.jo",  "# 约旦",
+  "net.kw",  "# 科威特",
+  "gov.om",  "# 阿曼",
+  "org.eg",  "# 埃及",
+  "com.zm",  "# 赞比亚",
+  "com.br", "# 巴西",
+  "co.in", "# 印度",
+
+
+  "co.at",
+  "com.mx",
+  "com.pe",
+  "com.pl",
+  "com.ua",
+  "com.ve"
+
+
+
+]

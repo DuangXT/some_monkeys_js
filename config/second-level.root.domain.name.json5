@@ -1,0 +1,203 @@
+[ // 二级域名根
+
+  // 中国
+  "com.cn", "gov.cn", "edu.cn", "org.cn", "net.cn", "cn.com",
+  "gov.hk", "com.hk", "hk.com", // 香港
+  "com.mo", "mo.com",  // 澳门
+  "com.tw", "tw.com",  // 台湾
+
+  // 英国
+  "co.uk", "net.uk", "com.uk", "org.uk",
+
+  "com.sg", // 新加坡
+  "com.kr", "co.kr",  // 韩国
+  "com.jp", "co.jp",  // 日本
+  "com.nz", "co.nz",  // 新西兰
+  "com.vn", "co.vn",  // 越南
+  "com.au", "co.au",  // 澳大利亚
+
+
+  "com.cy", "org.cy",  // 塞浦路斯
+  "com.tr",  // 土耳其
+  "com.pk",  // 巴基斯坦
+  "com.ph", "gov.ph",  // 菲律宾
+  "co.id",   // 印度
+  "co.il",   // 以色列
+  "gov.sa",  // 沙特阿拉伯
+  "gov.jo",  // 约旦
+  "com.kw", "net.kw",  // 科威特
+  "gov.om",  // 阿曼
+  "org.eg",  // 埃及
+  "com.zm",  // 赞比亚
+  "com.br",  // 巴西
+  "co.in",   // 印度
+
+
+  "com.co",
+  "com.ky",
+  "com.bn",
+  "com.mk",
+  "com.ua",
+  "com.pa",
+  "com.sv",
+  "com.mx",
+  "co.za,",
+  "com.bo",
+  "com.hr",
+  "com.pe",
+  "co.za",
+  "com.ve",
+  "com.do",
+  "co.at",
+  "com.my",
+  "com.kh",
+  "com.pl",
+  "com.gt",
+  "com.uy",
+  "com.mt",
+  "co.ao",
+  "com.ec",
+  "com.ni",
+  "co.cr",
+  "co.th",
+  "com.br",
+  "com.ar",
+  "com.py",
+  "com.bd",
+  "com.ge",
+  "co.ke",
+
+
+  // 二级域名注册
+  "eu.org",
+  "nom.za",
+  "ip6.arpa", // tb.netassist.ua
+  "netlib.re",
+  "obl.ong",
+  "nyc.mn", "now.cc",
+  "duckdns.org",
+  "com.mp",
+  "d.gv.vc",
+  "twodns.de",
+  "zeabur.app", // zeabur.com
+  "ydns.eu", // ydns.io
+  "getmx.net", // getmx.com
+  "whf.bz", "cu.ma", // googiehost.com
+  "zone.id", "nett.to",
+  "hidns.co", "hidns.vip", // hidoha.net
+  "work.gd", "line.pm", "publicvm.com", "run.place", "linkpc.net", // freedomain.one // 每月登录续期
+  "x10.mx", // x10hosting.com // 每三月登陆续期
+  // "rr.nu", "kwikto.com", "PassingGas.net", "MyRedirect.us", "myfw.us", "OnTheWeb.nu", "IsTheBe.st", // sitelutions.com
+  // "ByInter.net", "FindHere.org", "OnTheNetAs.com", "UglyAs.com", "AsSexyAs.com", "PassAs.us", "IsGre.at",
+  // "PassingGas.net", "AtHisSite.com", "AtHerSite.com", "Lookin.At", "BestDeals.At", "LowestPrices.At",
+  "webn.cc", "zabc.net", "sylu.cc", "sylu.net", "acg.rest", "vvvv.ee", "ctrl.li", // zoneabc.net
+  "san.tc", "tic.tc", "app.tc", "dev.tc", "con.tc", "3d.tc", "blogu.tc", "forumu.tc", "sitesi.tc", // site.ac
+  "dynv6.net", "dns.navy", "dns.army", "v6.army", "v6.navy", "v6.rocks", // dynv6.com
+  "onflashdrive.app", "filegear-sg.me", "ggff.net", // L53.net
+  "pp.ua", // nic.ua
+  "qzz.io", "us.kg", "xx.kg", "dpdns.org", // dash.domain.digitalplat.org
+  "serv00.net", // serv00.com
+  "is-an.ai",
+  "ccwu.cc", "de5.net",  // dnshe.com
+  "1gb.ua", "cc.ua",
+  "nets.hk", "coms.hk", "orgs.hk",  // 3domains.net
+  "frii.site", "arr.ovh", "pill.ovh",
+  "so.kg", // sokg.net
+  "eu.cc", // gname.vip
+  "us.to", "uk.to", // afraid.org
+  "duia.eu", "duia.us", "duia.ro", // duiadns.net
+  "fr.cr", "fr.nf", "ze.cx", "asso.st", "infos.st", "xxl.st", // azote.org
+  "let.tf", "let.gs", "ye.gs", // nic.ye.gs
+
+  // cloudns.net
+  // 免费，inPSL
+  "cloudns.be", "cloudns.org", "cloudns.ch", "cloudns.pro", "cloudns.club",
+  "dns-dynamic.net", "ip-ddns.com", "abrdns.com", "cloud-ip.cc",
+  // in PSL
+  "cloudns.asia",  "cloud-ip.biz", "cloudns.biz", "cloudns.cc",
+  "cloudns.cl", "dnsabr.com", "cloudns.cx", "cloudns.eu",
+  "cloudns.in", "cloudns.info", "ddns-ip.net", "dns-cloud.net",  "cloudns.nz",
+  "ip-dynamic.org", "cloudns.ph",  "cloudns.pw", "cloudns.us",
+  "za.com", "www.ro", // 付费
+
+  "ddnss.de",
+  "ddnss.ch", "dyn.ddnss.de", "dyndns.ddnss.de", "dyn-ip24.de", "dyndns1.de", "ddnss.org",
+  "home-webserver.de", "dyn.home-webserver.de", "myhome-server.de", "ddnss.eu", "dynip.online",
+
+  "mmfreeweb.com",
+  "webmastermm.asia", "freehost.webmastermm.com",
+
+  "my-place.us", "hostingem.ru", // 用的同样的模板
+  "22web.org", "10001mb.com", "2kool4u.net", "66ghz.com", "a0001.net", "fast-page.org",
+  "fanclub.rocks", "html-5.me", "iblogger.org", "is-best.net", "is-great.net", "is-great.org",
+  "likesyou.org", "loveslife.biz", "my-board.org", "mydiscussion.net", "social-networking.me",
+  "nichesite.org", "synergize.co", "talk4fun.net", "totalh.net", "web1337.net", "my-style.in",
+
+  // infinityfree.com
+  "42web.io", "xo.je", "fwh.is", "rf.gd", "gamer.gd", "lovestoblog.com", "infinityfree.me", "ct.ws",
+  "gt.tc", "great-site.net", "infinityfreeapp.com", "wuaze.com", "free.nf", "kesug.com", "page.gd",
+
+  "mydns.jp",
+  "mydns.bz", "mydns.vc", "mydns.tw", "0am.jp", "0g0.jp", "0j0.jp", "0t0.jp", "pgw.jp",
+  "wjg.jp", "dix.asia", "daemon.asia", "live-on.net", "keyword-on.net", "server-on.net",
+  
+  // dynu.com
+  "giize.com",
+  "accesscam.org", "camdvr.org", "casacam.net", "ddnsfree.com", "ddnsgeek.com", "freeddns.org",
+  "gleeze.com", "kozow.com", "loseyourip.com", "mywire.org", "ooguy.com", "theworkpc.com", "webredirect.org",
+  // 付费会员
+  "1cooldns.com", "bumbleshrimp.com", "dynuddns.com", "dynuddns.net", "ddnsguru.com", "mysynology.net",
+
+  // noip.com，免费域名
+  "freedynamicdns.net", "3utilities.com", "bounceme.net", "ddns.net", "ddnsking.com",
+  "freedynamicdns.org", "gotdns.ch", "hopto.org", "myddns.me", "myftp.biz", "myftp.org",
+  "myvnc.com", "onthewifi.com", "redirectme.net", "servebeer.com", "serveblog.net",
+  "servecounterstrike.com", "serveftp.com", "servegame.com", "servehalflife.com",
+  "servehttp.com", "serveirc.com", "serveminecraft.net", "servemp3.com", "servepics.com",
+  "servequake.com", "sytes.net", "viewdns.net", "webhop.me", "zapto.org",
+  // 扩展域名
+  "access.ly", "blogsyte.com", "brasilia.me", "cable-modem.org", "ciscofreak.com",
+  "collegefan.org", "couchpotatofries.org", "damnserver.com", "ddns.me", "ditchyourip.com",
+  "dnsfor.me", "dnsiskinky.com", "dvrcam.info", "dynns.com", "eating-organic.net",
+  "fantasyleague.cc", "geekgalaxy.com", "golffan.us", "health-carereform.com",
+  "homesecuritymac.com", "homesecuritypc.com", "hopto.me", "hosthampster.com",
+  "ilovecollege.info", "loginto.me", "mlbfan.org", "mmafan.biz", "myactivedirectory.com",
+  "mydissent.net", "myeffect.net", "mymediapc.net", "mypsx.net", "mysecuritycamera.com",
+  "mysecuritycamera.net", "mysecuritycamera.org", "net-freaks.com", "nflfan.org", "nhlfan.net",
+  "pgafan.net", "point2this.com", "pointto.us", "privatizehealthinsurance.net", "quicksytes.com",
+  "read-books.org", "securitytactics.com", "serveexchange.com", "servehumour.com", "servep2p.com",
+  "servesarcasm.com", "stufftoread.com", "ufcfan.org", "unusualperson.com", "workisboring.com",
+
+  "dnshome.de",
+  "ddns.berlin", "ddns.wtf", "ddnssec.de", "dnshome.at", "dnshome.cloud",
+  "dnshome.eu", "dnshome.it", "dyndnssec.de", "resolve.bar", "srvdns.de",
+  
+  // changeip.com
+  "dynamic-dns.net", "longmusic.com", "wikaba.com", "zzux.com", "dumb1.com", "onedumb.com",
+  "yourtrap.com", "2waky.com", "sexidude.com", "mefound.com", "organiccrap.com", "toythieves.com",
+  "justdied.com", "jungleheart.com", "mrbasic.com", "mrbonus.com", "x24hr.com", "dns04.com",
+  "dns05.com", "zyns.com", "my03.com", "fartit.com", "itemdb.com", "instanthq.com", "xxuz.com",
+  "jkub.com", "itsaol.com", "faqserv.com", "jetos.com", "qpoe.com", "qhigh.com", "vizvaz.com",
+  "mrface.com", "isasecret.com", "mrslove.com", "otzo.com", "americanunfinished.com", "serveusers.com",
+  "serveuser.com", "freetcp.com", "ddns.info", "ns01.info", "ns02.info", "myftp.info", "mydad.info",
+  "mymom.info", "mypicture.info", "myz.info", "squirly.info", "xxxy.info", "freewww.info",
+  "freeddns.com", "myddns.com", "misecure.com", "got-game.org", "almostmy.com", "ocry.com",
+  "ourhobby.com", "dnsfailover.net", "ygto.com", "gettrials.com", "25u.com", "4dq.com", "4pu.com",
+  "3-a.net", "dsmtp.com", "dsmtp.com", "mynumber.org", "ns1.name", "ns2.name", "ns3.name",
+  "rebatesrule.net", "ezua.com", "sendsmtp.com", "ssmailer.com", "trickip.net", "dnsrd.com",
+  "lflinkup.com", "lflinkup.net", "lflinkup.org", "lflink.com", "dns-dns.com", "b0tnet.com",
+  "proxydns.com", "mysecondarydns.com", "dns-stuff.com", "dynssl.com", "mylftv.com", "mynetav.com",
+  "mynetav.net", "dns-report.com", "homingbeacon.net", "ikwb.com", "acmetoy.com", "ddns.mobi",
+  "dnset.com", "as19557.net", "toshibanetcam.com", "authorizeddns.net", "authorizeddns.org",
+  "cleansite.biz", "cleansite.info", "https443.net", "https443.org", "mypop3.net", "mypop3.org",
+  "iownyour.org", "onmypc.info", "onmypc.net", "onmypc.org", "dubya.info", "dubya.net", "freeddns.me",
+  "freeddns.tokyo",
+
+  // "app.link", // 一般专门提供给个公司做app域名流转
+
+  // PSL 公共后缀列表
+  // https://publicsuffix.org/list/public_suffix_list.dat
+
+
+
+]

@@ -1,0 +1,6 @@
+[
+  "json", "yaml", "toml",
+  "ini", "conf", "properties", "cfg",
+  "xml", "yml", "iml",
+  "sql", "plsql", "ddl", "dml"
+]
