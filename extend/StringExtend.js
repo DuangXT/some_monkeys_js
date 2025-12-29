@@ -2,13 +2,26 @@
 
 String.prototype.equals = function(...string){
     for (const s of string) {
-        if (this === s) return true;
+        if (this.toString() === s.toString()) return true;
     }
     return false;
 }
 String.prototype.equalsIgnoreCase = function(...string){
     for (const s of string) {
         if (this.toUpperCase() === s.toUpperCase())
+            return true;
+    }
+    return false;
+}
+String.prototype.equalsTrim = function(...string){
+    for (const s of string) {
+        if (this.trim() === s.trim()) return true;
+    }
+    return false;
+}
+String.prototype.equalsTrimIgnoreCase = function(...string){
+    for (const s of string) {
+        if (this.trim().toUpperCase() === s.trim().toUpperCase())
             return true;
     }
     return false;
@@ -46,7 +59,7 @@ String.prototype.containsAllIgnoreCase = function(...ss) {
 
 
 
-// @version: 0.0.12
+// @version: 0.0.13
 const StringExtend = true;
 console.log("属性扩展：字符串 StringExtend");
 

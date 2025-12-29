@@ -2,7 +2,12 @@
 
 var $qs = 'undefined' !== typeof $qs ? $qs : document.querySelector.bind(document);
 var $qsa = 'undefined' !== typeof $qsa ? $qsa :document.querySelectorAll.bind(document);
-var create = 'undefined' !== typeof create ? create : document.createElement.bind(document);
+var $create = 'undefined' !== typeof $create ? $create : document.createElement.bind(document);
+var create = 'undefined' !== typeof create ? create : $create;
+var $id = 'undefined' !== typeof $id ? $id : document.getElementById.bind(document);
+var $name = 'undefined' !== typeof $name ? $name : document.getElementsByName.bind(document);
+var $tag = 'undefined' !== typeof $tag ? $tag : document.getElementsByTagName.bind(document);
+var $class = 'undefined' !== typeof $class ? $class : document.getElementsByClassName.bind(document);
 
 Document.prototype.$qs = Document.prototype.querySelector;
 Element.prototype.$qs = Element.prototype.querySelector;
@@ -39,11 +44,11 @@ Element.prototype.removeIfIncludesText = function(...strs){
 }
 
 /** 在当前元素内的开头插入指定的内容 => jQuery.prepend() */
-Element.prototype.prepend = Element.prototype.prepend ? Element.prototype.prepend
+/* Element.prototype.prepend = Element.prototype.prepend ? Element.prototype.prepend
     : function(elementOrString){
         return this.insertAdjacentHTML('afterbegin',
             elementOrString instanceof HTMLElement ? elementOrString.innerHTML : elementOrString);
-    }
+    } */
 
 /** 在当前元素的前面插入指定的内容 => jQuery.before() */
 Element.prototype.before = Element.prototype.before ? Element.prototype.before
@@ -73,11 +78,10 @@ Document.prototype.closest = Element.prototype.closest ? Element.prototype.close
     return null;
 }
 
+Element.prototype.removeAttr = Element.prototype.removeAttr ? Element.prototype.removeAttr : Element.prototype.removeAttribute;
 
 
-
-
-// @version 0.0.7
+// @version 0.0.9
 const DomExtend = true;
 console.log("属性扩展：DOM选择器 DomExtend");
 

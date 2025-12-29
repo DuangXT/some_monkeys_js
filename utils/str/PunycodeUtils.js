@@ -1,335 +1,226 @@
+// 建议直接使用
+// by trae
 /**
- * Punycode 编解码工具（纯 JS，支持混合编码 + 子域名）
- * 基于 RFC 3492，支持 IDN 域名/子域名
- * 使用：punycode.toASCII('bücher.com') → 'xn--bcher-kva.com'
+ * Punycode 编码与解码工具 (RFC 3492)
+ *
+ * 变量命名说明：
+ * - codePoint: 当前处理的字符码点 (RFC中的 n)
+ * - bias: 偏差值，用于动态调整阈值
+ * - delta: 增量值，表示状态距离
+ * - basicCodePoints: 基础 ASCII 字符
  */
-const PunycodeUtils = (function() {
+const PunycodeUtils = (function () {
 
-    // UCS-2 辅助：处理代理对（surrogate pairs）
-    function ucs2decode(string) {
-        const output = [];
-        let counter = 0;
-        const length = string.length;
-        while (counter < length) {
-            let value = string.charCodeAt(counter++);
-            if ((value & 0xFC00) === 0xD800 && counter < length) {
-                // 高代理
-                const extra = string.charCodeAt(counter++);
-                if ((extra & 0xFC00) === 0xDC00) {
-                    value = 0x10000 + ((value & 0x3FF) << 10) + (extra & 0x3FF);
-                } else {
-                    // 不匹配的代理对，退回
-                    value = 0xFFFD;
-                    counter--;
-                }
-            }
-            output.push(value);
+    const CONSTANTS = {
+        BASE: 36,
+        T_MIN: 1,
+        T_MAX: 26,
+        SKEW: 38,
+        DAMP: 700,
+        INITIAL_BIAS: 72,
+        INITIAL_CODE_POINT: 128,
+        DELIMITER: '-'
+    };
+
+    /** 计算新的偏差值 (Adaptation) */
+    function adaptBias(delta, numPoints, isFirstTime) {
+        let k = 0;
+        delta = isFirstTime ? Math.floor(delta / CONSTANTS.DAMP) : Math.floor(delta / 2);
+        delta += Math.floor(delta / numPoints);
+
+        while (delta > ((CONSTANTS.BASE - CONSTANTS.T_MIN) * CONSTANTS.T_MAX) / 2) {
+            delta = Math.floor(delta / (CONSTANTS.BASE - CONSTANTS.T_MIN));
+            k += CONSTANTS.BASE;
         }
-        return output;
+        return Math.floor(k + ((CONSTANTS.BASE - CONSTANTS.T_MIN + 1) * delta) / (delta + CONSTANTS.SKEW));
     }
 
-    function ucs2encode(array) {
+    /** 将数字转换为基本字符 (0-25 -> a-z, 26-35 -> 0-9) */
+    function digitToBasicChar(digit) {
+        return String.fromCharCode(digit + 22 + 75 * (digit < 26));
+    }
+
+    /** 将基本字符转换为数字 */
+    function basicCharToDigit(code) {
+        if (code - 48 < 10) return code - 22;
+        if (code - 65 < 26) return code - 65;
+        if (code - 97 < 26) return code - 97;
+        return CONSTANTS.BASE;
+    }
+
+    /** 解码 Punycode 字符串 (不带 xn-- 前缀) */
+    function decodeString(input) {
         const output = [];
-        for (let i = 0, length = array.length; i < length; i++) {
-            const value = array[i];
-            if (value > 0xFFFF) {
-                value -= 0x10000;
-                output.push(((value >> 10) & 0x3FF) | 0xD800);
-                output.push(((value & 0x3FF)) | 0xDC00);
-            } else {
-                output.push(value);
+        const inputLength = input.length;
+        let codePoint = CONSTANTS.INITIAL_CODE_POINT;
+        let bias = CONSTANTS.INITIAL_BIAS;
+        let workIndex = 0; // RFC中的 i
+
+        // 1. 处理基础字符 (分隔符之前的部分)
+        const lastDelimiterIndex = input.lastIndexOf(CONSTANTS.DELIMITER);
+        let encodedStartIndex = 0;
+
+        if (lastDelimiterIndex > 0) {
+            for (let j = 0; j < lastDelimiterIndex; j++) {
+                const charCode = input.charCodeAt(j);
+                if (charCode >= 0x80) throw new Error('Illegal input >= 0x80');
+                output.push(charCode);
+            }
+            encodedStartIndex = lastDelimiterIndex + 1;
+        }
+
+        // 2. 主循环处理编码部分
+        let inputIndex = encodedStartIndex;
+
+        while (inputIndex < inputLength) {
+            const oldWorkIndex = workIndex;
+            let weight = 1;
+
+            for (let step = CONSTANTS.BASE; ; step += CONSTANTS.BASE) {
+                if (inputIndex >= inputLength) throw new Error('Punycode: Bad input');
+
+                const charCode = input.charCodeAt(inputIndex++);
+                const digit = basicCharToDigit(charCode);
+
+                if (digit >= CONSTANTS.BASE) throw new Error('Punycode: Invalid input char');
+                if (digit > Math.floor((Number.MAX_SAFE_INTEGER - workIndex) / weight)) throw new Error('Punycode: Overflow');
+
+                workIndex += digit * weight;
+
+                let threshold; // RFC中的 t
+                if (step <= bias + CONSTANTS.T_MIN) threshold = CONSTANTS.T_MIN;
+                else if (step >= bias + CONSTANTS.T_MAX) threshold = CONSTANTS.T_MAX;
+                else threshold = step - bias;
+
+                if (digit < threshold) break;
+
+                if (weight > Math.floor(Number.MAX_SAFE_INTEGER / (CONSTANTS.BASE - threshold))) throw new Error('Punycode: Overflow');
+                weight *= (CONSTANTS.BASE - threshold);
+            }
+
+            const numPoints = output.length + 1;
+            bias = adaptBias(workIndex - oldWorkIndex, numPoints, oldWorkIndex === 0);
+
+            if (Math.floor(workIndex / numPoints) > Number.MAX_SAFE_INTEGER - codePoint) throw new Error('Punycode: Overflow');
+
+            codePoint += Math.floor(workIndex / numPoints);
+            workIndex %= numPoints;
+
+            output.splice(workIndex, 0, codePoint);
+            workIndex++;
+        }
+
+        return String.fromCodePoint(...output);
+    }
+
+    /** 编码 Unicode 字符串为 Punycode */
+    function encodeString(input) {
+        const output = [];
+        // 将字符串转换为码点数组
+        const inputCodePoints = [];
+        for (const char of input) {
+            inputCodePoints.push(char.codePointAt(0));
+            if (char.codePointAt(0) > 0xFFFF) {
+                // 跳过代理对的第二个部分，如果使用了 for...of 配合 codePointAt 通常不需要手动跳过，
+                // 但如果 input 是普通 string，for-of 会正确迭代 code point。
             }
         }
-        return String.fromCharCode.apply(null, output);
-    }
+        // 注意：上面的循环对于代理对会自动正确处理（ES6特性）
+        // 但是我们需要确保 inputCodePoints 里存的是完整的码点，而不是 UTF-16 单元
+        // 使用 Array.from(input) 或者 ...input 更安全
+        const codePoints = Array.from(input).map(c => c.codePointAt(0));
 
-    // 基本码点判断
-    function isBasic(codePoint) {
-        return codePoint < 0x80;
-    }
+        // 1. 复制基础字符 (ASCII)
+        for (const code of codePoints) {
+            if (code < 128) {
+                output.push(String.fromCharCode(code));
+            }
+        }
 
-    // 基本码点编码
-    function encodeBasic(bcp, flag) {
-        bcp -= (bcp < 0x7F ? 0 : bcp < 0xA0 ? 32 : bcp < 0x100 ? 64 : 0);
-        return String.fromCharCode(bcp + (bcp < 26 ? 97 : 75));
-    }
+        const basicLength = output.length;
+        let handledCount = basicLength;
 
-    // Punycode 核心编码
-    function encode(input) {
-        const output = [];
-        let inputLength = input.length;
-        let n = 128;
+        if (basicLength > 0) {
+            output.push(CONSTANTS.DELIMITER);
+        }
+
+        let codePoint = CONSTANTS.INITIAL_CODE_POINT;
         let delta = 0;
-        let handledCPCount = 0;
-        let bcp;
-        let bias = 72;
-        let j;
-        let m;
-        let q;
-        let k;
-        let t;
-        let currentValue;
-        let i;
+        let bias = CONSTANTS.INITIAL_BIAS;
 
-        // 处理基本码点
-        for (i = 0; i < inputLength; i++) {
-            bcp = input[i];
-            if (isBasic(bcp)) {
-                output.push(String.fromCharCode(bcp));
-                delta = (delta + bcp) % n;
-                handledCPCount++;
+        // 2. 主循环处理非 ASCII 字符
+        while (handledCount < codePoints.length) {
+            // 寻找下一个最小的未处理码点
+            let minCodePoint = Number.MAX_SAFE_INTEGER;
+            for (const code of codePoints) {
+                if (code >= codePoint && code < minCodePoint) {
+                    minCodePoint = code;
+                }
             }
-        }
 
-        // 插入分隔符
-        if (handledCPCount > 0) {
-            output.push('-');
-        }
-
-        // 主循环
-        currentValue = n;
-        for (; handledCPCount < inputLength; ) {
-            for (m = 0x10FFFF; m > bcp; m = Math.floor(m / n)) {
-                q = delta + (bcp - m) % (0x10FFFF - m);
-                delta += q * (n - m) / (currentValue + 1);
-                m = Math.floor(q / (n - m));
+            if (minCodePoint - codePoint > Math.floor((Number.MAX_SAFE_INTEGER - delta) / (handledCount + 1))) {
+                throw new Error('Punycode: Overflow');
             }
-            bcp += Math.floor((currentValue - delta) / (handledCPCount + 1));
-            delta %= (currentValue - delta);
-            handledCPCount++;
-            currentValue = bcp;
 
-            for (j = 0; j < inputLength; j++) {
-                if ((input[j] & 0x3FF) >= n && input[j] < currentValue) {
+            delta += (minCodePoint - codePoint) * (handledCount + 1);
+            codePoint = minCodePoint;
+
+            for (const code of codePoints) {
+                if (code < codePoint) {
                     delta++;
+                    if (delta === 0) throw new Error('Punycode: Overflow');
                 }
-                if (input[j] === currentValue) {
-                    for (q = 0, k = n; ; k += n) {
-                        t = k <= bias ? 1 : k >= bias + 26 ? 26 : k - bias;
-                        if (q < delta) {
-                            output.push(encodeBasic(q + t, false));
-                            delta += (n - t);
-                        } else if (q === delta) {
-                            output.push(encodeBasic(q, true));
-                            bias = adapt(delta, handledCPCount + 1, handledCPCount === 0 ? 128 : n / 2, true);
-                            delta = 0;
-                            handledCPCount++;
-                            break;
-                        }
-                        q += n;
+
+                if (code === codePoint) {
+                    let currentDelta = delta;
+                    for (let step = CONSTANTS.BASE; ; step += CONSTANTS.BASE) {
+                        let threshold;
+                        if (step <= bias + CONSTANTS.T_MIN) threshold = CONSTANTS.T_MIN;
+                        else if (step >= bias + CONSTANTS.T_MAX) threshold = CONSTANTS.T_MAX;
+                        else threshold = step - bias;
+
+                        if (currentDelta < threshold) break;
+
+                        output.push(digitToBasicChar(threshold + (currentDelta - threshold) % (CONSTANTS.BASE - threshold)));
+                        currentDelta = Math.floor((currentDelta - threshold) / (CONSTANTS.BASE - threshold));
                     }
-                    handledCPCount++;
-                    break;
+
+                    output.push(digitToBasicChar(currentDelta));
+                    bias = adaptBias(delta, handledCount + 1, handledCount === basicLength);
+                    delta = 0;
+                    handledCount++;
                 }
             }
+
+            delta++;
+            codePoint++;
         }
 
         return output.join('');
     }
 
-    // 适应函数
-    function adapt(delta, numPoints, firstTime) {
-        let k = 0;
-        delta = firstTime ? Math.floor(delta / 700) : Math.floor((delta - 455) / 35);
-        for (; delta > 19; delta = delta / 35) {
-            k += 36;
-        }
-        return k + (1 + Math.floor(delta / 2));
-    }
 
-    // Punycode 核心解码
-    function decode(input) {
-        const output = [];
-        let inputLength = input.length;
-        let i = 0;
-        let n = 128;
-        let out;
-        let bias = 72;
-        let basic;
-        let j;
-        let ic;
-        let oldi;
-        let w;
-        let k;
-        let digit;
-        let t;
-        let flag;
-        let c;
-        let len;
-
-        // 处理基本码点
-        basic = i;
-        for (j = 0; j < inputLength; j++) {
-            c = input.charCodeAt(j);
-            if (c < 128) {
-                output.push(c);
-                basic++;
-            }
-        }
-
-        // 查找分隔符
-        len = basic;
-        if (basic > 0) {
-            basic = 0;
-        }
-
-        // 主循环
-        while (i < len) {
-            out = 0x10FFFF;
-            oldi = i;
-            w = 1;
-            for (k = n; ; k += n) {
-                digit = decodeDigit(input.charCodeAt(i++), k);
-                if (digit < out) {
-                    out = digit;
-                }
-                t = out - digit;
-                if (t * w <= n - bias) {
-                    break;
-                }
-                out = Math.floor((out - t) / w);
-                w += n;
-            }
-            bias = adapt(out, i - oldi, w);
-            n = out;
-            for (j = 0; j < basic; j++) {
-                output.push(decodeDigit(input.charCodeAt(j), n));
-            }
-            output.push(out);
-            basic += 1;
-            n += 1;
-        }
-
-        return ucs2encode(output);
-    }
-
-    // 解码数字
-    function decodeDigit(codePoint, n) {
-        if (codePoint <= 25) {
-            return codePoint + 26 - (codePoint < 24 ? 26 : 0);
-        } else if (codePoint <= 35) {
-            return codePoint - 26 + (codePoint < 36 ? 26 : 0);
-        }
-        return n;
-    }
-
-    // 域名级编码：处理子域名 + 混合
-    function toASCII(domain) {
-        return domain.split('.').map(label => {
-            if (/[^a-zA-Z0-9-]/.test(label)) {
-                // 包含非 ASCII，转 Punycode
-                const unicode = ucs2decode(label.toLowerCase());
-                const puny = encode(unicode);
-                return 'xn--' + puny;
-            }
-            return label.toLowerCase();
+    /** 解码 Punycode 域名 */
+    function decode(domain) {
+        return domain.split('.').map(part => {
+            if (part.startsWith('xn--')) return decodeString(part.substring(4));
+            return part;
         }).join('.');
     }
 
-    // 域名级解码：处理子域名 + 混合
-    function toUnicode(domain) {
-        return domain.split('.').map(label => {
-            if (label.startsWith('xn--')) {
-                // Punycode 标签，转 Unicode
-                const puny = label.slice(4);
-                return decode(puny);
-            }
-            return label;
+    /** 编码 Unicode 域名 */
+    function encode(domain) {
+        return domain.split('.').map(part => {
+            if (/^[\x00-\x7F]*$/.test(part)) return part; // 如果全是 ASCII，不需要编码
+            return 'xn--' + encodeString(part);
         }).join('.');
     }
+
 
     return {
         encode: encode,
         decode: decode,
-        toASCII: toASCII,
-        toUnicode: toUnicode,
-        ucs2: { decode: ucs2decode, encode: ucs2encode }
     };
 })();
-
-
-/*
-
-const punycode = {
-  // 编码：Unicode → Punycode 域名
-  encode(domain) {
-    return domain.split('.').map(label => {
-      if (/[^\x00-\x7F]/.test(label)) {
-        let s = '';
-        for (let c of label) if (c < 128) s += c;
-        const basic = s;
-        s = label;
-        let n = 128, delta = 0, bias = 72, h = basic.length;
-        let out = basic;
-        if (h > 0) out += '-';
-
-        while (h < s.length) {
-          let m = 0x10FFFF;
-          for (let c of s) { const cp = c.codePointAt(0); if (cp >= n && cp < m) m = cp; }
-          delta += (m - n) * (h + 1); n = m;
-          for (let c of s) {
-            const cp = c.codePointAt(0);
-            if (cp < n) { delta++; }
-            else if (cp === n) {
-              let q = delta;
-              for (let k = 36; ; k += 36) {
-                const t = k <= bias ? 1 : k >= bias + 26 ? 26 : k - bias;
-                if (q < t) break;
-                const d = q - t;
-                const base = 36 - t;
-                out += String.fromCharCode(d % base + (d < 26 ? 97 : 22));
-                q = (q - t) / base | 0;
-              }
-              out += String.fromCharCode(q + (q < 26 ? 97 : 22));
-              bias = delta / (h + 1) | 0 + (delta < 350 ? 35 : delta < 700 ? 45 : 55);
-              delta = 0; h++;
-            }
-          }
-          delta++; n++;
-        }
-        return 'xn--' + out;
-      }
-      return label;
-    }).join('.');
-  },
-
-  // 解码：Punycode → Unicode 域名
-  decode(domain) {
-    return domain.split('.').map(label => {
-      if (!label.startsWith('xn--')) return label;
-      let s = label.slice(4);
-      const i = s.lastIndexOf('-');
-      const basic = i === -1 ? '' : s.slice(0, i);
-      s = i === -1 ? s : s.slice(i + 1);
-      const output = [...basic];
-      let n = 128, i = 0, bias = 72;
-      let pos = 0;
-
-      while (pos < s.length) {
-        let w = 1, k = 36;
-        for (; ; k += 36) {
-          const d = s.charCodeAt(pos++);
-          const digit = d - (d >= 97 ? 97 : 22);
-          i += digit * w;
-          const t = k <= bias ? 1 : k >= bias + 26 ? 26 : k - bias;
-          if (digit < t) break;
-          w = w * (36 - t);
-        }
-        const size = output.length + 1;
-        bias = i / size | 0 + 36;
-        n += i / size | 0;
-        output.push(String.fromCodePoint(n));
-        i = i % size;
-      }
-      return output.join('');
-    }).join('.');
-  }
-};
-
-*/
-
-
-
-
 
 
